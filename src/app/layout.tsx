@@ -1,3 +1,4 @@
+import { Toaster } from "@/Components/Toaster";
 import "@/styles/globals.css";
 import { Inter, Lexend } from "next/font/google";
 
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-Br">
       <body className={`${inter.variable} ${lexend.variable}`}>{children}</body>
+      <Toaster />
     </html>
   );
 }
