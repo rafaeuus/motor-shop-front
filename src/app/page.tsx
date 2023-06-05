@@ -1,4 +1,6 @@
 "use client";
+
+import Button from "@/Components/Button";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
 
@@ -15,6 +17,9 @@ export default function Home() {
       </button>
       <p className="">Read More about hot-toast:</p>
       <Link href={"https://react-hot-toast.com/"}>https://react-hot-toast.com/</Link>
+      <Button color="black" variant="gradient" size="secondary">
+        Example
+      </Button>
     </main>
   );
 }
