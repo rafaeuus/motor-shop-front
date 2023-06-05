@@ -20,6 +20,9 @@ export default function Home() {
       <Button color="black" variant="gradient" size="secondary">
         Example
       </Button>
+      <h1>opa</h1>
+      <h1 className="prose-headingBold1">test</h1>
+      <p className="prose-textBold1">test parr</p>
     </main>
   );
 }

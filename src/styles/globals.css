@@ -10,6 +10,13 @@
     font-family: var(--font-inter);
   }
 
+  p,
+  small,
+  input,
+  button {
+    font-family: var(--font-inter);
+  }
+
   h1,
   h2,
   h3,
