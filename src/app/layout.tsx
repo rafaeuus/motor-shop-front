@@ -1,4 +1,5 @@
 "use client";
+import { Footer } from "@/Components/Footer";
 import { Navbar } from "@/Components/Navbar";
 import "@/styles/globals.css";
 import { Inter, Lexend } from "next/font/google";
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.variable} ${lexend.variable}`}>
         <Navbar />
         {children}
+        <Footer />
         <Toaster />
       </body>
     </html>
