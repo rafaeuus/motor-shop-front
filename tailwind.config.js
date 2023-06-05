@@ -76,20 +76,107 @@ export default withMT({
         grey8: "#f1f3f5",
         grey9: "#f8f9fa",
         grey10: "#fdfdfd"
+      },
+      typography: {
+        headingBold1: {
+          css: {
+            fontSize: "2.75rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "700",
+            fontStyle: "normal",
+            lineHeight: "56px"
+          }
+        },
+        headingBold2: {
+          css: {
+            fontSize: "2.25rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "600",
+            fontStyle: "normal"
+          }
+        },
+        headingBold3: {
+          css: {
+            fontSize: "2rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "600",
+            fontStyle: "normal"
+          }
+        },
+        heading3: {
+          css: {
+            fontSize: "2rem",
+            fontFamily: "var(--font-inter)",
+            fontWeight: "500",
+            fontStyle: "normal"
+          }
+        },
+        headingBold4: {
+          css: {
+            fontSize: "1.75rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "600",
+            fontStyle: "normal"
+          }
+        },
+        heading4: {
+          css: {
+            fontSize: "1.75rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "500",
+            fontStyle: "normal"
+          }
+        },
+        headingBold5: {
+          css: {
+            fontSize: "1.5rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "600",
+            fontStyle: "normal"
+          }
+        },
+        heading5: {
+          css: {
+            fontSize: "1.5rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "500",
+            fontStyle: "normal"
+          }
+        },
+        text1: {
+          css: {
+            fontSize: "1rem",
+            fontFamily: "var(--font-inter)",
+            fontWeight: "400",
+            lineHeight: "1.625"
+          }
+        },
+        textBold1: {
+          css: {
+            fontSize: "1rem",
+            fontFamily: "var(--font-inter)",
+            fontWeight: "600",
+            lineHeight: "1.625"
+          }
+        },
+        text4: {
+          css: {
+            fontSize: "0.875rem",
+            fontFamily: "var(--font-inter)",
+            fontWeight: "400",
+            lineHeight: "1.625"
+          }
+        },
+        textBold2: {
+          css: {
+            fontSize: "0.875rem",
+            fontFamily: "var(--font-inter)",
+            fontWeight: "500",
+            lineHeight: "1.625"
+          }
+        }
       }
     }
   },
-  plugins: []
+  plugins: [require("@tailwindcss/typography")]
 });
-
-// Apenas falta configurar weights das fonts //
-// fontSizes: {
-//   h1: "2.75rem",
-//   h2: "2.25rem",
-//   h3: "2rem",
-//   h4: "1.75rem",
-//   h5: "1.5rem",
-//   t1: "1.25rem",
-//   t2: "1rem",
-//   t3: "0.875rem"
-// }
