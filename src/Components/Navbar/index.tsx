@@ -80,6 +80,7 @@ export const Navbar = () => {
               isAdvertiser={isAdvertiser}
               menuAuthIsOpen={menuAuthIsOpen}
               toogleMenuAuth={toogleMenuAuth}
+              name="Samuel Leão"
             />
           ) : (
             <NavDefault style="flex items-center gap-10" />
@@ -95,6 +96,7 @@ export const Navbar = () => {
                   isAdvertiser={isAdvertiser}
                   menuAuthIsOpen={menuAuthIsOpen}
                   toogleMenuAuth={toogleMenuAuth}
+                  name="Samuel Leão"
                 />
               </nav>
             ) : (
