@@ -1,6 +1,9 @@
 "use client";
 
 import Button from "@/Components/Button";
+import Input from "@/Components/Input";
+import Select from "@/Components/Select";
+import TextArea from "@/Components/TextArea";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
 
@@ -23,6 +26,12 @@ export default function Home() {
       <h1>opa</h1>
       <h1 className="prose-headingBold1">test</h1>
       <p className="prose-textBold1">test parr</p>
+      <Input placeholder="Teste" label="Teste Input" />
+      <TextArea placeholder="Teste" label="Teste TextArea" />
+      <Select>
+        <option value={"teste1"}>Teste 1</option>
+        <option value={"teste1"}>Teste 2</option>
+      </Select>
     </main>
   );
 }
