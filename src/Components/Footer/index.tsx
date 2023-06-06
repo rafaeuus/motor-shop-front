@@ -6,8 +6,8 @@ export const Footer = () => {
     window.scrollTo(0, 0);
   };
   return (
-    <footer className="h-32 w-full bg-grey0">
-      <div className="mx-auto my-0 flex w-full max-w-7xl flex-row items-center justify-between gap-2 px-4 py-10 md:px-16">
+    <footer className=" h-72 w-full bg-grey0 sm:h-32">
+      <div className="mx-auto my-0 flex h-full w-full max-w-7xl flex-col items-center justify-between gap-2 px-4 py-10 sm:flex-row md:px-16">
         <Link href={"/"}>
           <Image
             src={"/motors-shop-white.svg"}
