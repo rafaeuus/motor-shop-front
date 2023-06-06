@@ -10,7 +10,7 @@ export const Navbar = () => {
   const [menuBurgerIsOpen, setMenuBurgerIsOpen] = useState(false);
   const [menuAuthIsOpen, setMenuAuthIsOpen] = useState(false);
 
-  const isAuth = true;
+  const isAuth = false;
   const isAdvertiser = false;
 
   const closeMenuBurguer = () => {
