@@ -1,4 +1,3 @@
-import carExample from "./assets/carExample.png";
 import Image, { StaticImageData } from "next/image";
 
 // Criado apenas para exemplificar o uso do card
@@ -26,7 +25,7 @@ interface CardProps {
 const Card = ({ car, isAdvertiserOwner }: CardProps) => {
   if (car?.cover_image === "") {
     // eslint-disable-next-line camelcase
-    car.cover_image = carExample;
+    car.cover_image = "/assets/carExample.png";
   }
 
   return (
@@ -34,7 +33,7 @@ const Card = ({ car, isAdvertiserOwner }: CardProps) => {
       <div className="relative flex h-36 max-h-36 w-full justify-center border-2 border-grey7 bg-grey7 object-cover transition group-hover:border-Brand1">
         <Image
           className="h-full bg-transparent object-contain"
-          src={car ? car.cover_image : carExample}
+          src={car ? car.cover_image : "/assets/carExample.png"}
           alt="Imagem do veículo"
         />
         {isAdvertiserOwner && (

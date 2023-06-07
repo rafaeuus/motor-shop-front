@@ -14,7 +14,6 @@ const CategoryFilters = ({ children }: CategoryFiltersProps) => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
   const [model, setModel] = useState("");
-  console.log(model);
 
   const filteredModels: ModelOption[] = models.options.filter((e) => e.label === model);
 
@@ -28,7 +27,6 @@ const CategoryFilters = ({ children }: CategoryFiltersProps) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log("Valores capturados:", inputValues);
     //  lógica do envío do formulario
   };
 
