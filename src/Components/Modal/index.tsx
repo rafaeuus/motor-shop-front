@@ -1,3 +1,5 @@
+"use client";
+
 import { AuthContext } from "@/contexts/AuthContext.tsx";
 import Image from "next/image";
 import { useContext } from "react";
