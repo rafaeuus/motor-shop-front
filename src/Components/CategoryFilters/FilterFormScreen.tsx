@@ -3,7 +3,6 @@ import { ChangeEvent, FormEvent } from "react";
 import { Disclosure } from "@headlessui/react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { Filter, Option } from "@/constants/filters";
-import { Button } from "../Button";
 
 interface InputValue {
   [key: string]: string;
