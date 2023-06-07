@@ -1,5 +1,6 @@
 "use client";
 import { Footer } from "@/Components/Footer";
+import { ModalCustom } from "@/Components/Modal";
 import { Navbar } from "@/Components/Navbar";
 import { AuthProvider } from "@/contexts/AuthContext.tsx";
 import "@/styles/globals.css";
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           {children}
           <Footer />
+          <ModalCustom />
           <Toaster />
         </AuthProvider>
       </body>
