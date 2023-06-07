@@ -6,10 +6,13 @@ import Card from "@/Components/Card";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
 import TextArea from "@/Components/TextArea";
+import { AuthContext } from "@/contexts/AuthContext.tsx";
 import Link from "next/link";
+import { useContext } from "react";
 import { toast } from "react-hot-toast";
 
 export default function Home() {
+  const { openModal } = useContext(AuthContext);
   const handleToast = () => {
     toast.success("Hello World");
   };
@@ -34,6 +37,13 @@ export default function Home() {
         <option value={"teste1"}>Teste 1</option>
         <option value={"teste1"}>Teste 2</option>
       </Select>
+      <Button
+        color="black"
+        variant="gradient"
+        size="primary"
+        onClick={() => openModal("filterHomePage", "Filtro")}>
+        Teste modal
+      </Button>
       <Card
         car={{
           brand: "Teste",
