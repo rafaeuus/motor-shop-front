@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/Components/Button";
+import Card from "@/Components/Card";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
 import TextArea from "@/Components/TextArea";
@@ -42,6 +43,30 @@ export default function Home() {
         onClick={() => openModal("filterHomePage", "Filtro")}>
         Teste modal
       </Button>
+      <Card
+        car={{
+          brand: "Teste",
+          model: "Volksvago",
+          year: "2020",
+          // eslint-disable-next-line camelcase
+          fuel_type: "Gasolina",
+          mileage: 20,
+          color: "Preto",
+          // eslint-disable-next-line camelcase
+          fipe_price: 120.0,
+          // eslint-disable-next-line camelcase
+          cover_image: "",
+          // eslint-disable-next-line camelcase
+          created_at: new Date("1995-12-17T03:24:00"),
+          description:
+            "Esse é o carro teste, testando o carro que é o carro de teste para testar o teste do carro testado que será um teste",
+          // eslint-disable-next-line camelcase
+          is_published: false,
+          price: 20000.5,
+          user: { name: "Rafael" }
+        }}
+        isAdvertiserOwner={true}
+      />
     </main>
   );
 }
