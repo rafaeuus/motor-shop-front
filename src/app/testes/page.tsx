@@ -54,7 +54,7 @@ export default function Home() {
           mileage: 20,
           color: "Preto",
           // eslint-disable-next-line camelcase
-          fipe_price: 120.0,
+          fipe_price: 20000,
           // eslint-disable-next-line camelcase
           cover_image: "",
           // eslint-disable-next-line camelcase
@@ -63,7 +63,7 @@ export default function Home() {
             "Esse é o carro teste, testando o carro que é o carro de teste para testar o teste do carro testado que será um teste",
           // eslint-disable-next-line camelcase
           is_published: false,
-          price: 20000.5,
+          price: 19000,
           user: { name: "Rafael" }
         }}
         isAdvertiserOwner={true}

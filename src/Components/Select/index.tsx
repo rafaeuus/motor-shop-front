@@ -10,12 +10,12 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 
 const Select = ({ error, label, register, children, ...rest }: SelectProps) => {
   let componentClasses =
-    "prose-text1 block w-full rounded-md border-2 border-grey7 bg-transparent p-4 outline-none transition hover:border-grey8 hover:bg-grey8 focus:border-Brand2 focus:bg-grey9 text-grey3";
+    "prose-body-2-400 block w-full rounded-md border-2 border-grey7 bg-transparent p-4 outline-none transition hover:border-grey8 hover:bg-grey8 focus:border-Brand2 focus:bg-grey9 text-grey3";
 
   return (
     <div className="flex flex-col gap-2">
       {label && (
-        <label htmlFor={rest.id} className="prose-textBold2 text-grey1">
+        <label htmlFor={rest.id} className="prose-body-2-600 text-grey1">
           {label}
         </label>
       )}
