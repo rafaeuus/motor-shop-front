@@ -78,7 +78,7 @@ export default withMT({
         grey10: "#fdfdfd"
       },
       typography: {
-        headingBold1: {
+        "heading-1-700": {
           css: {
             fontSize: "2.75rem",
             fontFamily: "var(--font-lexend)",
@@ -87,63 +87,106 @@ export default withMT({
             lineHeight: "56px"
           }
         },
-        headingBold2: {
+        "heading-2-600": {
           css: {
             fontSize: "2.25rem",
             fontFamily: "var(--font-lexend)",
             fontWeight: "600",
-            fontStyle: "normal"
+            fontStyle: "normal",
+            lineHeight: "45px"
           }
         },
-        headingBold3: {
+        "heading-3-600": {
           css: {
             fontSize: "2rem",
             fontFamily: "var(--font-lexend)",
             fontWeight: "600",
-            fontStyle: "normal"
+            fontStyle: "normal",
+            lineHeight: "40px"
           }
         },
-        heading3: {
+        "heading-3-500": {
           css: {
             fontSize: "2rem",
             fontFamily: "var(--font-inter)",
             fontWeight: "500",
-            fontStyle: "normal"
+            fontStyle: "normal",
+            lineHeight: "40px"
           }
         },
-        headingBold4: {
+        "heading-4-600": {
           css: {
             fontSize: "1.75rem",
             fontFamily: "var(--font-lexend)",
             fontWeight: "600",
-            fontStyle: "normal"
+            fontStyle: "normal",
+            lineHeight: "35px"
           }
         },
-        heading4: {
+        "heading-4-500": {
           css: {
             fontSize: "1.75rem",
             fontFamily: "var(--font-lexend)",
             fontWeight: "500",
-            fontStyle: "normal"
+            fontStyle: "normal",
+            lineHeight: "35px"
           }
         },
-        headingBold5: {
+        "heading-5-600": {
           css: {
             fontSize: "1.5rem",
             fontFamily: "var(--font-lexend)",
             fontWeight: "600",
-            fontStyle: "normal"
+            fontStyle: "normal",
+            lineHeight: "30px"
           }
         },
-        heading5: {
+        "heading-5-500": {
           css: {
             fontSize: "1.5rem",
             fontFamily: "var(--font-lexend)",
             fontWeight: "500",
-            fontStyle: "normal"
+            fontStyle: "normal",
+            lineHeight: "30px"
           }
         },
-        text1: {
+        "heading-6-600": {
+          css: {
+            fontSize: "1.25rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "600",
+            fontStyle: "normal",
+            lineHeight: "25px"
+          }
+        },
+        "heading-6-500": {
+          css: {
+            fontSize: "1.25rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "500",
+            fontStyle: "normal",
+            lineHeight: "25px"
+          }
+        },
+        "heading-7-600": {
+          css: {
+            fontSize: "1rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "600",
+            fontStyle: "normal",
+            lineHeight: "20px"
+          }
+        },
+        "heading-7-500": {
+          css: {
+            fontSize: "1rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "500",
+            fontStyle: "normal",
+            lineHeight: "20px"
+          }
+        },
+        "body-1-400": {
           css: {
             fontSize: "1rem",
             fontFamily: "var(--font-inter)",
@@ -151,7 +194,7 @@ export default withMT({
             lineHeight: "1.625"
           }
         },
-        textBold1: {
+        "body-1-600": {
           css: {
             fontSize: "1rem",
             fontFamily: "var(--font-inter)",
@@ -159,7 +202,7 @@ export default withMT({
             lineHeight: "1.625"
           }
         },
-        text4: {
+        "body-2-400": {
           css: {
             fontSize: "0.875rem",
             fontFamily: "var(--font-inter)",
@@ -167,7 +210,7 @@ export default withMT({
             lineHeight: "1.625"
           }
         },
-        textBold2: {
+        "body-2-600": {
           css: {
             fontSize: "0.875rem",
             fontFamily: "var(--font-inter)",

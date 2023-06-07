@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { createContext, useState } from "react";
 import { IauthContext, IauthProviderProps, TmodalTypes } from "./types";
 
@@ -9,7 +8,6 @@ export const AuthProvider = ({ children }: IauthProviderProps) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalType, setModalType] = useState<TmodalTypes>("filterHomePage");
   const [modalTitle, setModalTitle] = useState("Modal Title");
-  const router = useRouter();
 
   const openModal = (type: TmodalTypes, modalTitle: string) => {
     setModalType(type);
