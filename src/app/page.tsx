@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/Components/Button";
+import CategoryFilters from "@/Components/CategoryFilters";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
 
@@ -11,18 +11,12 @@ export default function Home() {
 
   return (
     <main className="">
-      <h1>Hello World</h1>
       <button className="mt-2 rounded-md bg-blue-500 px-6 py-4 text-white" onClick={handleToast}>
         Toast
       </button>
       <p className="">Read More about hot-toast:</p>
       <Link href={"https://react-hot-toast.com/"}>https://react-hot-toast.com/</Link>
-      <Button color="black" variant="gradient" size="secondary">
-        Example
-      </Button>
-      <h1>opa</h1>
-      <h1 className="prose-headingBold1">test</h1>
-      <p className="prose-textBold1">test parr</p>
+      <CategoryFilters>aqui Cards</CategoryFilters>
     </main>
   );
 }

@@ -13,9 +13,18 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset" | undefined;
   size: "primary" | "secondary";
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  fullWidth?: boolean | undefined;
 }
 
-const Button = ({ variant, color, children, type, size, onClick }: ButtonProps) => {
+export const Button = ({
+  variant,
+  color,
+  children,
+  type,
+  size,
+  fullWidth,
+  onClick
+}: ButtonProps) => {
   let buttonClasses =
     "flex items-center justify-center font-sans font-semibold capitalize tracking-wide rounded bg-transparent shadow-none hover:shadow-none";
 
@@ -90,10 +99,8 @@ const Button = ({ variant, color, children, type, size, onClick }: ButtonProps) 
   }
 
   return (
-    <ButtonComponent type={type} onClick={onClick} className={buttonClasses}>
+    <ButtonComponent type={type} onClick={onClick} className={buttonClasses} fullWidth={fullWidth}>
       {children}
     </ButtonComponent>
   );
 };
-
-export default Button;
