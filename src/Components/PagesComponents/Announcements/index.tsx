@@ -10,8 +10,8 @@ export const AnnouncementsMain = () => {
   return (
     <main className="min-h-screen bg-gradient-to-b from-Brand1 from-30% via-grey8 via-30% to-grey8 to-100% pb-[73px] pt-[40px]">
       <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4">
-        <div className="flex w-full flex-wrap justify-between gap-3.5">
-          <div className="flex w-full max-w-full flex-col gap-8 [@media(min-width:1262px)]:max-w-3xl">
+        <div className="flex w-full flex-wrap justify-between gap-3.5 [@media(min-width:1000px)]:flex-nowrap">
+          <div className="flex w-full max-w-full flex-col gap-8 [@media(min-width:1000px)]:max-w-3xl">
             <div className="flex flex-col gap-5">
               <div className="flex h-[355px] w-full max-w-full justify-center rounded bg-grey10 object-contain xl:max-w-3xl">
                 <Image
@@ -52,7 +52,7 @@ export const AnnouncementsMain = () => {
               </p>
             </div>
           </div>
-          <div className="flex w-full max-w-full flex-col gap-8 [@media(min-width:1262px)]:max-w-md">
+          <div className="flex w-full max-w-full flex-col gap-8 [@media(min-width:1000px)]:max-w-md">
             <div className="flex flex-col gap-8 rounded bg-grey10 px-5 pb-8 pt-9">
               <span className="prose-heading-6-600 text-grey1">Fotos</span>
               <div className="grid max-h-52 grid-cols-3 gap-x-3.5 gap-y-8 overflow-y-scroll">
@@ -151,7 +151,7 @@ export const AnnouncementsMain = () => {
             />
           </div>
         </div>
-        <div className="flex w-full max-w-full flex-col gap-8 [@media(min-width:1262px)]:max-w-3xl">
+        <div className="flex w-full max-w-full flex-col gap-8 [@media(min-width:1000px)]:max-w-3xl">
           <div className="flex flex-col gap-6 rounded bg-grey10 px-5 py-9">
             <span className="prose-heading-6-600">Comentários</span>
             <ul className="flex flex-col gap-11">
