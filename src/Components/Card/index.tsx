@@ -39,38 +39,43 @@ const Card = ({ car, isAdvertiserOwner }: CardProps) => {
         />
         {isAdvertiserOwner && (
           <span
-            className={`prose-textBold2 absolute left-4 top-[11px] bg-Brand1 px-2 text-grey10 ${
+            className={`prose-body-2-600 absolute left-4 top-[11px] bg-Brand1 px-2 text-grey10 ${
               car!.is_published ? "bg-Bran1" : "bg-grey4"
             }`}>
             {car!.is_published ? "Ativo" : "Inativo"}
           </span>
         )}
+        {car && car.fipe_price - (5 / 100) * car.fipe_price >= car.price && (
+          <span className="prose-body-2-600 absolute right-0 top-0 bg-Green1 px-1 py-1 text-grey10">
+            $
+          </span>
+        )}
       </div>
       <div className="flex h-[182px] flex-col justify-between text-grey1">
-        <p className="prose-textBold1 truncate">
+        <p className="prose-heading-7-600 truncate">
           {car ? car.model : "Product title stays here - max 1 line"}
         </p>
-        <p className="prose-text4 text-grey2 line-clamp-2 ">
+        <p className="prose-body-2-400 text-grey2 line-clamp-2 ">
           {car
             ? car.description
             : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis assumenda nobis tempore reprehenderit veniam perferendis fugit cupiditate laboriosam numquam, vitae molestias cum debitis commodi quos ab tenetur iste expedita eaque."}
         </p>
         <div className="flex items-center gap-2">
-          <span className="prose-textBold2 flex h-8 w-8 items-center justify-center rounded-full bg-Brand2 text-grey10">
-            {car ? car.user.name[1] : "R"}
+          <span className="prose-body-2-600 flex h-8 w-8 items-center justify-center rounded-full bg-Brand2 text-grey10">
+            {car ? car.user.name[0].toUpperCase() : "R"}
           </span>
-          <span className="prose-textBold2 text-grey2">{car ? car.user.name : "Anunciante"}</span>
+          <span className="prose-body-2-600 text-grey2">{car ? car.user.name : "Anunciante"}</span>
         </div>
         <div className="flex justify-between">
           <div className="flex gap-3">
-            <span className="prose-textBold2 rounded bg-Brand4 px-2 py-1 text-Brand1">
+            <span className="prose-body-2-600  rounded bg-Brand4 px-2 py-1 text-Brand1">
               {car ? car.mileage : 0} KM
             </span>
-            <span className="prose-textBold2 rounded bg-Brand4 px-2 py-1 text-Brand1">
+            <span className="prose-body-2-600  rounded bg-Brand4 px-2 py-1 text-Brand1">
               {car ? car.year : "2019"}
             </span>
           </div>
-          <span className="prose-textBold1">
+          <span className="prose-heading-7-500">
             {car
               ? car.price.toLocaleString("pt-br", { style: "currency", currency: "BRL" })
               : "R$ 00.000,00"}
