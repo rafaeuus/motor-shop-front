@@ -337,6 +337,11 @@
   dependencies:
     mini-svg-data-uri "^1.2.3"
 
+"@tailwindcss/line-clamp@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.4.4.tgz#767cf8e5d528a5d90c9740ca66eb079f5e87d423"
+  integrity sha512-5U6SY5z8N42VtrCrKlsTAA35gy2VSyYtHWCsg1H87NU1SXnEfekTVlrga9fzUDrrHcGi2Lb5KenUWb4lRQT5/g==
+
 "@tailwindcss/typography@^0.5.9":
   version "0.5.9"
   resolved "https://registry.yarnpkg.com/@tailwindcss/typography/-/typography-0.5.9.tgz#027e4b0674929daaf7c921c900beee80dbad93e8"
@@ -1595,6 +1600,11 @@ graphemer@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/graphemer/-/graphemer-1.4.0.tgz#fb2f1d55e0e3a1849aeffc90c4fa0dd53a0e66c6"
   integrity sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==
+
+hamburger-react@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/hamburger-react/-/hamburger-react-2.5.0.tgz#7c0148af8f02f3b693564d69e590d02db8ffc221"
+  integrity sha512-5GSXe+ucxTPJ0SkhIsPQ/PRDweZPIKya1lfahAuExx31SdheeUA4uOPfQIAirbKona8hvo79VDr5LJQzPXsdpw==
 
 has-bigints@^1.0.1, has-bigints@^1.0.2:
   version "1.0.2"
