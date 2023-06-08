@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent } from "react";
 import { Disclosure } from "@headlessui/react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { Filter, Option } from "@/constants/filters";
+import { Button } from "../Button";
 
 interface InputValue {
   [key: string]: string;
@@ -26,7 +27,7 @@ const FilterFormScreen = ({
   modelsList
 }: FilterFormProps) => {
   return (
-    <form onSubmit={handleSubmit} className="hidden lg:block">
+    <form onSubmit={handleSubmit} className="col-span-1 hidden lg:block">
       {filters.map((section) => (
         <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
           {({ open }) => (
@@ -111,11 +112,14 @@ const FilterFormScreen = ({
           )}
         </Disclosure>
       ))}
-      <button
-        type="submit"
-        className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2">
-        Filtrar
-      </button>
+      <div className="flex flex-col gap-4">
+        <Button color="blue" variant="gradient" size="primary" fullWidth={true} type="submit">
+          Filtrar
+        </Button>
+        <Button color="black" variant="outlined" size="secondary" fullWidth={true} type="submit">
+          Limpar Filtro
+        </Button>
+      </div>
     </form>
   );
 };

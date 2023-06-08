@@ -1,10 +1,13 @@
 "use client";
-import { ChangeEvent, FormEvent, ReactNode, useState } from "react";
+import { ChangeEvent, FormEvent, ReactNode, useContext, useState } from "react";
 import MobileDialog from "./MobileDialog";
 import MainFilter from "./MainFilter";
 import { ModelOption, Option, filters, models } from "@/constants/filters";
 import FilterFormMobile from "./FilterFormMobile";
 import FilterFormScreen from "./FilterFormScreen";
+import Pagination from "./Pagination";
+import { Button } from "../Button";
+import { AuthContext } from "@/contexts/AuthContext.tsx";
 
 interface CategoryFiltersProps {
   children: ReactNode;
@@ -14,7 +17,7 @@ const CategoryFilters = ({ children }: CategoryFiltersProps) => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
   const [model, setModel] = useState("");
-  console.log(model);
+  const { openModal } = useContext(AuthContext);
 
   const filteredModels: ModelOption[] = models.options.filter((e) => e.label === model);
 
@@ -33,7 +36,7 @@ const CategoryFilters = ({ children }: CategoryFiltersProps) => {
   };
 
   return (
-    <div className="bg-grey9">
+    <section className="bg-grey10">
       <div>
         {/* Mobile filter dialog */}
         <MobileDialog
@@ -59,10 +62,25 @@ const CategoryFilters = ({ children }: CategoryFiltersProps) => {
             modelsList={modelsList}
           />
           {/* Product grid */}
-          <div className="lg:col-span-3">{children}</div>
+          <div className="lg:col-span-3">
+            <div className="grid h-[100%] grid-cols-1 gap-2 p-4 md:grid-cols-2 md:gap-4 lg:grid-cols-3 ">
+              {children}
+            </div>
+            <div className="mb-4 flex content-center justify-center lg:hidden ">
+              <Button
+                fullWidth={true}
+                color="blue"
+                size="primary"
+                variant="gradient"
+                onClick={() => openModal("filterHomePage", "FilterModal")}>
+                Filtrar
+              </Button>
+            </div>
+            <Pagination />
+          </div>
         </MainFilter>
       </div>
-    </div>
+    </section>
   );
 };
 

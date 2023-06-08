@@ -40,7 +40,7 @@ const Card = ({ car, isAdvertiserOwner }: CardProps) => {
         {isAdvertiserOwner && (
           <span
             className={`prose-textBold2 absolute left-4 top-[11px] bg-Brand1 px-2 text-grey10 ${
-              car!.is_published ? "bg-Bran1" : "bg-grey4"
+              car!.is_published ? "bg-Brand1" : "bg-grey4"
             }`}>
             {car!.is_published ? "Ativo" : "Inativo"}
           </span>

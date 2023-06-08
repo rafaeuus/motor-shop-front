@@ -18,7 +18,7 @@ interface FilterFormProps {
   modelsList: Option[];
 }
 
-const FilterFormMobile = ({
+const FormMobile = ({
   filters,
   handleSubmit,
   setModel,
@@ -126,4 +126,4 @@ const FilterFormMobile = ({
   );
 };
 
-export default FilterFormMobile;
+export default FormMobile;
