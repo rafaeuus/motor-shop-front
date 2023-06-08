@@ -32,9 +32,11 @@ const Card = ({ car, isAdvertiserOwner }: CardProps) => {
     <div className="group m-2 flex h-[342px] max-w-xs flex-col justify-between">
       <div className="relative flex h-36 max-h-36 w-full justify-center border-2 border-grey7 bg-grey7 object-cover transition group-hover:border-Brand1">
         <Image
-          className="h-full bg-transparent object-contain"
+          className="h-auto w-auto bg-transparent object-contain"
           src={car ? car.cover_image : "/assets/carExample.png"}
           alt="Imagem do veículo"
+          width={400}
+          height={400}
         />
         {isAdvertiserOwner && (
           <span

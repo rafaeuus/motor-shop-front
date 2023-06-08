@@ -1,11 +1,11 @@
 "use client";
 
+import { filters, ModelOption, models, Option } from "@/constants/filters";
 import { AuthContext } from "@/contexts/AuthContext.tsx";
 import Image from "next/image";
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import Modal from "react-modal";
 import FormMobile from "../CategoryFilters/FormModal";
-import { ModelOption, filters, models, Option } from "@/constants/filters";
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)"
@@ -69,7 +69,7 @@ export const ModalCustom = () => {
         </header>
         <div>
           {modalType == "filterHomePage" && (
-            <div>
+            <div className="h-[60vh]  w-full  overflow-auto">
               <FormMobile
                 filters={filters}
                 handleInputChange={handleInputChange}
