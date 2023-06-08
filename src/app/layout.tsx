@@ -27,7 +27,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-Br">
-      <body className={`${inter.variable} ${lexend.variable}`}>
+      <body className={`${inter.variable} ${inter.className} ${lexend.variable}`}>
         <AuthProvider>
           <>
             <Navbar />

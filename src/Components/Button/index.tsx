@@ -30,10 +30,10 @@ export const Button = ({
 
   switch (size) {
     case "primary":
-      buttonClasses += " h-12 w-[146px] text-base";
+      buttonClasses += `h-12  text-base ${fullWidth ? "w-full" : "w-[119px]"}`;
       break;
     case "secondary":
-      buttonClasses += " h-[38px] w-[119px] text-sm";
+      buttonClasses += ` h-[38px] text-base ${fullWidth ? "w-full" : "w-[119px]"}`;
       break;
     default:
       throw new Error(`Invalid type option '${type}' for Button`);

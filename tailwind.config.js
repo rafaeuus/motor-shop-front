@@ -37,13 +37,18 @@ export default withMT({
       xl: "1200px",
       // => @media (min-width: 1200px) { ... }
 
-      "2xl": "1400px"
+      "2xl": "1400px",
+      // => @media (min-width: 1400px) { ... }
+      "3xl": "1600px"
       // => @media (min-width: 1400px) { ... }
     },
     extend: {
       fontFamily: {
         sans: "var(--font-inter)",
         lexend: "var(--font-bai-lexend)"
+      },
+      gridAutoRows: {
+        "3fr": "minmax(320, 3fr)"
       },
       colors: {
         Alert1: "#cd2b31",
@@ -76,6 +81,9 @@ export default withMT({
         grey8: "#f1f3f5",
         grey9: "#f8f9fa",
         grey10: "#fdfdfd"
+      },
+      backgroundImage: {
+        car: "url('/public/motors-shop-white.svg')"
       },
       typography: {
         "heading-1-700": {
