@@ -1,3 +1,5 @@
+"use client";
+
 import { AuthContext } from "@/contexts/AuthContext.tsx";
 import Image from "next/image";
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
@@ -24,7 +26,7 @@ const customStyles = {
 };
 
 export const ModalCustom = () => {
-  // vai pro contexto:
+  // vai pro contexto, apenas pra teste:
   const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
   const [model, setModel] = useState("");
 

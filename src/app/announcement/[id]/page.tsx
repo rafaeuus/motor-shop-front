@@ -1,7 +1,7 @@
-const Announcement = ({ params }: { params: { id: string } }) => {
-  console.log(params.id);
+import { AnnouncementsMain } from "@/Components/PagesComponents/Announcements";
 
-  return <h1>Teste</h1>;
+const Announcement = ({ params }: { params: { id: string } }) => {
+  return <AnnouncementsMain />;
 };
 
 export default Announcement;

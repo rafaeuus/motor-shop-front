@@ -1,4 +1,3 @@
-"use client";
 import { Footer } from "@/Components/Footer";
 import { ModalCustom } from "@/Components/Modal";
 import { Navbar } from "@/Components/Navbar";
@@ -30,11 +29,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-Br">
       <body className={`${inter.variable} ${inter.className} ${lexend.variable}`}>
         <AuthProvider>
-          <Navbar />
-          {children}
-          <Footer />
-          <ModalCustom />
-          <Toaster />
+          <>
+            <Navbar />
+            {children}
+            <Footer />
+            <ModalCustom />
+            <Toaster />
+          </>
         </AuthProvider>
       </body>
     </html>

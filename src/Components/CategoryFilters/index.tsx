@@ -31,7 +31,6 @@ const CategoryFilters = ({ children }: CategoryFiltersProps) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log("Valores capturados:", inputValues);
     //  lógica do envío do formulario
   };
 
