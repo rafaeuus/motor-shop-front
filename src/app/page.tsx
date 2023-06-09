@@ -3,7 +3,7 @@ import Card from "@/Components/Card";
 
 const Home = () => {
   return (
-    <main className="container">
+    <main className="mx-auto max-w-[1600px]">
       <section className="flex max-h-[537px] min-h-[537px] w-full items-center justify-center bg-[url('/car.png')] bg-no-repeat">
         <div className="flex max-h-[537px] min-h-[537px] w-full items-center justify-center bg-gradient-to-b from-[rgba(0,0,0,0.19940476190476186)] to-grey0">
           <div className="px-8 text-center">
@@ -16,11 +16,13 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <CategoryFilters>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
-          <Card key={item} isAdvertiserOwner={false} />
-        ))}
-      </CategoryFilters>
+      <div className="container">
+        <CategoryFilters>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
+            <Card key={item} isAdvertiserOwner={false} />
+          ))}
+        </CategoryFilters>
+      </div>
     </main>
   );
 };

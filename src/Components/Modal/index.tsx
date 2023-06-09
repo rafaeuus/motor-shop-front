@@ -1,11 +1,10 @@
 "use client";
 
-import { filters, ModelOption, models, Option } from "@/constants/filters";
 import { AuthContext } from "@/contexts/AuthContext.tsx";
 import Image from "next/image";
-import { ChangeEvent, FormEvent, useContext, useState } from "react";
+import { useContext } from "react";
 import Modal from "react-modal";
-import FormMobile from "../CategoryFilters/FormModal";
+import FilterForm from "../CategoryFilters/FilterForm";
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)"
@@ -26,26 +25,6 @@ const customStyles = {
 };
 
 export const ModalCustom = () => {
-  // vai pro contexto, apenas pra teste:
-  const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
-  const [model, setModel] = useState("");
-
-  const filteredModels: ModelOption[] = models.options.filter((e) => e.label === model);
-
-  const modelsList: Option[] = filteredModels.length > 0 ? filteredModels[0].options : [];
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>, sectionId: string) => {
-    const newInputValues = { ...inputValues };
-    newInputValues[sectionId] = e.target.value;
-    setInputValues(newInputValues);
-  };
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    console.log("Valores capturados:", inputValues);
-    //  lógica do envío do formulario
-  };
-  // ate aqui
   const { closeModal, modalIsOpen, modalTitle, modalType } = useContext(AuthContext);
   return (
     <Modal
@@ -70,14 +49,7 @@ export const ModalCustom = () => {
         <div>
           {modalType == "filterHomePage" && (
             <div className="h-[60vh]  w-full  overflow-auto">
-              <FormMobile
-                filters={filters}
-                handleInputChange={handleInputChange}
-                handleSubmit={handleSubmit}
-                inputValues={inputValues}
-                setModel={setModel}
-                modelsList={modelsList}
-              />
+              <FilterForm show={true} />
             </div>
           )}
           {modalType == "imageCar" && <div> </div>}
