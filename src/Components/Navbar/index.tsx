@@ -53,7 +53,7 @@ export const Navbar = () => {
   }, []);
   return (
     <header className="w-full border-b-2 border-grey6 " ref={menuRef}>
-      <div className="relative mx-auto my-0 flex h-20 w-full max-w-7xl items-center justify-between  bg-grey10 px-4">
+      <div className="relative mx-auto my-0 flex h-20 w-full max-w-[1600px] items-center justify-between  bg-grey10 px-4">
         <Link href={"/"}>
           <Image
             src={"/motors-shop.svg"}

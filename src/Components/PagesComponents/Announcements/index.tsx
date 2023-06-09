@@ -1,10 +1,10 @@
 "use-client";
 
-import Image from "next/image";
-import { Button } from "@/Components/Button";
-import TextArea from "@/Components/TextArea";
 import AnnouncerCard from "@/Components/AnnouncerCard";
+import { Button } from "@/Components/Button";
 import Comment from "@/Components/Comment";
+import TextArea from "@/Components/TextArea";
+import Image from "next/image";
 
 export const AnnouncementsMain = () => {
   return (

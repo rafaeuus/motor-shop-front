@@ -2,10 +2,10 @@ import Link from "next/link";
 
 const Pagination = () => {
   return (
-    <nav className="mb-10 flex items-center justify-center">
+    <nav className=" mt-11 flex items-center justify-center">
       <ul className="flex gap-2">
         <li>
-          <Link href={"#"} className="prose-heading-7-600 mr-2">
+          <Link href={"#"} className="prose-heading-7-600 mr-2 text-Brand2">
             {"< Anterior"}
           </Link>
         </li>
@@ -15,7 +15,7 @@ const Pagination = () => {
         </li>
         <li>2</li>
         <li>
-          <Link href={"#"} className="prose-heading-7-600 ml-2">
+          <Link href={"#"} className="prose-heading-7-600 ml-2 text-Brand2">
             {"Seguinte >"}
           </Link>
         </li>

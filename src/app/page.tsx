@@ -1,10 +1,10 @@
-import CategoryFilters from "@/Components/CategoryFilters";
 import Card from "@/Components/Card";
+import CategoryFilters from "@/Components/CategoryFilters";
 
 const Home = () => {
   return (
-    <main className="mx-auto max-w-[1600px]">
-      <section className="flex max-h-[537px] min-h-[537px] w-full items-center justify-center bg-[url('/car.png')] bg-no-repeat">
+    <main className="mx-auto max-w-[1600px] bg-blue-gray-400">
+      <section className="flex max-h-[537px] min-h-[537px] w-full items-center justify-center bg-[url('/car.png')] bg-center bg-no-repeat">
         <div className="flex max-h-[537px] min-h-[537px] w-full items-center justify-center bg-gradient-to-b from-[rgba(0,0,0,0.19940476190476186)] to-grey0">
           <div className="px-8 text-center">
             <h1 className="prose-heading-3-500 mb-6 text-grey10 md:prose-heading-1-700">
@@ -16,7 +16,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <div className="container">
+      <div className="">
         <CategoryFilters>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
             <Card key={item} isAdvertiserOwner={false} />
