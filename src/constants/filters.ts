@@ -7,7 +7,7 @@ export interface Option {
 export interface Filter {
   id: string;
   name: string;
-  options: Option[];
+  options?: Option[];
 }
 
 export interface ModelOption {
@@ -15,7 +15,7 @@ export interface ModelOption {
   options: Option[];
 }
 
-export interface CarBrand {
+export interface CarModels {
   id: "model";
   name: "Modelo";
   options: ModelOption[];
@@ -49,11 +49,7 @@ export const filters: Filter[] = [
   },
   {
     id: "model",
-    name: "Modelo",
-    options: [
-      { value: "Mercedes", label: "Mercedes", checked: false },
-      { value: "BMW", label: "BMW", checked: false }
-    ]
+    name: "Modelo"
   },
   {
     id: "color",
@@ -61,15 +57,33 @@ export const filters: Filter[] = [
     options: [
       { value: "azul", label: "Azul", checked: false },
       { value: "vermelho", label: "Vermelho", checked: false },
-      { value: "verde", label: "Verde", checked: false }
+      { value: "verde", label: "Verde", checked: false },
+      { value: "branco", label: "Branco", checked: false },
+      { value: "preto", label: "Preto", checked: false },
+      { value: "prata", label: "Prata", checked: false },
+      { value: "cinza", label: "Cinza", checked: false },
+      { value: "amarelo", label: "Amarelo", checked: false },
+      { value: "laranja", label: "Laranja", checked: false }
     ]
   },
   {
     id: "year",
     name: "Ano",
     options: [
-      { value: "ano1", label: "Ano1", checked: false },
-      { value: "ano2", label: "Ano2", checked: false }
+      { value: "2023", label: "2023", checked: false },
+      { value: "2022", label: "2022", checked: false },
+      { value: "2021", label: "2021", checked: false },
+      { value: "2020", label: "2020", checked: false },
+      { value: "2019", label: "2019", checked: false },
+      { value: "2018", label: "2018", checked: false },
+      { value: "2017", label: "2017", checked: false },
+      { value: "2016", label: "2016", checked: false },
+      { value: "2015", label: "2015", checked: false },
+      { value: "2014", label: "2014", checked: false },
+      { value: "2013", label: "2013", checked: false },
+      { value: "2012", label: "2012", checked: false },
+      { value: "2011", label: "2011", checked: false },
+      { value: "2010", label: "2010", checked: false }
     ]
   },
   {
@@ -78,13 +92,13 @@ export const filters: Filter[] = [
     options: [
       { value: "gasolina", label: "Gasolina", checked: false },
       { value: "diesel", label: "Diesel", checked: false },
-      { value: "eletrico", label: "Eletrico", checked: false },
-      { value: "hibrido", label: "Hibrido", checked: false }
+      { value: "etanol", label: "Etanol", checked: false },
+      { value: "flex", label: "Flex", checked: false }
     ]
   },
   {
     id: "km",
-    name: "Kilometraje",
+    name: "KM",
     options: [
       { value: "0-50000", label: "0 - 50,000", checked: false },
       { value: "50000-100000", label: "50,000 - 100,000", checked: false },
@@ -106,7 +120,7 @@ export const filters: Filter[] = [
   }
 ];
 
-export const models: CarBrand = {
+export const models: CarModels = {
   id: "model",
   name: "Modelo",
   options: [
