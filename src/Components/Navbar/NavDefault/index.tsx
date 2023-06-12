@@ -8,7 +8,7 @@ export const NavDefault = ({ style }: InavDefaultProps) => {
   return (
     <nav className={style}>
       <Link
-        href={"/"}
+        href={"/login"}
         className="prose-body-1-600 flex  h-12  w-auto items-center  justify-center  rounded px-7 py-3  text-grey2 hover:bg-grey8"
         id="link-login-page">
         Fazer Login
