@@ -1,3 +1,6 @@
+import { AuthContext } from "@/contexts/AuthContext.tsx";
+import { useContext } from "react";
+
 interface InavAuthProps {
   toogleMenuAuth: () => void;
   menuAuthIsOpen: boolean;
@@ -6,6 +9,7 @@ interface InavAuthProps {
 }
 
 export const NavAuth = ({ toogleMenuAuth, menuAuthIsOpen, isAdvertiser, name }: InavAuthProps) => {
+  const { logoutUserAuth } = useContext(AuthContext);
   return (
     <div className="relative  flex h-20 items-center">
       <button
@@ -39,6 +43,7 @@ export const NavAuth = ({ toogleMenuAuth, menuAuthIsOpen, isAdvertiser, name }: 
             </button>
           )}
           <button
+            onClick={logoutUserAuth}
             className="text-base font-normal leading-7 text-grey2 hover:text-grey1 hover:underline"
             id="button-logout">
             Sair
