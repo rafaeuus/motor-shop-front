@@ -29,7 +29,6 @@ const Input = ({ error, label, register, ...rest }: InputProps) => {
             : componentClasses
         }
       />
-      ;
     </div>
   );
 };
