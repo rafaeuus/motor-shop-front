@@ -1,7 +1,7 @@
 import Card from "@/Components/Card";
 import CategoryFilters from "@/Components/CategoryFilters";
 
-const Home = () => {
+const Home = async () => {
   return (
     <main className="mx-auto max-w-[1600px] bg-blue-gray-400">
       <section className="flex max-h-[537px] min-h-[537px] w-full items-center justify-center bg-[url('/car.png')] bg-center bg-no-repeat">

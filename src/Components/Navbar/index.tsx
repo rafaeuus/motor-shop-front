@@ -1,9 +1,10 @@
 "use client";
 
+import { AuthContext } from "@/contexts/AuthContext.tsx";
 import { Sling } from "hamburger-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useOutClick } from "../../hooks/useOutClick";
 import { NavAuth } from "./NavAuth";
 import { NavDefault } from "./NavDefault";
@@ -12,8 +13,8 @@ export const Navbar = () => {
   const [menuBurgerIsOpen, setMenuBurgerIsOpen] = useState(false);
   const [menuAuthIsOpen, setMenuAuthIsOpen] = useState(false);
 
-  const isAuth = false;
-  const isAdvertiser = false;
+  const { userAuth } = useContext(AuthContext);
+  const isAdvertiser = userAuth ? userAuth.isAdvertiser : false;
 
   const closeMenuBurguer = () => {
     setMenuBurgerIsOpen(false);
@@ -77,12 +78,12 @@ export const Navbar = () => {
 
         <div className="hidden h-full md:flex">
           <span className="mr-3 h-full w-[2px] bg-grey6"></span>
-          {isAuth ? (
+          {userAuth ? (
             <NavAuth
               isAdvertiser={isAdvertiser}
               menuAuthIsOpen={menuAuthIsOpen}
               toogleMenuAuth={toogleMenuAuth}
-              name="Samuel Leão"
+              name={userAuth.name}
             />
           ) : (
             <NavDefault style="flex items-center gap-10" />
@@ -91,7 +92,7 @@ export const Navbar = () => {
 
         {menuBurgerIsOpen && (
           <>
-            {isAuth ? (
+            {userAuth ? (
               <nav
                 className={`absolute left-0 top-[76px]  flex h-fit w-full items-center justify-center bg-grey10  px-3 py-3 pr-5`}>
                 <NavAuth
