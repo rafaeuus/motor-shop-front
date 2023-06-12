@@ -12,6 +12,7 @@ const Register = () => {
     handleSubmit,
     formState: { errors }
   } = useForm<TRegisterData>({
+    mode: "onBlur",
     resolver: zodResolver(registerSchema)
   });
   console.log(errors);
@@ -30,99 +31,87 @@ const Register = () => {
             label="Nome"
             type="text"
             placeholder="Ex: João da Silva"
-            {...register("name")}
+            register={register("name")}
             error={errors.name?.message}
-            key={"name"}
           />
           <Input
             label="Email"
             type="email"
             placeholder="Ex: joao@mail.com"
-            {...register("email")}
+            register={register("email")}
             error={errors.email?.message}
-            key={"email"}
           />
           <Input
             label="CPF"
             type="text"
             placeholder="000.000.000-00"
-            {...register("cpf")}
+            register={register("cpf")}
             error={errors.cpf?.message}
-            key={"cpf"}
           />
           <Input
             label="Celular"
             type="text"
             placeholder="(DDD) 00000-0000"
-            {...register("phone")}
+            register={register("phone")}
             error={errors.phone?.message}
-            key={"phone"}
           />
           <Input
             label="Data de nascimento"
             type="date"
-            {...register("birthDate")}
+            register={register("birthDate")}
             error={errors.birthDate?.message}
-            key={"birthDate"}
           />
           <TextArea
             label="Descrição"
             placeholder="Ex: Sobre mim"
-            {...register("description")}
+            register={register("description")}
             error={errors.description?.message}
-            key={"description"}
           />
           <h5 className="prose-body-2-500">Informações de Endereço</h5>
           <Input
             label="CEP"
             type="text"
             placeholder="00000.000"
-            {...register("zipCode")}
+            register={register("zipCode")}
             error={errors.zipCode?.message}
-            key={"zipCode"}
           />
           <div className="flex w-full gap-4">
             <Input
               label="Estado"
               type="text"
               placeholder="Digitar Estado"
-              {...register("state")}
+              register={register("state")}
               error={errors.state?.message}
-              key={"state"}
             />
             <Input
               label="Cidade"
               type="text"
               placeholder="Digitar Cidade"
-              {...register("city")}
+              register={register("city")}
               error={errors.city?.message}
-              key={"city"}
             />
           </div>
           <Input
             label="Rua"
             type="text"
             placeholder="Digitar Rua"
-            {...register("street")}
+            register={register("street")}
             error={errors.street?.message}
-            key={"street"}
           />
           <div className="flex w-full gap-4">
             <Input
               label="Número"
               type="text"
               placeholder="Digitar Número"
-              {...register("number")}
+              register={register("number")}
               error={errors.number?.message}
-              key={"number"}
             />
             <Input
               label="Complemento"
               type="text"
               placeholder="Ex: apart 307"
-              {...register("complement")}
+              register={register("complement")}
               error={errors.complement?.message}
-              key={"complement"}
             />
           </div>
           <h5 className="prose-body-2-500">Tipo de conta</h5>
@@ -134,7 +123,6 @@ const Register = () => {
                 value="comprador"
                 className="peer hidden"
                 {...register("isAdvertiser")}
-                key={"isAdvertiser"}
               />
               <label
                 htmlFor="comprador"
@@ -149,7 +137,6 @@ const Register = () => {
                 value="anunciante"
                 className="peer hidden"
                 {...register("isAdvertiser")}
-                key={"isAdvertiser"}
               />
               <label
                 htmlFor="Anunciante"
@@ -157,22 +144,23 @@ const Register = () => {
                 <div className="font-sans text-base font-semibold">Anunciante</div>
               </label>
             </div>
+            {errors.isAdvertiser ? (
+              <span className="prose-body-1-600 text-red-900">{errors.isAdvertiser.message}</span>
+            ) : null}
           </div>
           <Input
             label="Senha"
             type="password"
             placeholder="Digitar Senha"
-            {...register("password")}
+            register={register("password")}
             error={errors.password?.message}
-            key={"password"}
           />
           <Input
             label="Confirmar senha"
             type="password"
             placeholder="Digitar Senha"
-            {...register("confirmPassword")}
+            register={register("confirmPassword")}
             error={errors.confirmPassword?.message}
-            key={"confirmPassword"}
           />
         </div>
         <Button variant="gradient" color="blue" size="primary" fullWidth type="submit">

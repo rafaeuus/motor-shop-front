@@ -47,10 +47,10 @@ export const registerSchema = z
       .refine((value) => /^\d{5}-\d{3}$/.test(value), {
         message: "El valor debe ser un CEP válido en el formato XXXXX-XXX."
       }),
-    state: z.string(),
-    city: z.string(),
-    street: z.string(),
-    number: z.string(),
+    state: z.string().nonempty("O estado é obrigatorio"),
+    city: z.string().nonempty("A cidade é obrigatoria"),
+    street: z.string().nonempty("A rua é obrigatoria"),
+    number: z.string().nonempty("O némero é obrigatorio"),
     complement: z.string().nullable(),
     password: z
       .string()
