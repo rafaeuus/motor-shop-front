@@ -21,12 +21,12 @@ export const registerSchema = z
       .max(100)
       .email("Formato de email inválido")
       .nonempty("Seu email é obrigatorio"),
-    cpf: z.string().length(11).nonempty("Seu cpf é obrigatorio"),
+    cpf: z.string().length(11, "O cpf precisa ter 11 caracteres").nonempty("Seu cpf é obrigatorio"),
     phone: z
       .string()
       .regex(
         new RegExp(/^\([0-9]{2}\)[0-9]{5}-[0-9]{4}$/),
-        "Formato de telefone inválido, utilize: (DDD)xxxxx-xxxx"
+        "Formato de telefone inválido, utilize: (DD)xxxxx-xxxx"
       )
       .nonempty("Seu telefone é obrigatorio"),
     birthDate: z
@@ -37,15 +37,19 @@ export const registerSchema = z
       .nonempty("Sua data de nascimento é obrigatorio"),
     description: z
       .string()
-      .min(3, "O nome precisa ter ao menos 3 caracteres")
+      .min(3, "A descrição precisa ter ao menos 5 caracteres")
       .max(150, "O nome precisa ter no máximo 150 caracteres")
       .nonempty("Sua descrição é obrigatoria"),
-    isAdvertiser: z.boolean().default(false),
+    isAdvertiser: z
+      .string()
+      .nonempty("É necessario informar se vocé é um anunciante ou não")
+      .transform((value) => (value === "true" ? true : false)),
     zipCode: z
       .string()
       .nonempty("O CEP é obrigatorio")
       .refine((value) => /^\d{5}-\d{3}$/.test(value), {
-        message: "El valor debe ser un CEP válido en el formato XXXXX-XXX."
+        message: "O CEP deve estar no formato XXXXX-XXX, precisa ter 9 caracteres",
+        path: ["zipCode"]
       }),
     state: z.string().nonempty("O estado é obrigatorio"),
     city: z.string().nonempty("A cidade é obrigatoria"),
@@ -69,5 +73,8 @@ export const registerSchema = z
     message: "Os passwords não conferem, precisam ser iguais",
     path: ["confirmPassword"]
   });
+// .transform((field) => ({
+//   ...field
+// }));
 
 export type TRegisterData = z.infer<typeof registerSchema>;

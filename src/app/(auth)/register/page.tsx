@@ -2,28 +2,17 @@
 import { Button } from "@/Components/Button";
 import Input from "@/Components/Input";
 import TextArea from "@/Components/TextArea";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { TRegisterData, registerSchema } from "./schema";
+import { useCep } from "./useCep";
 
 const Register = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<TRegisterData>({
-    mode: "onBlur",
-    resolver: zodResolver(registerSchema)
-  });
-  console.log(errors);
-  const formSubmit: SubmitHandler<TRegisterData> = (data) => {
-    console.log(data);
-  };
+  const { errors, register, handleSubmit, formSubmit } = useCep();
+
   return (
     <section className="flex h-max w-screen items-center justify-center bg-grey8">
       <form
         className="my-8 flex max-h-max w-[411px] flex-col items-start justify-center gap-4 rounded bg-grey10 p-12"
-        onSubmit={handleSubmit(formSubmit)}>
+        onSubmit={handleSubmit(formSubmit)}
+        noValidate>
         <h4 className="prose-heading-5-500">Cadastro</h4>
         <div className="flex w-full flex-col gap-4">
           <h5 className="prose-body-2-500">Informações pessoais</h5>
@@ -120,7 +109,7 @@ const Register = () => {
               <input
                 type="radio"
                 id="comprador"
-                value="comprador"
+                value={false.toString()}
                 className="peer hidden"
                 {...register("isAdvertiser")}
               />
@@ -134,7 +123,7 @@ const Register = () => {
               <input
                 type="radio"
                 id="Anunciante"
-                value="anunciante"
+                value={true.toString()}
                 className="peer hidden"
                 {...register("isAdvertiser")}
               />
@@ -144,10 +133,10 @@ const Register = () => {
                 <div className="font-sans text-base font-semibold">Anunciante</div>
               </label>
             </div>
-            {errors.isAdvertiser ? (
-              <span className="prose-body-1-600 text-red-900">{errors.isAdvertiser.message}</span>
-            ) : null}
           </div>
+          {errors.isAdvertiser ? (
+            <span className="prose-body-1-600 text-red-900">{errors.isAdvertiser.message}</span>
+          ) : null}
           <Input
             label="Senha"
             type="password"
