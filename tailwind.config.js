@@ -218,6 +218,14 @@ export default withMT({
             lineHeight: "1.625"
           }
         },
+        "body-2-500": {
+          css: {
+            fontSize: "0.875rem",
+            fontFamily: "var(--font-inter)",
+            fontWeight: "500",
+            lineHeight: "1.625"
+          }
+        },
         "body-2-600": {
           css: {
             fontSize: "0.875rem",
