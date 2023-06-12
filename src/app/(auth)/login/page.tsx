@@ -2,13 +2,16 @@
 
 import { Button } from "@/Components/Button";
 import Input from "@/Components/Input";
-import Link from "next/link";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { ILoginForm, loginSchema } from "./loginSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "react-hot-toast";
+import { IloginUser } from "@/contexts/AuthContext.tsx/types";
 import { api } from "@/services/api";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { setCookie } from "nookies";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { ILoginForm, loginSchema } from "./loginSchema";
+
 const LoginPage = () => {
   const router = useRouter();
 
@@ -25,10 +28,15 @@ const LoginPage = () => {
     const toaster = toast.loading("Realizando login, aguarde!");
 
     try {
-      const response = await api.post("/login", data);
+      const response = await api.post<IloginUser>("/login", data);
+      const { token } = response.data;
       toast.dismiss(toaster);
       toast.success("Login realizado!");
-      console.log("Token: ", response.data.token);
+
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      setCookie(undefined, "@motors-shop:token", token, {
+        maxAge: 60 * 60 * 1
+      });
       router.push("/");
     } catch (error: any) {
       console.log(error);
@@ -36,6 +44,7 @@ const LoginPage = () => {
       toast.error(error.response.data.message);
     }
   };
+
   return (
     <div className="flex justify-center bg-grey8 py-20">
       <div className="w-4/5 max-w-[600px] rounded bg-grey10 px-12 py-11">

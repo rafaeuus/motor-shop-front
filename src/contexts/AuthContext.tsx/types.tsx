@@ -13,3 +13,7 @@ export interface IauthProviderProps {
 }
 
 export type TmodalTypes = "filterHomePage" | "imageCar";
+
+export interface IloginUser {
+  token: string;
+}
