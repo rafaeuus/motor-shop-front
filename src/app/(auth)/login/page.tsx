@@ -8,9 +8,9 @@ import { ILoginForm, loginSchema } from "./loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-hot-toast";
 import { api } from "@/services/api";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 const LoginPage = () => {
-  // const router = useRouter();
+  const router = useRouter();
 
   const {
     register,
@@ -29,7 +29,7 @@ const LoginPage = () => {
       toast.dismiss(toaster);
       toast.success("Login realizado!");
       console.log("Token: ", response.data.token);
-      // router.push("/");
+      router.push("/");
     } catch (error: any) {
       console.log(error);
       toast.dismiss(toaster);
@@ -55,10 +55,10 @@ const LoginPage = () => {
             placeholder="Digitar senha"
             error={errors.password?.message}
           />
-          <Link className="prose-body-2-500 flex justify-end" href={"/recover"}>
+          <Link className="prose-body-2-500 flex justify-end hover:scale-105" href={"/recover"}>
             Esqueci minha senha
           </Link>
-          <Button type="submit" variant="gradient" color="blue" size="primary">
+          <Button type="submit" variant="gradient" color="blue" size="primary" fullWidth={true}>
             Entrar
           </Button>
         </form>
