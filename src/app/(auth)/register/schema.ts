@@ -21,11 +21,16 @@ export const registerSchema = z
       .max(100)
       .email("Formato de email inválido")
       .nonempty("Seu email é obrigatorio"),
-    cpf: z.string().length(14, "O cpf precisa ter 11 digitos").nonempty("Seu cpf é obrigatorio"),
+    cpf: z
+      .string()
+      .length(14, "O cpf precisa ter 11 digitos")
+      .nonempty("Seu cpf é obrigatorio")
+      .transform((value) => value.replace(/\D/g, "")),
     phone: z
       .string()
       .length(15, "O telefone precisa ter 11 digitos")
-      .nonempty("Seu telefone é obrigatorio"),
+      .nonempty("Seu telefone é obrigatorio")
+      .transform((value) => "55" + value.replace(/\D/g, "")),
     birthDate: z
       .string()
       .nonempty("Sua data de nascimento é obrigatorio")
@@ -42,10 +47,8 @@ export const registerSchema = z
     zipCode: z
       .string()
       .nonempty("O CEP é obrigatorio")
-      .refine((value) => /^\d{5}-\d{3}$/.test(value), {
-        message: "O CEP deve estar no formato XXXXX-XXX, precisa ter 9 caracteres",
-        path: ["zipCode"]
-      }),
+      .length(9, "O CEP precisa ter 8 digitos")
+      .transform((value) => value.replace(/\D/g, "")),
     state: z.string().nonempty("O estado é obrigatorio"),
     city: z.string().nonempty("A cidade é obrigatoria"),
     street: z.string().nonempty("A rua é obrigatoria"),
