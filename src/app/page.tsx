@@ -1,7 +1,19 @@
-import Card from "@/Components/Card";
+import Card, { IcarAnnouncement } from "@/Components/Card";
 import CategoryFilters from "@/Components/CategoryFilters";
+import { api } from "@/services/api";
+
+const getListCarsAnnouncement = async () => {
+  try {
+    const res = await api.get<IcarAnnouncement[]>("/cars");
+    return res.data;
+  } catch (error) {
+    throw new Error("API sendo iniciada");
+  }
+};
 
 const Home = async () => {
+  const listCarsAnnouncement = await getListCarsAnnouncement();
+
   return (
     <main className="mx-auto max-w-[1600px] bg-blue-gray-400">
       <section className="flex max-h-[537px] min-h-[537px] w-full items-center justify-center bg-[url('/car.png')] bg-center bg-no-repeat">
@@ -18,8 +30,8 @@ const Home = async () => {
       </section>
       <div className="">
         <CategoryFilters>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
-            <Card key={item} isAdvertiserOwner={false} />
+          {listCarsAnnouncement.map((announcement) => (
+            <Card key={announcement.id} car={announcement} />
           ))}
         </CategoryFilters>
       </div>
