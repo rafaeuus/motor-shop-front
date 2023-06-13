@@ -1,11 +1,11 @@
 "use client";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback, useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { TRegisterData, registerSchema } from "./schema";
 import { api } from "@/services/api";
-import { toast } from "react-hot-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { registerSchema, TRegisterData } from "./schema";
 
 type TAddressProps = {
   bairro: string;
@@ -45,7 +45,6 @@ export const useRegister = () => {
       try {
         const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
         const data = await response.json();
-        console.log(data);
         handleSetData(data);
       } catch (error) {
         console.error(error);
