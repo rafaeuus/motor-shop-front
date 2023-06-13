@@ -10,7 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Input = ({ error, label, register, ...rest }: InputProps) => {
   let componentClasses =
-    "prose-body-2-400! block! w-full! rounded-md border-2! border-grey7! bg-transparent! p-4! outline-none! transition! hover:border-grey8! hover:bg-grey8! focus:border-Brand2! focus:bg-grey9! placeholder-grey3!";
+    "prose-body-2-400! block! w-full rounded-md border-2! border-grey7! bg-transparent! p-4! outline-none! transition! hover:border-grey8! hover:bg-grey8! focus:border-Brand2! focus:bg-grey9! placeholder-grey3!";
 
   return (
     <div className="flex flex-col gap-2">
@@ -29,7 +29,7 @@ const Input = ({ error, label, register, ...rest }: InputProps) => {
             : componentClasses
         }
       />
-      {error ? <span className="prose-body-1-600 text-red-900">{error}</span> : null}
+      {error ? <span className="prose-body-2-500 text-red-900">{error}</span> : null}
     </div>
   );
 };
