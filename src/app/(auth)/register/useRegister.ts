@@ -47,7 +47,7 @@ export const useRegister = () => {
         const data = await response.json();
         handleSetData(data);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     },
     [handleSetData, cep]
@@ -58,7 +58,8 @@ export const useRegister = () => {
     const toaster = toast.loading("Realizando cadastro, aguarde!");
     setLoading(true);
     try {
-      await api.post<TRegisterData>("/register", data);
+      const response = await api.post<TRegisterData>("/user", data);
+      console.log(response.data);
       toast.dismiss(toaster);
       toast.success("Cadastro realizado!");
       router.push("/login");
