@@ -1,4 +1,4 @@
-import { Button } from "../Button";
+import { Button } from "../../../Button";
 
 interface AnnouncerCardProps {
   user: {
@@ -14,9 +14,7 @@ const AnnouncerCard = ({ user }: AnnouncerCardProps) => {
         {user.name[0].toUpperCase()}
       </span>
       <span className="prose-heading-6-600 text-grey1">Rafael</span>
-      <p className="prose-body-1-400 overflow-y-scroll text-center text-grey2">
-        {user.description}
-      </p>
+      <p className="prose-body-1-400 overflow-y-auto text-center text-grey2">{user.description}</p>
       <Button variant={"gradient"} color={"black"} size={"primary"} fullWidth={true}>
         Ver todos anuncios
       </Button>

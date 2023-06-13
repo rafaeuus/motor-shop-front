@@ -1,85 +1,100 @@
-import Image, { StaticImageData } from "next/image";
+"use client";
+import { AuthContext } from "@/contexts/AuthContext.tsx";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
 
-// Criado apenas para exemplificar o uso do card
-interface CardProps {
-  car?: {
-    brand: string;
-    model: string;
-    year: string;
-    fuel_type: string;
-    mileage: number;
-    color: string;
-    fipe_price: number;
-    price: number;
+export interface IcarAnnouncement {
+  id: string;
+  brand: string;
+  model: string;
+  year: string;
+  fuelType: string;
+  mileage: number;
+  color: string;
+  fipePrice: number;
+  price: number;
+  description: string;
+  created_at: string;
+  isPublished: boolean;
+  coverImage: string;
+  userId: string;
+  user: {
+    name: string;
+    email: string;
     description: string;
-    user: {
-      name: string;
-    };
-    created_at: Date;
-    is_published: boolean;
-    cover_image: string | StaticImageData;
   };
-  isAdvertiserOwner: boolean;
+  carImages: {
+    id: string;
+    url: string;
+    carId: string;
+  }[];
 }
 
-const Card = ({ car, isAdvertiserOwner }: CardProps) => {
-  if (car?.cover_image === "") {
-    // eslint-disable-next-line camelcase
-    car.cover_image = "/assets/carExample.png";
+interface CardProps {
+  car: IcarAnnouncement;
+}
+
+const Card = ({ car }: CardProps) => {
+  const { userAuth } = useContext(AuthContext);
+
+  const router = useRouter();
+
+  if (car.coverImage === "") {
+    car.coverImage = "/assets/carExample.png";
+  }
+  let isAdvertiserOwner = false;
+  if (car.userId === userAuth?.id) {
+    isAdvertiserOwner = true;
   }
 
   return (
-    <div className="group m-2 flex h-[342px] max-w-xs flex-col justify-between">
-      <div className="relative flex h-36 max-h-36 w-full justify-center border-2 border-grey7 bg-grey7 object-cover transition group-hover:border-Brand1">
-        <Image
-          className="h-auto w-auto bg-transparent object-contain"
-          src={car ? car.cover_image : "/assets/carExample.png"}
-          alt="Imagem do veículo"
-          width={400}
-          height={400}
-        />
+    <div
+      className="group m-2 flex h-[342px] w-full min-w-[280px] max-w-xs flex-col justify-between hover:cursor-pointer"
+      onClick={() => router.push(`/announcement/${car.id}`)}>
+      <div className="relative flex h-36 max-h-36 w-full justify-center border-2 border-grey7 bg-grey7 object-cover transition  group-hover:border-Brand1">
+        <picture className="h-[140px] w-full">
+          <img
+            className="h-full w-full  bg-transparent object-contain"
+            src={car.coverImage}
+            alt="Imagem do veículo"
+            width={312}
+            height={132}
+          />
+        </picture>
         {isAdvertiserOwner && (
           <span
             className={`prose-body-2-600 absolute left-4 top-[11px] bg-Brand1 px-2 text-grey10 ${
-              car!.is_published ? "bg-Bran1" : "bg-grey4"
+              car.isPublished ? "bg-Bran1" : "bg-grey4"
             }`}>
-            {car!.is_published ? "Ativo" : "Inativo"}
+            {car.isPublished ? "Ativo" : "Inativo"}
           </span>
         )}
-        {car && car.fipe_price - (5 / 100) * car.fipe_price >= car.price && (
+        {(car.price <= car.fipePrice || (5 / 100) * car.fipePrice >= car.price - car.fipePrice) && (
           <span className="prose-body-2-600 absolute right-0 top-0 bg-Green1 px-1 py-1 text-grey10">
             $
           </span>
         )}
       </div>
       <div className="flex h-[182px] flex-col justify-between text-grey1">
-        <p className="prose-heading-7-600 truncate">
-          {car ? car.model : "Product title stays here - max 1 line"}
-        </p>
-        <p className="prose-body-2-400 text-grey2 line-clamp-2 ">
-          {car
-            ? car.description
-            : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis assumenda nobis tempore reprehenderit veniam perferendis fugit cupiditate laboriosam numquam, vitae molestias cum debitis commodi quos ab tenetur iste expedita eaque."}
-        </p>
+        <p className="prose-heading-7-600 truncate">{car.model}</p>
+        <p className="prose-body-2-400 text-grey2 line-clamp-2 ">{car.description}</p>
         <div className="flex items-center gap-2">
           <span className="prose-body-2-600 flex h-8 w-8 items-center justify-center rounded-full bg-Brand2 text-grey10">
-            {car ? car.user.name[0].toUpperCase() : "R"}
+            {car.user.name[0].toUpperCase()}
           </span>
-          <span className="prose-body-2-600 text-grey2">{car ? car.user.name : "Anunciante"}</span>
+          <span className="prose-body-2-600 text-grey2">{car.user.name}</span>
         </div>
         <div className="flex justify-between">
           <div className="flex gap-3">
             <span className="prose-body-2-600  rounded bg-Brand4 px-2 py-1 text-Brand1">
-              {car ? car.mileage : 0} KM
+              {car.mileage} KM
             </span>
             <span className="prose-body-2-600  rounded bg-Brand4 px-2 py-1 text-Brand1">
-              {car ? car.year : "2019"}
+              {car.year}
             </span>
           </div>
           <span className="prose-heading-7-500">
-            {car
-              ? car.price.toLocaleString("pt-br", { style: "currency", currency: "BRL" })
-              : "R$ 00.000,00"}
+            {car.price.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}
           </span>
         </div>
       </div>
