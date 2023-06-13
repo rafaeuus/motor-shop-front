@@ -21,20 +21,15 @@ export const registerSchema = z
       .max(100)
       .email("Formato de email inválido")
       .nonempty("Seu email é obrigatorio"),
-    cpf: z.string().length(11, "O cpf precisa ter 11 caracteres").nonempty("Seu cpf é obrigatorio"),
+    cpf: z.string().length(14, "O cpf precisa ter 11 digitos").nonempty("Seu cpf é obrigatorio"),
     phone: z
       .string()
-      .regex(
-        new RegExp(/^\([0-9]{2}\)[0-9]{5}-[0-9]{4}$/),
-        "Formato de telefone inválido, utilize: (DD)xxxxx-xxxx"
-      )
+      .length(15, "O telefone precisa ter 11 digitos")
       .nonempty("Seu telefone é obrigatorio"),
     birthDate: z
       .string()
-      .datetime(
-        "Invalid datetime string, datetime must be in format YYYY-MM-DDTHH:MM:SSZ, use .toISOString() to convert you date."
-      )
-      .nonempty("Sua data de nascimento é obrigatorio"),
+      .nonempty("Sua data de nascimento é obrigatorio")
+      .transform((value) => new Date(value).toISOString()),
     description: z
       .string()
       .min(3, "A descrição precisa ter ao menos 5 caracteres")
@@ -73,8 +68,5 @@ export const registerSchema = z
     message: "Os passwords não conferem, precisam ser iguais",
     path: ["confirmPassword"]
   });
-// .transform((field) => ({
-//   ...field
-// }));
 
 export type TRegisterData = z.infer<typeof registerSchema>;

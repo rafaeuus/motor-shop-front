@@ -1,7 +1,11 @@
+"use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TRegisterData, registerSchema } from "./schema";
+import { api } from "@/services/api";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 type TAddressProps = {
   bairro: string;
@@ -11,7 +15,10 @@ type TAddressProps = {
   localidade: string;
 };
 
-export const useCep = () => {
+export const useRegister = () => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -23,9 +30,9 @@ export const useCep = () => {
     mode: "all",
     resolver: zodResolver(registerSchema)
   });
-  console.log("0", watch("birthDate"));
+
   const cep = watch("zipCode");
-  console.log("1", cep);
+
   const handleSetData = useCallback((data: TAddressProps) => {
     setValue("city", data.localidade);
     setValue("street", data.logradouro);
@@ -36,12 +43,10 @@ export const useCep = () => {
   const handleFetchAddress = useCallback(
     async (cep: string) => {
       try {
-        console.log("2", cep);
         const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
         const data = await response.json();
         console.log(data);
         handleSetData(data);
-        console.log("3", watch("city"));
       } catch (error) {
         console.error(error);
       }
@@ -49,8 +54,22 @@ export const useCep = () => {
     [handleSetData, cep]
   );
 
-  const formSubmit: SubmitHandler<TRegisterData> = (data) => {
+  const formSubmit: SubmitHandler<TRegisterData> = async (data) => {
     console.log(data);
+    const toaster = toast.loading("Realizando cadastro, aguarde!");
+    setLoading(true);
+    try {
+      await api.post<TRegisterData>("/register", data);
+      toast.dismiss(toaster);
+      toast.success("Cadastro realizado!");
+      router.push("/login");
+    } catch (error: any) {
+      console.log(error);
+      toast.dismiss(toaster);
+      toast.error("Opps! algo deu errado, tente novamente");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -63,6 +82,7 @@ export const useCep = () => {
   }, [handleFetchAddress]);
 
   return {
+    loading,
     errors,
     register,
     handleSubmit,
