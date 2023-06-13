@@ -29,6 +29,7 @@ const TextArea = ({ error, label, register, ...rest }: TextAreaProps) => {
             : componentClasses
         }
       />
+      {error ? <span className="prose-body-2-500 text-red-900">{error}</span> : null}
     </div>
   );
 };

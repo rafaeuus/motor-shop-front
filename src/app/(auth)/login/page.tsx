@@ -11,13 +11,15 @@ import jwt_decode from "jwt-decode";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { setCookie } from "nookies";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { ILoginForm, loginSchema } from "./loginSchema";
+import { Spinner } from "@material-tailwind/react";
 
 const LoginPage = () => {
   const { setUserAuth } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const {
@@ -32,6 +34,7 @@ const LoginPage = () => {
   const submitLogin: SubmitHandler<ILoginForm> = async (data): Promise<void> => {
     const toaster = toast.loading("Realizando login, aguarde!");
 
+    setLoading(true);
     try {
       const response = await api.post<IloginUser>("/login", data);
       const { token } = response.data;
@@ -55,7 +58,9 @@ const LoginPage = () => {
     } catch (error: any) {
       console.log(error);
       toast.dismiss(toaster);
-      toast.error(error.response.data.message);
+      toast.error("Email o senha errada, tente novamente!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -70,6 +75,7 @@ const LoginPage = () => {
             type="email"
             placeholder="Digitar email"
             error={errors.email?.message}
+            disabled={loading}
           />
           <Input
             register={register("password")}
@@ -77,12 +83,19 @@ const LoginPage = () => {
             type="password"
             placeholder="Digitar senha"
             error={errors.password?.message}
+            disabled={loading}
           />
           <Link className="prose-body-2-500 flex justify-end hover:scale-105" href={"/recover"}>
             Esqueci minha senha
           </Link>
-          <Button type="submit" variant="gradient" color="blue" size="primary" fullWidth={true}>
-            Entrar
+          <Button
+            type="submit"
+            variant="gradient"
+            color="blue"
+            size="primary"
+            fullWidth={true}
+            disabled={loading}>
+            {loading ? <Spinner color="blue-gray" /> : "Entrar"}
           </Button>
         </form>
         <p className="my-8 w-full text-center">Ainda não possui conta?</p>

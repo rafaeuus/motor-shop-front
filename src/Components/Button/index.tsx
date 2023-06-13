@@ -14,6 +14,7 @@ interface ButtonProps {
   size: "primary" | "secondary";
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   fullWidth?: boolean | undefined;
+  disabled?: boolean | undefined;
 }
 
 export const Button = ({
@@ -23,7 +24,8 @@ export const Button = ({
   type,
   size,
   fullWidth,
-  onClick
+  onClick,
+  disabled
 }: ButtonProps) => {
   let buttonClasses =
     "flex items-center justify-center font-sans font-semibold capitalize tracking-wide rounded bg-transparent shadow-none hover:shadow-none";
@@ -99,7 +101,12 @@ export const Button = ({
   }
 
   return (
-    <ButtonComponent type={type} onClick={onClick} className={buttonClasses} fullWidth={fullWidth}>
+    <ButtonComponent
+      type={type}
+      onClick={onClick}
+      className={buttonClasses}
+      fullWidth={fullWidth}
+      disabled={disabled}>
       {children}
     </ButtonComponent>
   );

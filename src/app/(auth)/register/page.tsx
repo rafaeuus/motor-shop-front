@@ -2,10 +2,28 @@
 import { Button } from "@/Components/Button";
 import Input from "@/Components/Input";
 import TextArea from "@/Components/TextArea";
-import { useCep } from "./useCep";
+import { useRegister } from "./useRegister";
+import { useMasks } from "@/hooks/useMasks";
+import { Spinner } from "@material-tailwind/react";
 
 const Register = () => {
-  const { errors, register, handleSubmit, formSubmit } = useCep();
+  const { loading, errors, register, handleSubmit, formSubmit } = useRegister();
+  const { CPFMask, phoneMask, zipCodeMask } = useMasks();
+
+  const handleZipCode: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
+    const input = event.target as HTMLInputElement;
+    input.value = zipCodeMask(input.value);
+  };
+
+  const handleNumberPhone: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
+    const input = event.target as HTMLInputElement;
+    input.value = phoneMask(input.value);
+  };
+
+  const handleCPF: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
+    const input = event.target as HTMLInputElement;
+    input.value = CPFMask(input.value);
+  };
 
   return (
     <section className="flex h-max w-screen items-center justify-center bg-grey8">
@@ -36,13 +54,17 @@ const Register = () => {
             placeholder="000.000.000-00"
             register={register("cpf")}
             error={errors.cpf?.message}
+            maxLength={14}
+            onKeyUp={handleCPF}
           />
           <Input
             label="Celular"
-            type="text"
+            type="tel"
             placeholder="(DDD) 00000-0000"
             register={register("phone")}
             error={errors.phone?.message}
+            maxLength={15}
+            onKeyUp={handleNumberPhone}
           />
           <Input
             label="Data de nascimento"
@@ -63,6 +85,8 @@ const Register = () => {
             placeholder="00000.000"
             register={register("zipCode")}
             error={errors.zipCode?.message}
+            maxLength={9}
+            onKeyUp={handleZipCode}
           />
           <div className="flex w-full gap-4">
             <Input
@@ -108,13 +132,13 @@ const Register = () => {
             <div>
               <input
                 type="radio"
-                id="comprador"
+                id="buyer"
                 value={false.toString()}
                 className="peer hidden"
                 {...register("isAdvertiser")}
               />
               <label
-                htmlFor="comprador"
+                htmlFor="buyer"
                 className="inline-flex h-12 w-[152px] cursor-pointer items-center justify-center rounded-md border-[2px] border-grey5 bg-grey10 p-4 text-grey0 hover:bg-Brand2 hover:text-grey10 peer-checked:border-Brand1  peer-checked:bg-Brand1 peer-checked:text-grey10">
                 <div className="font-sans text-base font-semibold">Comprador</div>
               </label>
@@ -122,21 +146,23 @@ const Register = () => {
             <div>
               <input
                 type="radio"
-                id="Anunciante"
+                id="advertiser"
                 value={true.toString()}
                 className="peer hidden"
                 {...register("isAdvertiser")}
               />
               <label
-                htmlFor="Anunciante"
+                htmlFor="advertiser"
                 className="inline-flex h-12 w-[152px] cursor-pointer items-center justify-center rounded-md border-[2px] border-grey5 bg-grey10 p-4 text-grey0 hover:bg-Brand2 hover:text-grey10 peer-checked:border-Brand1  peer-checked:bg-Brand1 peer-checked:text-grey10">
                 <div className="font-sans text-base font-semibold">Anunciante</div>
               </label>
             </div>
           </div>
-          {errors.isAdvertiser ? (
-            <span className="prose-body-1-600 text-red-900">{errors.isAdvertiser.message}</span>
-          ) : null}
+          <div>
+            {errors.isAdvertiser ? (
+              <span className="prose-body-2-500 text-red-900 ">{errors.isAdvertiser.message}</span>
+            ) : null}
+          </div>
           <Input
             label="Senha"
             type="password"
@@ -153,7 +179,7 @@ const Register = () => {
           />
         </div>
         <Button variant="gradient" color="blue" size="primary" fullWidth type="submit">
-          Finalizar Cadastro
+          {loading ? <Spinner color="blue-gray" /> : "Finalizar Cadastro"}
         </Button>
       </form>
     </section>

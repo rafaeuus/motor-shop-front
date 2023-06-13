@@ -29,7 +29,7 @@ const Input = ({ error, label, register, ...rest }: InputProps) => {
             : componentClasses
         }
       />
-      {error ? <span className="prose-body-1-600 text-red-900">{error}</span> : null}
+      {error ? <span className="prose-body-2-500 text-red-900">{error}</span> : null}
     </div>
   );
 };
