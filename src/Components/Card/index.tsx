@@ -1,5 +1,4 @@
 "use client";
-import { Cars } from "@/app/advertiser/[id]/page";
 import { AuthContext } from "@/contexts/AuthContext.tsx";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
@@ -32,7 +31,7 @@ export interface IcarAnnouncement {
 }
 
 interface CardProps {
-  car: Cars;
+  car: IcarAnnouncement;
 }
 
 const Card = ({ car }: CardProps) => {
