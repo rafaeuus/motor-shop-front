@@ -19,7 +19,7 @@ const AnnouncerCard = ({ user }: AnnouncerCardProps) => {
       <span className="prose-heading-2-600 flex aspect-square min-h-[90px] min-w-[90px] items-center justify-center rounded-full bg-Brand1 text-white">
         {user.name[0].toUpperCase()}
       </span>
-      <span className="prose-heading-6-600 text-grey1">Rafael</span>
+      <span className="prose-heading-6-600 text-grey1">{user.name}</span>
       <p className="prose-body-1-400 overflow-y-auto text-center text-grey2">{user.description}</p>
       <Button
         variant={"gradient"}
