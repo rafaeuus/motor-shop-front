@@ -9,6 +9,8 @@ export interface IauthContext {
   userAuth: TinfosToken;
   setUserAuth: Dispatch<SetStateAction<TinfosToken>>;
   logoutUserAuth: () => void;
+  setModalImageCarUrl: Dispatch<SetStateAction<string>>;
+  modalImageCarUrl: string;
 }
 
 export interface IauthProviderProps {

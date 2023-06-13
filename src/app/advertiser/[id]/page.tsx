@@ -19,6 +19,7 @@ export type Cars = {
   year: string;
   model: string;
   brand: string;
+  userId: string;
 };
 
 type tokenDataType = {
@@ -81,7 +82,7 @@ const AdvertiserMain = ({ params }: { params: { id: string } }) => {
           <ul className="flex gap-x-12 gap-y-20 overflow-x-scroll md:flex-wrap md:justify-around lg:grid lg:grid-cols-3 xl:grid-cols-4">
             {cars.map((car) => (
               <li key={car.id} className="gap- flex flex-col">
-                <Card car={car} isAdvertiserOwner={tokenData.sub === params.id} />
+                <Card car={car} />
                 {tokenData.sub === params.id && (
                   <div className="flex gap-4">
                     <Button color="black" size="secondary" variant="outlined" type="button">

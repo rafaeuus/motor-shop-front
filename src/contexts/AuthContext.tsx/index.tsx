@@ -11,6 +11,7 @@ export const AuthProvider = ({ children, decodedToken }: IauthProviderProps) => 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalType, setModalType] = useState<TmodalTypes>("filterHomePage");
   const [modalTitle, setModalTitle] = useState("Modal Title");
+  const [modalImageCarUrl, setModalImageCarUrl] = useState("");
   const [userAuth, setUserAuth] = useState<TinfosToken>(decodedToken);
 
   const router = useRouter();
@@ -42,7 +43,9 @@ export const AuthProvider = ({ children, decodedToken }: IauthProviderProps) => 
         modalTitle,
         userAuth,
         setUserAuth,
-        logoutUserAuth
+        logoutUserAuth,
+        modalImageCarUrl,
+        setModalImageCarUrl
       }}>
       {children}
     </AuthContext.Provider>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useContext } from "react";
 import Modal from "react-modal";
 import FilterForm from "../CategoryFilters/FilterForm";
+import { ModalImageCar } from "./ModalImageCar";
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)"
@@ -52,7 +53,7 @@ export const ModalCustom = () => {
               <FilterForm show={true} />
             </div>
           )}
-          {modalType == "imageCar" && <div> </div>}
+          {modalType == "imageCar" && <ModalImageCar />}
         </div>
       </div>
     </Modal>

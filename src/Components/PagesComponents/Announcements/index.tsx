@@ -1,42 +1,60 @@
-"use-client";
+"use client";
 
-import AnnouncerCard from "@/Components/AnnouncerCard";
 import { Button } from "@/Components/Button";
+import { IcarAnnouncement } from "@/Components/Card";
 import Comment from "@/Components/Comment";
+import AnnouncerCard from "@/Components/PagesComponents/Announcements/AnnouncerCard";
 import TextArea from "@/Components/TextArea";
-import Image from "next/image";
+import { AuthContext } from "@/contexts/AuthContext.tsx";
+import { useContext } from "react";
 
-export const AnnouncementsMain = () => {
+interface IannouncementsMainProps {
+  carsAnnouncement: IcarAnnouncement;
+}
+
+export const AnnouncementsMain = ({ carsAnnouncement }: IannouncementsMainProps) => {
+  const { openModal, setModalImageCarUrl } = useContext(AuthContext);
+
+  const openModalImageCar = (url: string) => {
+    openModal("imageCar", "Imagem do veículo");
+    setModalImageCarUrl(url);
+  };
   return (
     <main className="min-h-screen bg-gradient-to-b from-Brand1 from-30% via-grey8 via-30% to-grey8 to-100% pb-[73px] pt-[40px]">
       <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4">
         <div className="flex w-full flex-wrap justify-between gap-3.5 [@media(min-width:1000px)]:flex-nowrap">
           <div className="flex w-full max-w-full flex-col gap-8 [@media(min-width:1000px)]:max-w-3xl">
             <div className="flex flex-col gap-5">
-              <div className="flex h-[355px] w-full max-w-full justify-center rounded bg-grey10 object-contain xl:max-w-3xl">
-                <Image
-                  width={200}
-                  height={200}
-                  className="h-auto w-auto bg-transparent object-contain"
-                  src={"/assets/carExample.png"}
-                  alt="Imagem do veículo"
-                  priority
-                />
+              <div className="flex h-[355px] w-full max-w-full items-center justify-center rounded bg-grey10 object-contain xl:max-w-3xl">
+                <picture className="h-[80%] w-full ">
+                  <img
+                    className="h-full w-full  bg-transparent object-contain"
+                    src={carsAnnouncement.coverImage}
+                    alt="Imagem do veículo"
+                    width={312}
+                    height={132}
+                  />
+                </picture>
               </div>
               <div className="flex flex-col gap-9 rounded bg-grey10 px-5 pb-8 pt-11">
                 <h1 className="prose-heading-6-600">
-                  Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200
+                  {`${carsAnnouncement.model} ${carsAnnouncement.brand}`}
                 </h1>
                 <div className="flex flex-wrap items-center justify-between gap-9 gap-x-24">
                   <div className="flex gap-3">
                     <span className="prose-body-2-600  rounded bg-Brand4 px-2 py-1 text-Brand1">
-                      0 KM
+                      {carsAnnouncement.mileage} KM
                     </span>
                     <span className="prose-body-2-600  rounded bg-Brand4 px-2 py-1 text-Brand1">
-                      2019
+                      {carsAnnouncement.year}
                     </span>
                   </div>
-                  <span className="prose-heading-7-500">R$ 00.000,00</span>
+                  <span className="prose-heading-7-500">
+                    {carsAnnouncement.price.toLocaleString("pt-br", {
+                      style: "currency",
+                      currency: "BRL"
+                    })}
+                  </span>
                 </div>
                 <Button variant={"gradient"} color={"blue"} size={"secondary"}>
                   Comprar
@@ -45,108 +63,33 @@ export const AnnouncementsMain = () => {
             </div>
             <div className="flex flex-col gap-8 rounded bg-grey10 px-5 pb-8 pt-11">
               <span className="prose-heading-6-600 text-grey1">Descrição</span>
-              <p className="prose-body-1-400 text-grey2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores fugiat adipisci
-                molestias dolore fuga corporis, quo reiciendis aliquid temporibus facilis doloremque
-                pariatur velit modi amet porro. At velit repellendus dolor.
-              </p>
+              <p className="prose-body-1-400 text-grey2">{carsAnnouncement.description}</p>
             </div>
           </div>
           <div className="flex w-full max-w-full flex-col gap-8 [@media(min-width:1000px)]:max-w-md">
             <div className="flex flex-col gap-8 rounded bg-grey10 px-5 pb-8 pt-9">
               <span className="prose-heading-6-600 text-grey1">Fotos</span>
-              <div className="grid max-h-52 grid-cols-3 gap-x-3.5 gap-y-8 overflow-y-scroll">
-                <Image
-                  width={200}
-                  height={200}
-                  className="h-auto w-auto bg-grey7 object-contain"
-                  src={"/assets/carExample.png"}
-                  alt="Imagem do veículo"
-                />
-                <Image
-                  width={200}
-                  height={200}
-                  className="h-auto w-auto bg-grey7 object-contain"
-                  src={"/assets/carExample.png"}
-                  alt="Imagem do veículo"
-                />
-                <Image
-                  width={200}
-                  height={200}
-                  className="h-auto w-auto bg-grey7 object-contain"
-                  src={"/assets/carExample.png"}
-                  alt="Imagem do veículo"
-                />
-                <Image
-                  width={200}
-                  height={200}
-                  className="h-auto w-auto bg-grey7 object-contain"
-                  src={"/assets/carExample.png"}
-                  alt="Imagem do veículo"
-                />
-                <Image
-                  width={200}
-                  height={200}
-                  className="h-auto w-auto bg-grey7 object-contain"
-                  src={"/assets/carExample.png"}
-                  alt="Imagem do veículo"
-                />
-                <Image
-                  width={200}
-                  height={200}
-                  className="h-auto w-auto bg-grey7 object-contain"
-                  src={"/assets/carExample.png"}
-                  alt="Imagem do veículo"
-                />
-                <Image
-                  width={200}
-                  height={200}
-                  className="h-auto w-auto bg-grey7 object-contain"
-                  src={"/assets/carExample.png"}
-                  alt="Imagem do veículo"
-                />
-                <Image
-                  width={200}
-                  height={200}
-                  className="h-auto w-auto bg-grey7 object-contain"
-                  src={"/assets/carExample.png"}
-                  alt="Imagem do veículo"
-                />
-                <Image
-                  width={200}
-                  height={200}
-                  className="h-auto w-auto bg-grey7 object-contain"
-                  src={"/assets/carExample.png"}
-                  alt="Imagem do veículo"
-                />
-                <Image
-                  width={200}
-                  height={200}
-                  className="h-auto w-auto bg-grey7 object-contain"
-                  src={"/assets/carExample.png"}
-                  alt="Imagem do veículo"
-                />
-                <Image
-                  width={200}
-                  height={200}
-                  className="h-auto w-auto bg-grey7 object-contain"
-                  src={"/assets/carExample.png"}
-                  alt="Imagem do veículo"
-                />
-                <Image
-                  width={200}
-                  height={200}
-                  className="h-auto w-auto bg-grey7 object-contain"
-                  src={"/assets/carExample.png"}
-                  alt="Imagem do veículo"
-                />
+              <div className="grid max-h-52 grid-cols-3 gap-x-3.5 gap-y-8 overflow-y-auto">
+                {carsAnnouncement.carImages.map((img) => (
+                  <picture
+                    key={img.id}
+                    className="h-[100%] w-full bg-grey7 hover:cursor-pointer"
+                    onClick={() => openModalImageCar(img.url)}>
+                    <img
+                      className="h-full w-full  bg-transparent object-contain"
+                      src={img.url}
+                      alt="Imagem do veículo"
+                      width={312}
+                      height={152}
+                    />
+                  </picture>
+                ))}
               </div>
             </div>
             <AnnouncerCard
               user={{
-                name: "Rafael",
-                description:
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex fugiat quaerat, aspernatur ab debitis pariatur dignissimos fuga, error aperiam tenetur exercitationem reiciendis laborum expedita qui. Dolorem iusto maxime quaerat itaque?"
+                name: carsAnnouncement.user.name,
+                description: carsAnnouncement.user.description
               }}
             />
           </div>
