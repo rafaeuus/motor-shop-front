@@ -55,7 +55,7 @@ const Card = ({ car }: CardProps) => {
         <picture className="h-[140px] w-full">
           <img
             className="h-full w-full  bg-transparent object-contain"
-            src={car ? car.coverImage : "/assets/carExample.png"}
+            src={car.coverImage}
             alt="Imagem do veículo"
             width={312}
             height={132}
@@ -76,33 +76,25 @@ const Card = ({ car }: CardProps) => {
         )}
       </div>
       <div className="flex h-[182px] flex-col justify-between text-grey1">
-        <p className="prose-heading-7-600 truncate">
-          {car ? car.model : "Product title stays here - max 1 line"}
-        </p>
-        <p className="prose-body-2-400 text-grey2 line-clamp-2 ">
-          {car
-            ? car.description
-            : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis assumenda nobis tempore reprehenderit veniam perferendis fugit cupiditate laboriosam numquam, vitae molestias cum debitis commodi quos ab tenetur iste expedita eaque."}
-        </p>
+        <p className="prose-heading-7-600 truncate">{car.model}</p>
+        <p className="prose-body-2-400 text-grey2 line-clamp-2 ">{car.description}</p>
         <div className="flex items-center gap-2">
           <span className="prose-body-2-600 flex h-8 w-8 items-center justify-center rounded-full bg-Brand2 text-grey10">
-            {car ? car.user.name[0].toUpperCase() : "R"}
+            {car.user.name[0].toUpperCase()}
           </span>
-          <span className="prose-body-2-600 text-grey2">{car ? car.user.name : "Anunciante"}</span>
+          <span className="prose-body-2-600 text-grey2">{car.user.name}</span>
         </div>
         <div className="flex justify-between">
           <div className="flex gap-3">
             <span className="prose-body-2-600  rounded bg-Brand4 px-2 py-1 text-Brand1">
-              {car ? car.mileage : 0} KM
+              {car.mileage} KM
             </span>
             <span className="prose-body-2-600  rounded bg-Brand4 px-2 py-1 text-Brand1">
-              {car ? car.year : "2019"}
+              {car.year}
             </span>
           </div>
           <span className="prose-heading-7-500">
-            {car
-              ? car.price.toLocaleString("pt-br", { style: "currency", currency: "BRL" })
-              : "R$ 00.000,00"}
+            {car.price.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}
           </span>
         </div>
       </div>
