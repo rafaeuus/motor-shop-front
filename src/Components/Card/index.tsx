@@ -1,4 +1,5 @@
 "use client";
+import { Cars } from "@/app/advertiser/[id]/page";
 import { AuthContext } from "@/contexts/AuthContext.tsx";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
@@ -31,7 +32,7 @@ export interface IcarAnnouncement {
 }
 
 interface CardProps {
-  car: IcarAnnouncement;
+  car: Cars;
 }
 
 const Card = ({ car }: CardProps) => {
@@ -84,7 +85,7 @@ const Card = ({ car }: CardProps) => {
           </span>
           <span className="prose-body-2-600 text-grey2">{car.user.name}</span>
         </div>
-        <div className="flex justify-between">
+        <div className="flex items-center justify-between">
           <div className="flex gap-3">
             <span className="prose-body-2-600  rounded bg-Brand4 px-2 py-1 text-Brand1">
               {car.mileage} KM
