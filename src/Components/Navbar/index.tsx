@@ -84,6 +84,7 @@ export const Navbar = () => {
               menuAuthIsOpen={menuAuthIsOpen}
               toogleMenuAuth={toogleMenuAuth}
               name={userAuth.name}
+              closeMenuAuth={closeMenuAuth}
             />
           ) : (
             <NavDefault style="flex items-center gap-10" />
@@ -99,7 +100,8 @@ export const Navbar = () => {
                   isAdvertiser={isAdvertiser}
                   menuAuthIsOpen={menuAuthIsOpen}
                   toogleMenuAuth={toogleMenuAuth}
-                  name="Samuel Leão"
+                  name={userAuth.name}
+                  closeMenuAuth={closeMenuAuth}
                 />
               </nav>
             ) : (

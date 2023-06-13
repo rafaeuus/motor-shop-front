@@ -89,7 +89,8 @@ export const AnnouncementsMain = ({ carsAnnouncement }: IannouncementsMainProps)
             <AnnouncerCard
               user={{
                 name: carsAnnouncement.user.name,
-                description: carsAnnouncement.user.description
+                description: carsAnnouncement.user.description,
+                id: carsAnnouncement.userId
               }}
             />
           </div>

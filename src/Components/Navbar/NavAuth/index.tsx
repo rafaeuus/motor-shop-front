@@ -1,4 +1,7 @@
+"use client";
+
 import { AuthContext } from "@/contexts/AuthContext.tsx";
+import { useRouter } from "next/navigation";
 import { useContext } from "react";
 
 interface InavAuthProps {
@@ -6,10 +9,19 @@ interface InavAuthProps {
   menuAuthIsOpen: boolean;
   isAdvertiser: boolean;
   name: string;
+  closeMenuAuth: () => void;
 }
 
-export const NavAuth = ({ toogleMenuAuth, menuAuthIsOpen, isAdvertiser, name }: InavAuthProps) => {
-  const { logoutUserAuth } = useContext(AuthContext);
+export const NavAuth = ({
+  toogleMenuAuth,
+  menuAuthIsOpen,
+  isAdvertiser,
+  name,
+  closeMenuAuth
+}: InavAuthProps) => {
+  const router = useRouter();
+
+  const { logoutUserAuth, userAuth } = useContext(AuthContext);
   return (
     <div className="relative  flex h-20 items-center">
       <button
@@ -38,7 +50,11 @@ export const NavAuth = ({ toogleMenuAuth, menuAuthIsOpen, isAdvertiser, name }: 
           {isAdvertiser && (
             <button
               className="text-base font-normal leading-7 text-grey2 hover:text-grey1 hover:underline"
-              id="button-my-ads">
+              id="button-my-ads"
+              onClick={() => {
+                router.push(`/advertiser/${userAuth?.id}`);
+                closeMenuAuth();
+              }}>
               Meus Anúncios
             </button>
           )}
