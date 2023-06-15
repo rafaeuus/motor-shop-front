@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthContext } from "@/contexts/AuthContext.tsx";
+import { ModalContext } from "@/contexts/ModalContext.tsx";
 import Image from "next/image";
 import { useContext } from "react";
 import Modal from "react-modal";
@@ -26,7 +26,7 @@ const customStyles = {
 };
 
 export const ModalCustom = () => {
-  const { closeModal, modalIsOpen, modalTitle, modalType } = useContext(AuthContext);
+  const { closeModal, modalIsOpen, modalTitle, modalType } = useContext(ModalContext);
   return (
     <Modal
       isOpen={modalIsOpen}
