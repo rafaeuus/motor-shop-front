@@ -5,8 +5,8 @@ import Image from "next/image";
 import { useContext } from "react";
 import Modal from "react-modal";
 import FilterForm from "../CategoryFilters/FilterForm";
-import { ModalImageCar } from "./ModalImageCar";
 import { ModalCreateCar } from "./ModalCreateCar";
+import { ModalImageCar } from "./ModalImageCar";
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)"
@@ -55,7 +55,7 @@ export const ModalCustom = () => {
             </div>
           )}
           {modalType == "imageCar" && <ModalImageCar />}
-          {modalType == "createCar" && <ModalCreateCar/>}
+          {modalType == "createCar" && <ModalCreateCar />}
         </div>
       </div>
     </Modal>
