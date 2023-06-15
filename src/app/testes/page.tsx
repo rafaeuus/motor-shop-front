@@ -1,18 +1,18 @@
 "use client";
 
-import CategoryFilters from "@/Components/CategoryFilters";
 import { Button } from "@/Components/Button";
 import Card from "@/Components/Card";
+import CategoryFilters from "@/Components/CategoryFilters";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
 import TextArea from "@/Components/TextArea";
-import { AuthContext } from "@/contexts/AuthContext.tsx";
+import { ModalContext } from "@/contexts/ModalContext.tsx";
 import Link from "next/link";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
 
 export default function Home() {
-  const { openModal } = useContext(AuthContext);
+  const { openModal } = useContext(ModalContext);
   const handleToast = () => {
     toast.success("Hello World");
   };

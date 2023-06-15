@@ -1,10 +1,10 @@
 "use client";
 
-import { AuthContext } from "@/contexts/AuthContext.tsx";
+import { ModalContext } from "@/contexts/ModalContext.tsx";
 import { useContext } from "react";
 
 export const ModalImageCar = () => {
-  const { modalImageCarUrl } = useContext(AuthContext);
+  const { modalImageCarUrl } = useContext(ModalContext);
   return (
     <div className="h-56 w-full bg-grey7">
       <picture className="h-[80%] w-full ">

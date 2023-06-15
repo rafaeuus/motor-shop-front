@@ -15,7 +15,7 @@ const Home = async () => {
   const listCarsAnnouncement = await getListCarsAnnouncement();
 
   return (
-    <main className="mx-auto max-w-[1600px] bg-blue-gray-400">
+    <main className="mx-auto max-w-[1600px]">
       <section className="flex max-h-[537px] min-h-[537px] w-full items-center justify-center bg-[url('/car.png')] bg-center bg-no-repeat">
         <div className="flex max-h-[537px] min-h-[537px] w-full items-center justify-center bg-gradient-to-b from-[rgba(0,0,0,0.19940476190476186)] to-grey0">
           <div className="px-8 text-center">

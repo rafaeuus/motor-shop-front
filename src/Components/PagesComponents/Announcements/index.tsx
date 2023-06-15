@@ -5,7 +5,7 @@ import { IcarAnnouncement } from "@/Components/Card";
 import Comment from "@/Components/Comment";
 import AnnouncerCard from "@/Components/PagesComponents/Announcements/AnnouncerCard";
 import TextArea from "@/Components/TextArea";
-import { AuthContext } from "@/contexts/AuthContext.tsx";
+import { ModalContext } from "@/contexts/ModalContext.tsx";
 import { useContext } from "react";
 
 interface IannouncementsMainProps {
@@ -13,7 +13,7 @@ interface IannouncementsMainProps {
 }
 
 export const AnnouncementsMain = ({ carsAnnouncement }: IannouncementsMainProps) => {
-  const { openModal, setModalImageCarUrl } = useContext(AuthContext);
+  const { openModal, setModalImageCarUrl } = useContext(ModalContext);
 
   const openModalImageCar = (url: string) => {
     openModal("imageCar", "Imagem do veículo");

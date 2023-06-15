@@ -1,5 +1,5 @@
 "use client";
-import { AuthContext } from "@/contexts/AuthContext.tsx";
+import { ModalContext } from "@/contexts/ModalContext.tsx";
 import { ReactNode, useContext } from "react";
 import { Button } from "../Button";
 import FilterForm from "./FilterForm";
@@ -10,7 +10,7 @@ interface CategoryFiltersProps {
 }
 
 const CategoryFilters = ({ children }: CategoryFiltersProps) => {
-  const { openModal } = useContext(AuthContext);
+  const { openModal } = useContext(ModalContext);
 
   return (
     <section className="bg-grey10">
@@ -19,7 +19,6 @@ const CategoryFilters = ({ children }: CategoryFiltersProps) => {
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
             {" "}
             <FilterForm />
-            {/* Product grid  flex h-max  gap-2 overflow-x-auto  p-4 md:grid md:h-[100%]  md:grid-cols-2 md:gap-4 md:overflow-hidden lg:grid-cols-3*/}
             <div className=" lg:col-span-3">
               <div className="flex h-max  gap-2 overflow-x-auto  p-4 md:flex-wrap md:justify-around">
                 {children}
@@ -30,7 +29,7 @@ const CategoryFilters = ({ children }: CategoryFiltersProps) => {
                   color="blue"
                   size="primary"
                   variant="gradient"
-                  onClick={() => openModal("filterHomePage", "FilterModal")}>
+                  onClick={() => openModal("filterHomePage", "Filtro")}>
                   Filtrar
                 </Button>
               </div>
