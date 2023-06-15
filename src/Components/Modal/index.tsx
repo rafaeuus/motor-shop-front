@@ -6,6 +6,7 @@ import { useContext } from "react";
 import Modal from "react-modal";
 import FilterForm from "../CategoryFilters/FilterForm";
 import { ModalImageCar } from "./ModalImageCar";
+import { ModalCreateCar } from "./ModalCreateCar";
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)"
@@ -54,6 +55,7 @@ export const ModalCustom = () => {
             </div>
           )}
           {modalType == "imageCar" && <ModalImageCar />}
+          {modalType == "createCar" && <ModalCreateCar/>}
         </div>
       </div>
     </Modal>
