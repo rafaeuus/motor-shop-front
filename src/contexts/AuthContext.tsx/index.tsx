@@ -4,26 +4,13 @@ import { api } from "@/services/api";
 import { useRouter } from "next/navigation";
 import { destroyCookie } from "nookies";
 import { createContext, useState } from "react";
-import { IauthContext, IauthProviderProps, TinfosToken, TmodalTypes } from "./types";
+import { IauthContext, IauthProviderProps, TinfosToken } from "./types";
 
 export const AuthContext = createContext({} as IauthContext);
 export const AuthProvider = ({ children, decodedToken }: IauthProviderProps) => {
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [modalType, setModalType] = useState<TmodalTypes>("filterHomePage");
-  const [modalTitle, setModalTitle] = useState("Modal Title");
-  const [modalImageCarUrl, setModalImageCarUrl] = useState("");
   const [userAuth, setUserAuth] = useState<TinfosToken>(decodedToken);
 
   const router = useRouter();
-  const openModal = (type: TmodalTypes, modalTitle: string) => {
-    setModalType(type);
-    setModalTitle(modalTitle);
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
 
   const logoutUserAuth = () => {
     api.defaults.headers.common.authorization = `Bearer`;
@@ -36,16 +23,9 @@ export const AuthProvider = ({ children, decodedToken }: IauthProviderProps) => 
   return (
     <AuthContext.Provider
       value={{
-        modalIsOpen,
-        modalType,
-        openModal,
-        closeModal,
-        modalTitle,
         userAuth,
         setUserAuth,
         logoutUserAuth,
-        modalImageCarUrl,
-        setModalImageCarUrl
       }}>
       {children}
     </AuthContext.Provider>
