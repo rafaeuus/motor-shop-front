@@ -2,20 +2,21 @@
 
 import { UserProfile } from "@/app/advertiser/[id]/page";
 import { Button } from "@/Components/Button";
-import Card, { IcarAnnouncement } from "@/Components/Card";
+import Card from "@/Components/Card";
+import { AnnouncementContext } from "@/contexts/AnnouncementContext";
 import { AuthContext } from "@/contexts/AuthContext.tsx";
 import { ModalContext } from "@/contexts/ModalContext.tsx";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 interface AdvertiserMainProps {
   user: UserProfile;
-  listCars: IcarAnnouncement[];
 }
 
-const AdvertiserMain = ({ user, listCars }: AdvertiserMainProps) => {
-  const [cars, setCars] = useState(listCars);
+const AdvertiserMain = ({ user }: AdvertiserMainProps) => {
   const { userAuth } = useContext(AuthContext);
-  const {openModal} = useContext(ModalContext)
+  const { openModal } = useContext(ModalContext);
+
+  const { cars, setCars } = useContext(AnnouncementContext);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-Brand1 from-[357px] via-grey8 via-[357px] to-grey8 to-100% pb-[73px] pt-[40px]">
@@ -35,7 +36,13 @@ const AdvertiserMain = ({ user, listCars }: AdvertiserMainProps) => {
           <p className="prose-body-1-400 text-grey2">{user.description}</p>
           {userAuth && userAuth.id === user.id && (
             <div className="max-w-[170px]">
-              <Button onClick={() => openModal("createCar", "Criar anuncio")} color="blue" size="secondary" variant="outlined" type="button" fullWidth>
+              <Button
+                onClick={() => openModal("createCar", "Criar anuncio")}
+                color="blue"
+                size="secondary"
+                variant="outlined"
+                type="button"
+                fullWidth>
                 Criar anúncio
               </Button>
             </div>

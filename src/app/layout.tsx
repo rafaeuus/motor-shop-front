@@ -1,9 +1,9 @@
 import { Footer } from "@/Components/Footer";
-import { ModalCustom } from "@/Components/Modal";
+// import { ModalCustom } from "@/Components/Modal";
 import { Navbar } from "@/Components/Navbar";
 import { AuthProvider } from "@/contexts/AuthContext.tsx";
 import { IdecodedToken, TinfosToken } from "@/contexts/AuthContext.tsx/types";
-import { ModalProvider } from "@/contexts/ModalContext.tsx";
+// import { ModalProvider } from "@/contexts/ModalContext.tsx";
 import { api } from "@/services/api";
 import "@/styles/globals.css";
 // eslint-disable-next-line camelcase
@@ -51,15 +51,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-Br">
       <body className={`${inter.variable} ${inter.className} ${lexend.variable}`}>
         <AuthProvider decodedToken={decodedToken}>
-          <ModalProvider>
-            <>
-              <Navbar />
-              {children}
-              <Footer />
-              <ModalCustom />
-              <Toaster />
-            </>
-          </ModalProvider>
+          {/* <ModalProvider> */}
+          <>
+            <Navbar />
+            {children}
+            <Footer />
+            {/* <ModalCustom /> */}
+            <Toaster />
+          </>
+          {/* </ModalProvider> */}
         </AuthProvider>
       </body>
     </html>

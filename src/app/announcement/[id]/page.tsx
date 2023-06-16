@@ -1,5 +1,7 @@
 import { IcarAnnouncement } from "@/Components/Card";
+import { ModalCustom } from "@/Components/Modal";
 import { AnnouncementsMain } from "@/Components/PagesComponents/Announcements";
+import { ModalProvider } from "@/contexts/ModalContext.tsx";
 import { api } from "@/services/api";
 
 interface IPageProps {
@@ -18,9 +20,14 @@ const getCarAnnouncement = async (id: string) => {
 const Announcement = async ({ params }: IPageProps) => {
   const carsAnnouncement = await getCarAnnouncement(params.id);
   return (
-    <div>
-      <AnnouncementsMain carsAnnouncement={carsAnnouncement} />
-    </div>
+    <ModalProvider>
+      <>
+        <div>
+          <AnnouncementsMain carsAnnouncement={carsAnnouncement} />
+        </div>
+        <ModalCustom />
+      </>
+    </ModalProvider>
   );
 };
 

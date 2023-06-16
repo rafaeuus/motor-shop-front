@@ -7,6 +7,7 @@ import Modal from "react-modal";
 import FilterForm from "../CategoryFilters/FilterForm";
 import { ModalCreateCar } from "./ModalCreateCar";
 import { ModalImageCar } from "./ModalImageCar";
+import { ModalSucessCreateCar } from "./ModalSuccessCreateCar";
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)"
@@ -56,6 +57,7 @@ export const ModalCustom = () => {
           )}
           {modalType == "imageCar" && <ModalImageCar />}
           {modalType == "createCar" && <ModalCreateCar />}
+          {modalType == "sucessCreateCar" && <ModalSucessCreateCar />}
         </div>
       </div>
     </Modal>

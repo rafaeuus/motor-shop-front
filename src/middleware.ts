@@ -6,8 +6,12 @@ export default function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith("/login")) {
     if (cookieToken) return NextResponse.redirect(new URL("/", request.url));
   }
+
+  if (request.nextUrl.pathname.startsWith("/register")) {
+    if (cookieToken) return NextResponse.redirect(new URL("/", request.url));
+  }
 }
 
 export const config = {
-  matcher: ["/login"]
+  matcher: ["/login", "/register"]
 };

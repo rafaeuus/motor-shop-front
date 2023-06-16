@@ -1,12 +1,5 @@
 import { z } from "zod";
 
-enum Fuel {
-  ETANOL,
-  FLEX,
-  HIBRIDO,
-  ELETRICO
-}
-
 export const createCarSchema = z.object({
   brand: z.string().nonempty("Campo obrigatório"),
   model: z.string().nonempty("Campo obrigatório"),
@@ -17,6 +10,7 @@ export const createCarSchema = z.object({
     })
     .int()
     .nonnegative(),
+
   year: z.string().nonempty("Selecione o modelo"),
   fuelType: z.string().nonempty("Selecione o modelo"),
   color: z.string().min(4, "Mínimo de 4 caracteres").max(150).nonempty(),
@@ -26,7 +20,7 @@ export const createCarSchema = z.object({
       message: "Selecione o modelo"
     })
     .nonnegative(),
-  price: z.number().min(50000, "Mímino R$50.000"),
+  price: z.number().min(1, "Mímino R$ 1,00"),
   description: z.string().min(50, "Precisa ter no mínimo 50 caracteres").nonempty(),
   coverImage: z.string().url("Url inválida").nonempty(),
   url: z.array(z.string())

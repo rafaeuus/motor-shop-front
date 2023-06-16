@@ -25,7 +25,7 @@ export const AuthProvider = ({ children, decodedToken }: IauthProviderProps) => 
       value={{
         userAuth,
         setUserAuth,
-        logoutUserAuth,
+        logoutUserAuth
       }}>
       {children}
     </AuthContext.Provider>

@@ -1,8 +1,10 @@
 "use client";
 
+import { IcarAnnouncement } from "@/Components/Card";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
 import TextArea from "@/Components/TextArea";
+import { AnnouncementContext } from "@/contexts/AnnouncementContext";
 import { ModalContext } from "@/contexts/ModalContext.tsx";
 import { api } from "@/services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,7 +30,8 @@ export const ModalCreateCar = () => {
   >([]);
   const [inputCount, setInputCount] = useState<number>(1);
 
-  const { closeModal } = useContext(ModalContext);
+  const { closeModal, openModal } = useContext(ModalContext);
+  const { setCars } = useContext(AnnouncementContext);
 
   const {
     register,
@@ -49,9 +52,10 @@ export const ModalCreateCar = () => {
       const cookies = parseCookies();
       const token = cookies["@motors-shop:token"];
       api.defaults.headers.common.authorization = `Bearer ${token}`;
-      const response = await api.post("/cars", data);
-      console.log(response);
+      const response = await api.post<IcarAnnouncement>("/cars", data);
+      setCars((oldAnnoucements) => [response.data, ...oldAnnoucements]);
       closeModal();
+      openModal("sucessCreateCar", "Sucesso!");
     } catch (error) {
       console.log(error);
     }

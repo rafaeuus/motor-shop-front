@@ -1,5 +1,8 @@
 import { IcarAnnouncement } from "@/Components/Card";
+import { ModalCustom } from "@/Components/Modal";
 import AdvertiserMain from "@/Components/PagesComponents/Advertiser";
+import { AnnouncementProvider } from "@/contexts/AnnouncementContext";
+import { ModalProvider } from "@/contexts/ModalContext.tsx";
 import { api } from "@/services/api";
 
 export interface UserProfile {
@@ -48,7 +51,12 @@ const AdvertiserPage = async ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-      <AdvertiserMain listCars={cars!} user={user!} />
+      <AnnouncementProvider listCars={cars!}>
+        <ModalProvider>
+          <AdvertiserMain user={user!} />
+          <ModalCustom />
+        </ModalProvider>
+      </AnnouncementProvider>
     </>
   );
 };
