@@ -23,7 +23,11 @@ export const createCarSchema = z.object({
   price: z.number().min(1, "Mímino R$ 1,00"),
   description: z.string().min(50, "Precisa ter no mínimo 50 caracteres").nonempty(),
   coverImage: z.string().url("Url inválida").nonempty(),
-  url: z.array(z.string())
+  links: z.array(
+    z.object({
+      url: z.string().url("Url inválida").nonempty()
+    })
+  )
 });
 
 export type ICarsCreate = z.infer<typeof createCarSchema>;
