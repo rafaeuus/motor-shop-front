@@ -56,19 +56,19 @@ export const registerSchema = z
     complement: z.string().nullable(),
     password: z
       .string()
-      .min(6, "O password precisa ter ao menos 6 caracteres")
-      .max(120, "O password precisa ter no máximo 120 caracteres")
-      .regex(new RegExp(".*[A-Z].*"), "O password precisa ter ao menos uma letra maiúscula")
-      .regex(new RegExp(".*[a-z].*"), "O password precisa ter ao menos uma letra minúscula")
-      .regex(new RegExp(".*\\d.*"), "O password precisa ter ao menos um número")
+      .min(6, "A senha precisa ter ao menos 6 caracteres")
+      .max(120, "A senha precisa ter no máximo 120 caracteres")
+      .regex(new RegExp(".*[A-Z].*"), "A senha precisa ter ao menos uma letra maiúscula")
+      .regex(new RegExp(".*[a-z].*"), "A senha precisa ter ao menos uma letra minúscula")
+      .regex(new RegExp(".*\\d.*"), "A senha precisa ter ao menos um número")
       .regex(
         new RegExp(".*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*"),
-        "O password precisa ter ao menos um caractere especial"
+        "A senha precisa ter ao menos um caractere especial"
       ),
     confirmPassword: z.string()
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Os passwords precisam ser iguais",
+    message: "As senhas precisam ser iguais",
     path: ["confirmPassword"]
   });
 

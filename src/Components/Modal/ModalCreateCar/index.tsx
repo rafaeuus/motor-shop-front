@@ -9,8 +9,8 @@ import { ModalContext } from "@/contexts/ModalContext.tsx";
 import { api } from "@/services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { parseCookies } from "nookies";
-import { useContext, useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { createCarSchema, ICarsCreate } from "./createCar.schema";
 
 interface EnumValuesType {
@@ -28,7 +28,6 @@ export const ModalCreateCar = () => {
   const [valuesModel, setValuesModel] = useState<
     { name: string; year: string; fuel: number; value: number }[]
   >([]);
-  const [inputCount, setInputCount] = useState<number>(1);
 
   const { closeModal, openModal } = useContext(ModalContext);
   const { setCars } = useContext(AnnouncementContext);
@@ -48,11 +47,13 @@ export const ModalCreateCar = () => {
   const { isSubmitted } = formState;
 
   const carSubmit = async (data: ICarsCreate) => {
+    const { links, ...restData } = data;
+    const url = links.map((item) => item.url);
     try {
       const cookies = parseCookies();
       const token = cookies["@motors-shop:token"];
       api.defaults.headers.common.authorization = `Bearer ${token}`;
-      const response = await api.post<IcarAnnouncement>("/cars", data);
+      const response = await api.post<IcarAnnouncement>("/cars", { ...restData, url });
       setCars((oldAnnoucements) => [response.data, ...oldAnnoucements]);
       closeModal();
       openModal("sucessCreateCar", "Sucesso!");
@@ -105,15 +106,27 @@ export const ModalCreateCar = () => {
     setSelectModelValue(event.target.value);
   };
 
-  const handleAddInput = () => {
-    setInputCount(inputCount + 1);
-  };
-
   const EnumValues: EnumValuesType = {
     0: selectModelValue != "" ? "ETANOL" : "",
     1: "FLEX",
     2: "HIBRIDO",
     3: "ELETRICO"
+  };
+
+  const { fields, append, remove, prepend } = useFieldArray({
+    control,
+    name: "links"
+  });
+
+  // Adiciona um novo input de url de imagem do carro
+  const addNewUrlLinks = () => {
+    append({
+      url: ""
+    });
+  };
+  // Remove um input especifico de imagem do carro, porém obriga que sempre exista ao menos 1 input ativo.
+  const removeUrlLinks = (index: number) => {
+    if (fields.length > 1) remove(index);
   };
 
   useEffect(() => {
@@ -131,6 +144,13 @@ export const ModalCreateCar = () => {
     trigger("fuelType");
   }, [valuesModel[0]?.fuel, setValue]);
 
+  // Adiciona o primeiro input de url de imagem do carro
+  useLayoutEffect(() => {
+    prepend({
+      url: ""
+    });
+  }, [prepend]);
+
   return (
     <div className=" h-fit max-h-[80vh] w-full overflow-auto ">
       <p className="prose-body-2-500 mb-5">Informações do veículo</p>
@@ -141,7 +161,11 @@ export const ModalCreateCar = () => {
           render={({ field }) => (
             <Select
               label="Marca"
-              error={isSubmitted ? errors.brand?.message : undefined}
+              error={
+                isSubmitted && errors.brand?.message === "Required"
+                  ? "Campo obrigatório"
+                  : undefined
+              }
               {...field}
               onChange={(e) => {
                 handleBrandChange(e);
@@ -159,7 +183,11 @@ export const ModalCreateCar = () => {
           render={({ field }) => (
             <Select
               label="Modelo"
-              error={isSubmitted ? errors.model?.message : undefined}
+              error={
+                isSubmitted && errors.model?.message === "Required"
+                  ? "Campo obrigatório"
+                  : undefined
+              }
               disabled={selectModelDisabled}
               {...field}
               onChange={(e) => {
@@ -181,7 +209,9 @@ export const ModalCreateCar = () => {
               disabled={true}
               value={valuesModel[0]?.year || ""}
               register={register("year")}
-              error={isSubmitted ? errors.year?.message : undefined}
+              error={
+                isSubmitted && errors.year?.message === "Required" ? "Campo obrigatório" : undefined
+              }
               placeholder="Ex: 2018"
             />
             <Input
@@ -191,15 +221,18 @@ export const ModalCreateCar = () => {
               value={EnumValues[valuesModel[0]?.fuel] || ""}
               register={register("fuelType")}
               placeholder="Ex: Gasolina"
-              error={isSubmitted ? errors.fuelType?.message : undefined}
+              error={
+                isSubmitted && errors.fuelType?.message === "Required"
+                  ? "Campo obrigatório"
+                  : undefined
+              }
             />
           </div>
           <div className="flex gap-5">
             <Input
               label="Quilometragem"
               type="number"
-              register={register("mileage", { valueAsNumber: true })}
-              onChange={(event) => setValue("mileage", Number(event.target.value))}
+              register={register("mileage")}
               error={isSubmitted ? errors.mileage?.message : undefined}
               placeholder="KM 0.0"
             />
@@ -220,14 +253,17 @@ export const ModalCreateCar = () => {
               disabled={true}
               value={valuesModel[0]?.value || ""}
               register={register("fipePrice")}
-              error={isSubmitted ? errors.fipePrice?.message : undefined}
+              error={
+                isSubmitted && errors.fipePrice?.message === "Required"
+                  ? "Campo obrigatório"
+                  : undefined
+              }
               placeholder="R$ 0.00"
             />
             <Input
               label="Preço"
               type="number"
-              onChange={(event) => setValue("price", Number(event.target.value))}
-              register={register("price", { valueAsNumber: true })}
+              register={register("price")}
               error={isSubmitted ? errors.price?.message : undefined}
               placeholder="R$ 0.00"
             />
@@ -243,29 +279,45 @@ export const ModalCreateCar = () => {
           />
           <Input
             label="Imagem da capa"
-            type="url"
+            type="text"
             register={register("coverImage")}
             onChange={(event) => setValue("coverImage", event.target.value)}
             error={isSubmitted ? errors.coverImage?.message : undefined}
             placeholder="https://..."
           />
-          {Array.from(Array(inputCount).keys()).map((index) => {
+        </div>
+
+        <div className="flex flex-col gap-2">
+          {fields.map((field, index) => {
             return (
-              <Input
-                key={index}
-                label={`${index + 1}° da galeria`}
-                type="url"
-                register={register(`url.${index}`)}
-                onChange={(event) => setValue(`url.${index}`, event.target.value)}
-                error={isSubmitted ? errors.coverImage?.message : undefined}
-                placeholder="https://..."
-              />
+              <div key={field.id}>
+                <div className="relative flex h-fit w-full  ">
+                  <div className=" w-full ">
+                    <Input
+                      label={`${index + 1}° Imagem da galeria`}
+                      type="text"
+                      register={register(`links.${index}.url`)}
+                      error={isSubmitted ? errors.links?.[index]?.url?.message : undefined}
+                      placeholder="https://..."
+                      formNoValidate
+                    />
+                  </div>
+                  <div className="absolute right-0 top-1">
+                    <button
+                      type="button"
+                      className="h-7 w-7 rounded  text-lg font-bold text-red-700"
+                      onClick={() => removeUrlLinks(index)}>
+                      X
+                    </button>
+                  </div>
+                </div>
+              </div>
             );
           })}
 
           <button
             type="button"
-            onClick={handleAddInput}
+            onClick={addNewUrlLinks}
             className="w-full max-w-[315px]  rounded border-Brand4 bg-Brand4 px-3 py-3 text-sm font-semibold text-Brand1">
             Adicionar campo para imagem da galeria
           </button>
