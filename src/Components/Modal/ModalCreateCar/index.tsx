@@ -161,7 +161,11 @@ export const ModalCreateCar = () => {
           render={({ field }) => (
             <Select
               label="Marca"
-              error={isSubmitted ? errors.brand?.message : undefined}
+              error={
+                isSubmitted && errors.brand?.message === "Required"
+                  ? "Campo obrigatório"
+                  : undefined
+              }
               {...field}
               onChange={(e) => {
                 handleBrandChange(e);
@@ -179,7 +183,11 @@ export const ModalCreateCar = () => {
           render={({ field }) => (
             <Select
               label="Modelo"
-              error={isSubmitted ? errors.model?.message : undefined}
+              error={
+                isSubmitted && errors.model?.message === "Required"
+                  ? "Campo obrigatório"
+                  : undefined
+              }
               disabled={selectModelDisabled}
               {...field}
               onChange={(e) => {
@@ -201,7 +209,9 @@ export const ModalCreateCar = () => {
               disabled={true}
               value={valuesModel[0]?.year || ""}
               register={register("year")}
-              error={isSubmitted ? errors.year?.message : undefined}
+              error={
+                isSubmitted && errors.year?.message === "Required" ? "Campo obrigatório" : undefined
+              }
               placeholder="Ex: 2018"
             />
             <Input
@@ -211,15 +221,18 @@ export const ModalCreateCar = () => {
               value={EnumValues[valuesModel[0]?.fuel] || ""}
               register={register("fuelType")}
               placeholder="Ex: Gasolina"
-              error={isSubmitted ? errors.fuelType?.message : undefined}
+              error={
+                isSubmitted && errors.fuelType?.message === "Required"
+                  ? "Campo obrigatório"
+                  : undefined
+              }
             />
           </div>
           <div className="flex gap-5">
             <Input
               label="Quilometragem"
               type="number"
-              register={register("mileage", { valueAsNumber: true })}
-              onChange={(event) => setValue("mileage", Number(event.target.value))}
+              register={register("mileage")}
               error={isSubmitted ? errors.mileage?.message : undefined}
               placeholder="KM 0.0"
             />
@@ -240,14 +253,17 @@ export const ModalCreateCar = () => {
               disabled={true}
               value={valuesModel[0]?.value || ""}
               register={register("fipePrice")}
-              error={isSubmitted ? errors.fipePrice?.message : undefined}
+              error={
+                isSubmitted && errors.fipePrice?.message === "Required"
+                  ? "Campo obrigatório"
+                  : undefined
+              }
               placeholder="R$ 0.00"
             />
             <Input
               label="Preço"
               type="number"
-              onChange={(event) => setValue("price", Number(event.target.value))}
-              register={register("price", { valueAsNumber: true })}
+              register={register("price")}
               error={isSubmitted ? errors.price?.message : undefined}
               placeholder="R$ 0.00"
             />

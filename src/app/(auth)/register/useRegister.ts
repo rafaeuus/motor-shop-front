@@ -28,6 +28,7 @@ export const useRegister = () => {
   } = useForm<TRegisterData>({
     criteriaMode: "all",
     mode: "all",
+
     resolver: zodResolver(registerSchema)
   });
 
@@ -54,12 +55,10 @@ export const useRegister = () => {
   );
 
   const formSubmit: SubmitHandler<TRegisterData> = async (data) => {
-    console.log(data);
     const toaster = toast.loading("Realizando cadastro, aguarde!");
     setLoading(true);
     try {
-      const response = await api.post<TRegisterData>("/user", data);
-      console.log(response.data);
+      await api.post<TRegisterData>("/user", data);
       toast.dismiss(toaster);
       toast.success("Cadastro realizado!");
       router.push("/login");

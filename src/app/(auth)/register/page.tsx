@@ -2,9 +2,9 @@
 import { Button } from "@/Components/Button";
 import Input from "@/Components/Input";
 import TextArea from "@/Components/TextArea";
-import { useRegister } from "./useRegister";
 import { useMasks } from "@/hooks/useMasks";
 import { Spinner } from "@material-tailwind/react";
+import { useRegister } from "./useRegister";
 
 const Register = () => {
   const { loading, errors, register, handleSubmit, formSubmit } = useRegister();
@@ -84,7 +84,11 @@ const Register = () => {
             type="text"
             placeholder="00000.000"
             register={register("zipCode")}
-            error={errors.zipCode?.message}
+            error={
+              errors.zipCode?.message === "Required"
+                ? "O CEP é obrigatório"
+                : errors.zipCode?.message
+            }
             maxLength={9}
             onKeyUp={handleZipCode}
           />
@@ -159,9 +163,13 @@ const Register = () => {
             </div>
           </div>
           <div>
-            {errors.isAdvertiser ? (
-              <span className="prose-body-2-500 text-red-900 ">{errors.isAdvertiser.message}</span>
-            ) : null}
+            {errors.isAdvertiser && (
+              <span className="prose-body-2-500 text-red-900 ">
+                {errors.isAdvertiser.message === "Expected string, received null"
+                  ? "É necessário selecionar o tipo de conta"
+                  : errors.isAdvertiser.message}
+              </span>
+            )}
           </div>
           <Input
             label="Senha"
