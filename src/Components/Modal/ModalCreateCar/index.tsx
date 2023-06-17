@@ -55,7 +55,6 @@ export const ModalCreateCar = () => {
       const token = cookies["@motors-shop:token"];
       api.defaults.headers.common.authorization = `Bearer ${token}`;
       const response = await api.post<IcarAnnouncement>("/cars", { ...restData, url });
-      console.log(response)
       setCars((oldAnnoucements) => [response.data, ...oldAnnoucements]);
       closeModal();
       openModal("sucessCreateCar", "Sucesso!");
