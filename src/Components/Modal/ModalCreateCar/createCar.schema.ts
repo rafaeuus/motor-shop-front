@@ -6,7 +6,6 @@ export const createCarSchema = z.object({
     .nonempty("Campo obrigatório")
     .refine(
       (value) => {
-        console.log(value, "Neto");
         return value;
       },
       {
@@ -23,12 +22,7 @@ export const createCarSchema = z.object({
   year: z.string().nonempty("Selecione o modelo"),
   fuelType: z.string().nonempty("Selecione o modelo"),
   color: z.string().min(4, "Mínimo de 4 caracteres").max(150).nonempty(),
-  fipePrice: z
-    .number()
-    .min(1, {
-      message: "Selecione o modelo"
-    })
-    .nonnegative(),
+  fipePrice: z.number().nonnegative().or(z.string()),
   price: z.coerce.number().min(1, "Mímino R$ 1,00"),
   description: z.string().min(50, "Precisa ter no mínimo 50 caracteres").nonempty(),
   coverImage: z.string().url("Url inválida").nonempty(),

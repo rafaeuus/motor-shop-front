@@ -21,12 +21,12 @@ export const ModalCreateCar = () => {
   const [brandApi, setBrandApi] = useState<string[]>([]);
   const [selectBrand, setSelectBrand] = useState("");
   const [modelApi, setModelApi] = useState<
-    { name: string; year: string; fuel: number; value: number; price: number }[]
+    { name: string; year: string; fuel: number; value: number | string; price: number }[]
   >([]);
   const [selectModelDisabled, setSelectModelDisabled] = useState(true);
   const [selectModelValue, setSelectModelValue] = useState("");
   const [valuesModel, setValuesModel] = useState<
-    { name: string; year: string; fuel: number; value: number }[]
+    { name: string; year: string; fuel: number; value: number | string }[]
   >([]);
 
   const { closeModal, openModal } = useContext(ModalContext);
@@ -47,6 +47,7 @@ export const ModalCreateCar = () => {
   const { isSubmitted } = formState;
 
   const carSubmit = async (data: ICarsCreate) => {
+    console.log(data)
     const { links, ...restData } = data;
     const url = links.map((item) => item.url);
     try {
@@ -54,6 +55,7 @@ export const ModalCreateCar = () => {
       const token = cookies["@motors-shop:token"];
       api.defaults.headers.common.authorization = `Bearer ${token}`;
       const response = await api.post<IcarAnnouncement>("/cars", { ...restData, url });
+      console.log(response)
       setCars((oldAnnoucements) => [response.data, ...oldAnnoucements]);
       closeModal();
       openModal("sucessCreateCar", "Sucesso!");
@@ -82,11 +84,11 @@ export const ModalCreateCar = () => {
 
   const handleBrandChange = (event: any) => {
     setSelectBrand(event.target.value);
-    setValuesModel([{ fuel: 0, value: 0, year: "", name: "" }]);
+    setValuesModel([{ fuel: 0, value: "", year: "", name: "" }]);
     if (event.target.value === "") {
       setSelectModelDisabled(true);
       setSelectModelValue("");
-      setValuesModel([{ fuel: 0, value: 0, year: "", name: "" }]);
+      setValuesModel([{ fuel: 0, value: "", year: "", name: "" }]);
     } else {
       setSelectModelDisabled(false);
     }
@@ -95,7 +97,7 @@ export const ModalCreateCar = () => {
   const handleModelChange = (event: any) => {
     setSelectModelValue(event.target.value);
     const selectedModel = modelApi.find((model) => model.name === event.target.value);
-    setValuesModel([{ fuel: 0, value: 0, year: "", name: "" }]);
+    setValuesModel([{ fuel: 0, value: "", year: "", name: "" }]);
     if (selectedModel) {
       setValuesModel([selectedModel]);
     }
@@ -135,7 +137,7 @@ export const ModalCreateCar = () => {
   }, [valuesModel[0]?.year, setValue]);
 
   useEffect(() => {
-    setValue("fipePrice", valuesModel[0]?.value);
+    setValue("fipePrice", valuesModel[0]?.value === "" ? "" : Number(valuesModel[0]?.value));
     trigger("fipePrice");
   }, [valuesModel[0]?.value, setValue]);
 
@@ -162,9 +164,14 @@ export const ModalCreateCar = () => {
             <Select
               label="Marca"
               error={
-                isSubmitted && errors.brand?.message === "Required"
-                  ? "Campo obrigatório"
-                  : undefined
+                isSubmitted === true 
+                ? 
+                errors.brand?.message === "Required" || selectBrand === "" 
+                ? "Campo obrigatório" 
+                : 
+                undefined 
+                : 
+                undefined
               }
               {...field}
               onChange={(e) => {
@@ -184,9 +191,14 @@ export const ModalCreateCar = () => {
             <Select
               label="Modelo"
               error={
-                isSubmitted && errors.model?.message === "Required"
-                  ? "Campo obrigatório"
-                  : undefined
+                isSubmitted === true 
+                ? 
+                errors.model?.message === "Required" || selectModelValue === "" 
+                ? "Campo obrigatório" 
+                : 
+                undefined 
+                : 
+                undefined
               }
               disabled={selectModelDisabled}
               {...field}
@@ -210,7 +222,16 @@ export const ModalCreateCar = () => {
               value={valuesModel[0]?.year || ""}
               register={register("year")}
               error={
-                isSubmitted && errors.year?.message === "Required" ? "Campo obrigatório" : undefined
+                isSubmitted === true 
+                ? 
+                errors.year?.message === "Required" 
+                || selectBrand === "" 
+                || selectModelValue === ""
+                ? "Campo obrigatório" 
+                : 
+                undefined 
+                : 
+                undefined
               }
               placeholder="Ex: 2018"
             />
@@ -222,9 +243,16 @@ export const ModalCreateCar = () => {
               register={register("fuelType")}
               placeholder="Ex: Gasolina"
               error={
-                isSubmitted && errors.fuelType?.message === "Required"
-                  ? "Campo obrigatório"
-                  : undefined
+                isSubmitted === true 
+                ? 
+                errors.fuelType?.message === "Required" 
+                || selectBrand === "" 
+                || selectModelValue === ""
+                ? "Campo obrigatório" 
+                : 
+                undefined 
+                : 
+                undefined
               }
             />
           </div>
@@ -249,14 +277,21 @@ export const ModalCreateCar = () => {
           <div className="flex gap-5">
             <Input
               label="Preço tabela FIPE"
-              type="number"
+              type="text"
               disabled={true}
               value={valuesModel[0]?.value || ""}
               register={register("fipePrice")}
               error={
-                isSubmitted && errors.fipePrice?.message === "Required"
-                  ? "Campo obrigatório"
-                  : undefined
+                isSubmitted === true 
+                ? 
+                errors.fuelType?.message === "Required" 
+                || selectBrand === "" 
+                || selectModelValue === ""
+                ? "Campo obrigatório" 
+                : 
+                undefined 
+                : 
+                undefined
               }
               placeholder="R$ 0.00"
             />
