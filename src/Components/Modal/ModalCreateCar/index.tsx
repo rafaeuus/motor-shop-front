@@ -29,6 +29,8 @@ export const ModalCreateCar = () => {
     { name: string; year: string; fuel: number; value: number | string }[]
   >([]);
 
+  console.log(selectModelValue)
+
   const { closeModal, openModal } = useContext(ModalContext);
   const { setCars } = useContext(AnnouncementContext);
 
@@ -85,6 +87,7 @@ export const ModalCreateCar = () => {
   const handleBrandChange = (event: any) => {
     setSelectBrand(event.target.value);
     setValuesModel([{ fuel: 0, value: "", year: "", name: "" }]);
+    setSelectModelValue("");
     if (event.target.value === "") {
       setSelectModelDisabled(true);
       setSelectModelValue("");
@@ -193,7 +196,7 @@ export const ModalCreateCar = () => {
               error={
                 isSubmitted === true 
                 ? 
-                errors.model?.message === "Required" || selectModelValue === "" 
+                errors.model?.message === "Required" || selectModelValue == "" 
                 ? "Campo obrigatório" 
                 : 
                 undefined 
