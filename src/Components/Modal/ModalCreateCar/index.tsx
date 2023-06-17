@@ -29,8 +29,6 @@ export const ModalCreateCar = () => {
     { name: string; year: string; fuel: number; value: number | string }[]
   >([]);
 
-  console.log(selectModelValue)
-
   const { closeModal, openModal } = useContext(ModalContext);
   const { setCars } = useContext(AnnouncementContext);
 
