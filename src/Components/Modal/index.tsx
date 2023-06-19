@@ -6,6 +6,8 @@ import { useContext } from "react";
 import Modal from "react-modal";
 import FilterForm from "../CategoryFilters/FilterForm";
 import { ModalCreateCar } from "./ModalCreateCar";
+import { ModalEditAddress } from "./ModalEditAddress";
+import { ModalEditUser } from "./ModalEditUser";
 import { ModalImageCar } from "./ModalImageCar";
 import { ModalSucessCreateCar } from "./ModalSuccessCreateCar";
 const customStyles = {
@@ -58,6 +60,8 @@ export const ModalCustom = () => {
           {modalType == "imageCar" && <ModalImageCar />}
           {modalType == "createCar" && <ModalCreateCar />}
           {modalType == "sucessCreateCar" && <ModalSucessCreateCar />}
+          {modalType == "editUser" && <ModalEditUser />}
+          {modalType == "editAddress" && <ModalEditAddress />}
         </div>
       </div>
     </Modal>

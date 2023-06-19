@@ -14,4 +14,10 @@ export interface ImodalProviderProps {
   children: ReactNode;
 }
 
-export type TmodalTypes = "filterHomePage" | "imageCar" | "createCar" | "sucessCreateCar";
+export type TmodalTypes =
+  | "filterHomePage"
+  | "imageCar"
+  | "createCar"
+  | "sucessCreateCar"
+  | "editUser"
+  | "editAddress";
