@@ -1,11 +1,9 @@
 import { Footer } from "@/Components/Footer";
 import { ModalCustom } from "@/Components/Modal";
-// import { ModalCustom } from "@/Components/Modal";
 import { Navbar } from "@/Components/Navbar";
-import { AuthProvider } from "@/contexts/AuthContext.tsx";
-import { IdecodedToken, TinfosToken } from "@/contexts/AuthContext.tsx/types";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { IdecodedToken, TinfosToken } from "@/contexts/AuthContext/types";
 import { ModalProvider } from "@/contexts/ModalContext.tsx";
-// import { ModalProvider } from "@/contexts/ModalContext.tsx";
 import { api } from "@/services/api";
 import "@/styles/globals.css";
 // eslint-disable-next-line camelcase

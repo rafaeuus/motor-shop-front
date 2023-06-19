@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthContext } from "@/contexts/AuthContext.tsx";
+import { AuthContext } from "@/contexts/AuthContext";
 import { Sling } from "hamburger-react";
 import Image from "next/image";
 import Link from "next/link";

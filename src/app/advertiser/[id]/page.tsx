@@ -2,30 +2,9 @@ import { IcarAnnouncement } from "@/Components/Card";
 import { ModalCustom } from "@/Components/Modal";
 import AdvertiserMain from "@/Components/PagesComponents/Advertiser";
 import { AnnouncementProvider } from "@/contexts/AnnouncementContext";
+import { UserProfile } from "@/contexts/AuthContext/types";
 import { ModalProvider } from "@/contexts/ModalContext.tsx";
 import { api } from "@/services/api";
-
-export interface UserProfile {
-  id: string;
-  name: string;
-  email: string;
-  cpf: string;
-  phone: string;
-  birthDate: Date;
-  isAdvertiser: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  address: {
-    id: string;
-    zipCode: string;
-    state: string;
-    city: string;
-    street: string;
-    number: string;
-    complement: string;
-  };
-  description: string;
-}
 
 const getCars = async (id: string) => {
   try {
