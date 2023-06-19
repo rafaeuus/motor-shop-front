@@ -47,7 +47,6 @@ export const ModalCreateCar = () => {
   const { isSubmitted } = formState;
 
   const carSubmit = async (data: ICarsCreate) => {
-    console.log(data)
     const { links, ...restData } = data;
     const url = links.map((item) => item.url);
     try {
@@ -164,14 +163,11 @@ export const ModalCreateCar = () => {
             <Select
               label="Marca"
               error={
-                isSubmitted === true 
-                ? 
-                errors.brand?.message === "Required" || selectBrand === "" 
-                ? "Campo obrigatório" 
-                : 
-                undefined 
-                : 
-                undefined
+                isSubmitted === true
+                  ? errors.brand?.message === "Required" || selectBrand === ""
+                    ? "Campo obrigatório"
+                    : undefined
+                  : undefined
               }
               {...field}
               onChange={(e) => {
@@ -191,14 +187,11 @@ export const ModalCreateCar = () => {
             <Select
               label="Modelo"
               error={
-                isSubmitted === true 
-                ? 
-                errors.model?.message === "Required" || selectModelValue == "" 
-                ? "Campo obrigatório" 
-                : 
-                undefined 
-                : 
-                undefined
+                isSubmitted === true
+                  ? errors.model?.message === "Required" || selectModelValue == ""
+                    ? "Campo obrigatório"
+                    : undefined
+                  : undefined
               }
               disabled={selectModelDisabled}
               {...field}
@@ -222,16 +215,13 @@ export const ModalCreateCar = () => {
               value={valuesModel[0]?.year || ""}
               register={register("year")}
               error={
-                isSubmitted === true 
-                ? 
-                errors.year?.message === "Required" 
-                || selectBrand === "" 
-                || selectModelValue === ""
-                ? "Campo obrigatório" 
-                : 
-                undefined 
-                : 
-                undefined
+                isSubmitted === true
+                  ? errors.year?.message === "Required" ||
+                    selectBrand === "" ||
+                    selectModelValue === ""
+                    ? "Campo obrigatório"
+                    : undefined
+                  : undefined
               }
               placeholder="Ex: 2018"
             />
@@ -243,16 +233,13 @@ export const ModalCreateCar = () => {
               register={register("fuelType")}
               placeholder="Ex: Gasolina"
               error={
-                isSubmitted === true 
-                ? 
-                errors.fuelType?.message === "Required" 
-                || selectBrand === "" 
-                || selectModelValue === ""
-                ? "Campo obrigatório" 
-                : 
-                undefined 
-                : 
-                undefined
+                isSubmitted === true
+                  ? errors.fuelType?.message === "Required" ||
+                    selectBrand === "" ||
+                    selectModelValue === ""
+                    ? "Campo obrigatório"
+                    : undefined
+                  : undefined
               }
             />
           </div>
@@ -282,16 +269,13 @@ export const ModalCreateCar = () => {
               value={valuesModel[0]?.value || ""}
               register={register("fipePrice")}
               error={
-                isSubmitted === true 
-                ? 
-                errors.fuelType?.message === "Required" 
-                || selectBrand === "" 
-                || selectModelValue === ""
-                ? "Campo obrigatório" 
-                : 
-                undefined 
-                : 
-                undefined
+                isSubmitted === true
+                  ? errors.fuelType?.message === "Required" ||
+                    selectBrand === "" ||
+                    selectModelValue === ""
+                    ? "Campo obrigatório"
+                    : undefined
+                  : undefined
               }
               placeholder="R$ 0.00"
             />

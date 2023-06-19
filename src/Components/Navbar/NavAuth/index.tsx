@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthContext } from "@/contexts/AuthContext.tsx";
+import { AuthContext } from "@/contexts/AuthContext";
 import { ModalContext } from "@/contexts/ModalContext.tsx";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
@@ -40,13 +40,19 @@ export const NavAuth = ({
       {menuAuthIsOpen && (
         <nav className="absolute left-2 top-16 flex h-fit w-52 flex-col items-start justify-start gap-4 rounded bg-grey9 p-5 shadow-[0px_4px_40px_-10px_rgba(0,0,0,0.25)]">
           <button
-            onClick={() => openModal("editUser", "Editar perfil")}
+            onClick={() => {
+              openModal("editUser", "Editar perfil");
+              closeMenuAuth();
+            }}
             className="text-base font-normal leading-7 text-grey2 hover:text-grey1 hover:underline"
             id="button-edit-profile">
             Editar Perfil
           </button>
           <button
-            onClick={() => openModal("editAddress", "Editar endereço")}
+            onClick={() => {
+              openModal("editAddress", "Editar endereço");
+              closeMenuAuth();
+            }}
             className="text-base font-normal leading-7 text-grey2 hover:text-grey1 hover:underline"
             id="button-edit-address">
             Editar endereço

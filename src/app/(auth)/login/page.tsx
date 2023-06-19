@@ -2,10 +2,11 @@
 
 import { Button } from "@/Components/Button";
 import Input from "@/Components/Input";
-import { AuthContext } from "@/contexts/AuthContext.tsx";
-import { IdecodedToken, IloginUser, TinfosToken } from "@/contexts/AuthContext.tsx/types";
+import { AuthContext } from "@/contexts/AuthContext";
+import { IdecodedToken, IloginUser, TinfosToken, UserProfile } from "@/contexts/AuthContext/types";
 import { api } from "@/services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Spinner } from "@material-tailwind/react";
 // eslint-disable-next-line camelcase
 import jwt_decode from "jwt-decode";
 import Link from "next/link";
@@ -15,10 +16,9 @@ import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { ILoginForm, loginSchema } from "./loginSchema";
-import { Spinner } from "@material-tailwind/react";
 
 const LoginPage = () => {
-  const { setUserAuth } = useContext(AuthContext);
+  const { setUserAuth, setUserProfile } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -38,6 +38,9 @@ const LoginPage = () => {
     try {
       const response = await api.post<IloginUser>("/login", data);
       const { token } = response.data;
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      const responseProfile = await api.get<UserProfile>("/user");
+      setUserProfile(responseProfile.data);
       toast.dismiss(toaster);
       toast.success("Login realizado!");
 

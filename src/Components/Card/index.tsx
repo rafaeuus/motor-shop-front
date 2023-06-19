@@ -1,5 +1,5 @@
 "use client";
-import { AuthContext } from "@/contexts/AuthContext.tsx";
+import { AuthContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 
