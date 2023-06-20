@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useContext } from "react";
 import Modal from "react-modal";
 import FilterForm from "../CategoryFilters/FilterForm";
+import { ModalConfirmDeleteUser } from "./ModalConfirmDeleteUser";
 import { ModalCreateCar } from "./ModalCreateCar";
 import { ModalEditAddress } from "./ModalEditAddress";
 import { ModalEditUser } from "./ModalEditUser";
@@ -66,6 +67,7 @@ export const ModalCustom = () => {
           {modalType == "editAddress" && <ModalEditAddress />}
           {modalType == "sucessRegisterUser" && <ModalSucessRegisterUser />}
           {modalType == "recoverPassword" && <ModalRecoverPassword />}
+          {modalType == "deleteUser" && <ModalConfirmDeleteUser />}
         </div>
       </div>
     </Modal>
