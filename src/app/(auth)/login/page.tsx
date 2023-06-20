@@ -16,9 +16,11 @@ import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { ILoginForm, loginSchema } from "./loginSchema";
+import { ModalContext } from "@/contexts/ModalContext.tsx";
 
 const LoginPage = () => {
   const { setUserAuth, setUserProfile } = useContext(AuthContext);
+  const { openModal } = useContext(ModalContext);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -88,9 +90,12 @@ const LoginPage = () => {
             error={errors.password?.message}
             disabled={loading}
           />
-          <Link className="prose-body-2-500 flex justify-end hover:scale-105" href={"/recover"}>
+          <button
+            onClick={() => openModal("recoverPassword", "Recuperar senha")}
+            type="button"
+            className="prose-body-2-500 flex cursor-pointer justify-end">
             Esqueci minha senha
-          </Link>
+          </button>
           <Button
             type="submit"
             variant="gradient"

@@ -11,6 +11,7 @@ import { ModalEditUser } from "./ModalEditUser";
 import { ModalImageCar } from "./ModalImageCar";
 import { ModalSucessCreateCar } from "./ModalSuccessCreateCar";
 import { ModalSucessRegisterUser } from "./ModalSucessRegisterUser";
+import { ModalRecoverPassword } from "./MoralRecoverPassword";
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)"
@@ -64,6 +65,7 @@ export const ModalCustom = () => {
           {modalType == "editUser" && <ModalEditUser />}
           {modalType == "editAddress" && <ModalEditAddress />}
           {modalType == "sucessRegisterUser" && <ModalSucessRegisterUser />}
+          {modalType == "recoverPassword" && <ModalRecoverPassword />}
         </div>
       </div>
     </Modal>
