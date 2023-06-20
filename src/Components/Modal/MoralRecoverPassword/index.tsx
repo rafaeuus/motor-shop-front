@@ -47,12 +47,6 @@ export const ModalRecoverPassword = () => {
         />
         <div className="mt-4 flex flex-col gap-4">
           <button
-            className="w-auto rounded border-grey6 bg-grey6 px-5 py-3 text-base font-semibold text-grey2 hover:bg-grey5"
-            type="button"
-            onClick={closeModal}>
-            Cancelar
-          </button>
-          <button
             type="submit"
             className="w-auto rounded border-Brand1 bg-Brand1 px-5 py-3 text-base  font-semibold text-grey10 hover:bg-Brand2"
             disabled={loading}>

@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 :root {
-
 }
 
 @layer base {
@@ -61,6 +60,8 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  position: relative;
+  padding-bottom: 8rem;
 }
 
 body,

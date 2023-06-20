@@ -70,8 +70,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center bg-grey8 py-20">
-      <div className="w-4/5 max-w-[600px] rounded bg-grey10 px-4 py-11 xs:px-12">
+    <div className="flex min-h-3/4 justify-center bg-grey8 py-20">
+      <div className="h-fit w-4/5 max-w-[600px] rounded bg-grey10 px-4 py-11 xs:px-12">
         <h2 className="prose-heading-5-500">Login</h2>
         <form onSubmit={handleSubmit(submitLogin)} className="mt-8 flex flex-col gap-5" noValidate>
           <Input
