@@ -6,6 +6,7 @@ import { AnnouncementContext } from "@/contexts/AnnouncementContext";
 import { AuthContext } from "@/contexts/AuthContext";
 import { UserProfile } from "@/contexts/AuthContext/types";
 import { ModalContext } from "@/contexts/ModalContext.tsx";
+import { useRouter } from "next/navigation";
 import { useContext } from "react";
 
 interface AdvertiserMainProps {
@@ -18,6 +19,8 @@ const AdvertiserMain = ({ user }: AdvertiserMainProps) => {
 
   const { cars, setCars } = useContext(AnnouncementContext);
   const { userProfile } = useContext(AuthContext);
+
+  const router = useRouter()
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-Brand1 from-[357px] via-grey8 via-[357px] to-grey8 to-100% pb-[73px] pt-[40px]">
@@ -71,6 +74,7 @@ const AdvertiserMain = ({ user }: AdvertiserMainProps) => {
                       </Button>
                       <div className="max-w-[160px]">
                         <Button
+                          onClick={() => router.push(`/announcement/${car.id}`)}
                           color="black"
                           size="secondary"
                           variant="outlined"

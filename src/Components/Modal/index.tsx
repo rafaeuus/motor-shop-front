@@ -4,7 +4,7 @@ import { ModalContext } from "@/contexts/ModalContext.tsx";
 import Image from "next/image";
 import { useContext } from "react";
 import Modal from "react-modal";
-import FilterForm from "../CategoryFilters/FilterForm";
+import FilterForm from "../CarsFilter/FilterForm";
 import { ModalConfirmDeleteUser } from "./ModalConfirmDeleteUser";
 import { ModalCreateCar } from "./ModalCreateCar";
 import { ModalEditAddress } from "./ModalEditAddress";

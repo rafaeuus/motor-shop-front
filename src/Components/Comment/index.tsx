@@ -1,15 +1,14 @@
+import { ICommentProps } from "@/app/announcement/[id]/page";
+
 interface CommentProps {
-  user: {
-    name: string;
-    comment: string;
-    createdAt: Date;
-  };
+  comment: ICommentProps;
 }
 
-const Comment = ({ user }: CommentProps) => {
+const Comment = ({ comment }: CommentProps) => {
   const calcDaysAgo = () => {
     const currentDate = new Date();
-    const timeDiff = currentDate.getTime() - user.createdAt.getTime();
+    const commentDate = new Date(comment.createdAt)
+    const timeDiff = currentDate.getTime() - commentDate.getTime();
 
     return Math.floor(timeDiff / (1000 * 3600 * 24));
   };
@@ -18,13 +17,13 @@ const Comment = ({ user }: CommentProps) => {
     <li className="flex flex-col gap-3">
       <div className="flex items-center gap-2">
         <span className="prose-body-2-600 flex h-8 w-8 items-center justify-center rounded-full bg-Brand2 text-grey10">
-          {user.name[0].toUpperCase()}
+          {comment.user.name[0].toUpperCase()}
         </span>
-        <span className="prose-body-2-600 text-grey2">{user.name}</span>
+        <span className="prose-body-2-600 text-grey2">{comment.user.name}</span>
         <span className="h-1 w-1 rounded-full bg-grey4" />
         <span className="prose-body-2-400 text-xs text-grey3">há {calcDaysAgo()} dias</span>
       </div>
-      <p className="prose-body-2 text-grey2">{user.comment}</p>
+      <p className="prose-body-2 text-grey2">{comment.content}</p>
     </li>
   );
 };
