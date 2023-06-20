@@ -61,7 +61,13 @@ body {
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
   position: relative;
-  padding-bottom: 8rem;
+  padding-bottom: 18rem;
+}
+
+@media (min-width: 576px) {
+  body {
+    padding-bottom: 8rem;
+  }
 }
 
 body,
