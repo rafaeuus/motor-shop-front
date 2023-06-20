@@ -1,16 +1,42 @@
 "use client";
 import { ModalContext } from "@/contexts/ModalContext.tsx";
-import { ReactNode, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button } from "../Button";
 import FilterForm from "./FilterForm";
 import Pagination from "./Pagination";
+import Card, { IcarAnnouncement } from "../Card";
+import { api } from "@/services/api";
+import { useCarsFilter } from "@/hooks/useCarsFilter";
 
-interface CategoryFiltersProps {
-  children: ReactNode;
-}
+export type TFilterRequest = {
+  brand?: string;
+  model?: string;
+  year?: string;
+  fueltype?: string;
+  color?: string;
+  minkms?: string;
+  maxkms?: string;
+  minprice?: string;
+  maxprice?: string;
+};
 
-const CategoryFilters = ({ children }: CategoryFiltersProps) => {
+const CarsFilterComponent = () => {
   const { openModal } = useContext(ModalContext);
+  // const { listCarsAnnouncement, setListCarsAnnouncement } = useCarsFilter();
+  const [listCarsAnnouncement, setListCarsAnnouncement] = useState<IcarAnnouncement[]>([]);
+
+  const getListCarsAnnouncement = async () => {
+    try {
+      const res = await api.get<IcarAnnouncement[]>("/cars");
+      return setListCarsAnnouncement(res.data);
+    } catch (error) {
+      throw new Error("API sendo iniciada");
+    }
+  };
+
+  useEffect(() => {
+    getListCarsAnnouncement();
+  }, []);
 
   return (
     <section className="bg-grey10">
@@ -21,7 +47,9 @@ const CategoryFilters = ({ children }: CategoryFiltersProps) => {
             <FilterForm />
             <div className=" lg:col-span-3">
               <div className="flex h-max  gap-2 overflow-x-auto  p-4 md:flex-wrap md:justify-around">
-                {children}
+                {listCarsAnnouncement.map((announcement) => (
+                  <Card key={announcement.id} car={announcement} />
+                ))}
               </div>
               <div className=" mt-16 flex content-center justify-center lg:hidden ">
                 <Button
@@ -42,4 +70,4 @@ const CategoryFilters = ({ children }: CategoryFiltersProps) => {
   );
 };
 
-export default CategoryFilters;
+export default CarsFilterComponent;
