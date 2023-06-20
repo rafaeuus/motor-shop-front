@@ -21,4 +21,5 @@ export type TmodalTypes =
   | "sucessCreateCar"
   | "editUser"
   | "editAddress"
-  | "sucessRegisterUser";
+  | "sucessRegisterUser"
+  | "deleteUser";

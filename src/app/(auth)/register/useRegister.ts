@@ -24,7 +24,8 @@ export const useRegister = () => {
     handleSubmit,
     watch,
     setValue,
-    formState: { errors }
+    formState: { errors },
+    reset
   } = useForm<TRegisterData>({
     criteriaMode: "all",
     mode: "all",
@@ -60,6 +61,7 @@ export const useRegister = () => {
     try {
       await api.post<TRegisterData>("/user", data);
       toast.dismiss(toaster);
+      reset();
       openModal("sucessRegisterUser", "Sucesso!");
     } catch (error: any) {
       console.log(error);
