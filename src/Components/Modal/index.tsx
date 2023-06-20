@@ -10,6 +10,7 @@ import { ModalEditAddress } from "./ModalEditAddress";
 import { ModalEditUser } from "./ModalEditUser";
 import { ModalImageCar } from "./ModalImageCar";
 import { ModalSucessCreateCar } from "./ModalSuccessCreateCar";
+import { ModalSucessRegisterUser } from "./ModalSucessRegisterUser";
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)"
@@ -62,6 +63,7 @@ export const ModalCustom = () => {
           {modalType == "sucessCreateCar" && <ModalSucessCreateCar />}
           {modalType == "editUser" && <ModalEditUser />}
           {modalType == "editAddress" && <ModalEditAddress />}
+          {modalType == "sucessRegisterUser" && <ModalSucessRegisterUser />}
         </div>
       </div>
     </Modal>

@@ -26,9 +26,9 @@ const Register = () => {
   };
 
   return (
-    <section className="flex h-max w-screen items-center justify-center bg-grey8">
+    <section className="flex h-max w-screen items-center justify-center bg-grey8 p-4">
       <form
-        className="my-8 flex max-h-max w-[411px] flex-col items-start justify-center gap-4 rounded bg-grey10 p-12"
+        className="my-8 flex max-h-max  w-full max-w-[411px] flex-col items-start justify-center gap-4 rounded bg-grey10 px-4 py-12 xs:px-12"
         onSubmit={handleSubmit(formSubmit)}
         noValidate>
         <h4 className="prose-heading-5-500">Cadastro</h4>
@@ -132,7 +132,7 @@ const Register = () => {
             />
           </div>
           <h5 className="prose-body-2-500">Tipo de conta</h5>
-          <div className="flex w-full justify-between gap-4">
+          <div className="flex w-full flex-col items-center justify-between gap-4 xs:flex-row">
             <div>
               <input
                 type="radio"

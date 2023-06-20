@@ -1,8 +1,8 @@
 "use client";
+import { ModalContext } from "@/contexts/ModalContext.tsx";
 import { api } from "@/services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { registerSchema, TRegisterData } from "./schema";
@@ -17,7 +17,7 @@ type TAddressProps = {
 
 export const useRegister = () => {
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const { openModal } = useContext(ModalContext);
 
   const {
     register,
@@ -48,7 +48,7 @@ export const useRegister = () => {
         const data = await response.json();
         handleSetData(data);
       } catch (error) {
-        // console.error(error);
+        console.error(error);
       }
     },
     [handleSetData, cep]
@@ -60,8 +60,7 @@ export const useRegister = () => {
     try {
       await api.post<TRegisterData>("/user", data);
       toast.dismiss(toaster);
-      toast.success("Cadastro realizado!");
-      router.push("/login");
+      openModal("sucessRegisterUser", "Sucesso!");
     } catch (error: any) {
       console.log(error);
       toast.dismiss(toaster);
