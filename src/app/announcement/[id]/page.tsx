@@ -8,6 +8,19 @@ interface IPageProps {
   params: { id: string };
 }
 
+export interface ICommentProps {
+  content: string,
+  id: string,
+  createdAt: Date,
+  carId: string,
+  userId: string
+  user: {name: string}
+}
+
+export interface ICommentCreateProps {
+  content: string
+}
+
 const getCarAnnouncement = async (id: string) => {
   try {
     const res = await api.get<IcarAnnouncement>(`/cars/${id}`);
@@ -17,13 +30,23 @@ const getCarAnnouncement = async (id: string) => {
   }
 };
 
+const getComments = async (carId: string) => {
+  try {
+    const res = await api.get<ICommentProps[]>(`/comments/${carId}`)
+    return res.data;
+  } catch(error) {
+    throw new Error("API sendo iniciada");
+  }
+}
+
 const Announcement = async ({ params }: IPageProps) => {
   const carsAnnouncement = await getCarAnnouncement(params.id);
+  const carComments = await getComments(carsAnnouncement.id)
   return (
     <ModalProvider>
       <>
         <div>
-          <AnnouncementsMain carsAnnouncement={carsAnnouncement} />
+          <AnnouncementsMain carsAnnouncement={carsAnnouncement} carComments={carComments} />
         </div>
         <ModalCustom />
       </>
