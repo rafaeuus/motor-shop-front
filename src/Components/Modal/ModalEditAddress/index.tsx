@@ -115,7 +115,6 @@ export const ModalEditAddress = () => {
             label="Estado"
             type="text"
             placeholder="Digitar Estado"
-            disabled={true}
             register={register("state")}
             error={errors.state?.message}
           />
@@ -123,7 +122,6 @@ export const ModalEditAddress = () => {
             label="Cidade"
             type="text"
             placeholder="Digitar Cidade"
-            disabled={true}
             register={register("city")}
             error={errors.city?.message}
           />
@@ -132,7 +130,6 @@ export const ModalEditAddress = () => {
           label="Rua"
           type="text"
           placeholder="Digitar Rua"
-          disabled={true}
           register={register("street")}
           error={errors.street?.message}
         />
