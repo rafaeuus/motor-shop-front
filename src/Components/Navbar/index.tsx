@@ -87,7 +87,7 @@ export const Navbar = () => {
               closeMenuAuth={closeMenuAuth}
             />
           ) : (
-            <NavDefault style="flex items-center gap-10" />
+            <NavDefault style="flex items-center gap-10" closeMenuBurguer={closeMenuBurguer} />
           )}
         </div>
 
@@ -105,7 +105,10 @@ export const Navbar = () => {
                 />
               </nav>
             ) : (
-              <NavDefault style="absolute left-0 top-[76px]  flex h-44 w-full flex-col justify-between bg-grey10  px-3 py-8 pr-5" />
+              <NavDefault
+                style="absolute left-0 top-[76px]  flex h-44 w-full flex-col justify-between bg-grey10  px-3 py-8 pr-5"
+                closeMenuBurguer={closeMenuBurguer}
+              />
             )}
           </>
         )}
