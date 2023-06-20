@@ -8,7 +8,7 @@ export const Footer = () => {
     window.scrollTo(0, 0);
   };
   return (
-    <footer className=" h-72 w-full bg-grey0 sm:h-32">
+    <footer className=" position: absolute bottom-0 h-72 w-full bg-grey0 sm:h-32">
       <div className="mx-auto my-0 flex h-full w-full max-w-[1600px] flex-col items-center justify-between gap-2 px-4 py-10 sm:flex-row ">
         <Link href={"/"}>
           <Image
