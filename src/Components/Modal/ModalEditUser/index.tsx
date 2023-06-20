@@ -14,7 +14,7 @@ export const ModalEditUser = () => {
   const [loading, setLoading] = useState(false);
   const { CPFMask, phoneMask } = useMasks();
   const { userProfile, setUserProfile } = useContext(AuthContext);
-  const { closeModal } = useContext(ModalContext);
+  const { closeModal, openModal } = useContext(ModalContext);
   const {
     register,
     handleSubmit,
@@ -111,6 +111,10 @@ export const ModalEditUser = () => {
             Cancelar
           </button>
           <button
+            onClick={() => {
+              closeModal();
+              openModal("deleteUser", "Excluir usuário");
+            }}
             type="button"
             className="w-auto rounded border-Alert2 bg-Alert2 px-5 py-3 text-base  font-semibold text-Alert1 hover:bg-Alert3">
             Excluir Perfil

@@ -10,6 +10,9 @@ export default withMT({
   ],
   darkMode: "class",
   theme: {
+    minHeight: {
+      "3/4": "78vh"
+    },
     container: {
       center: true,
       padding: "1rem"

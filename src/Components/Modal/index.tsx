@@ -4,13 +4,15 @@ import { ModalContext } from "@/contexts/ModalContext.tsx";
 import Image from "next/image";
 import { useContext } from "react";
 import Modal from "react-modal";
-import FilterForm from "../CarsFilter/FilterForm";
+import FilterForm from "../CategoryFilters/FilterForm";
+import { ModalConfirmDeleteUser } from "./ModalConfirmDeleteUser";
 import { ModalCreateCar } from "./ModalCreateCar";
 import { ModalEditAddress } from "./ModalEditAddress";
 import { ModalEditUser } from "./ModalEditUser";
 import { ModalImageCar } from "./ModalImageCar";
 import { ModalSucessCreateCar } from "./ModalSuccessCreateCar";
 import { ModalSucessRegisterUser } from "./ModalSucessRegisterUser";
+import { ModalRecoverPassword } from "./MoralRecoverPassword";
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)"
@@ -64,6 +66,8 @@ export const ModalCustom = () => {
           {modalType == "editUser" && <ModalEditUser />}
           {modalType == "editAddress" && <ModalEditAddress />}
           {modalType == "sucessRegisterUser" && <ModalSucessRegisterUser />}
+          {modalType == "recoverPassword" && <ModalRecoverPassword />}
+          {modalType == "deleteUser" && <ModalConfirmDeleteUser />}
         </div>
       </div>
     </Modal>
