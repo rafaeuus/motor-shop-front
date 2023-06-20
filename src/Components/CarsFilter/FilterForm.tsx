@@ -1,29 +1,54 @@
 "use client";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { ModelOption, Option, filters, models } from "@/constants/filters";
 import { Button } from "../Button";
+import { api } from "@/services/api";
+import { useCarsFilter } from "@/hooks/useCarsFilter";
 
 interface FilterFormProps {
   show?: boolean;
 }
 
 const FilterForm = ({ show }: FilterFormProps) => {
+  const { inputValues, setInputValues } = useCarsFilter();
   const [model, setModel] = useState("");
   const filteredModels: ModelOption[] = models.options.filter((e) => e.label === model);
   const modelsList: Option[] = filteredModels.length > 0 ? filteredModels[0].options : [];
 
   // Logica temporaria, só pra mostra
-  const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>, sectionId: string) => {
-    const newInputValues = { ...inputValues };
-    newInputValues[sectionId] = e.target.value;
-    setInputValues(newInputValues);
-  };
+  // const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
+
+  const handleInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>, sectionId: string) => {
+      const newInputValues = { ...inputValues };
+      newInputValues[sectionId] = e.target.value;
+
+      setInputValues(newInputValues);
+    },
+    [inputValues]
+  );
+
+  // useEffect(() => {
+  //   submit();
+  // }, [inputValues]);
+
+  // const submit = async () => {
+  //   const queryParams = new URLSearchParams({ ...inputValues });
+  //   try {
+  //     const response = await api(`${process.env.NEXT_PUBLIC_BASE_URL_API}/filters?${queryParams}`);
+  //     const { data } = response;
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   console.log(queryParams);
+  // };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    console.log(inputValues);
     //  lógica do envío do formulario
   };
 
@@ -75,7 +100,6 @@ const FilterForm = ({ show }: FilterFormProps) => {
                         id={`filter-scrren-${section.id}-${optionIdx}`}
                         name={`${section.id}[]`}
                         type="checkbox"
-                        defaultChecked={option.checked}
                         value={option.value}
                         onChange={(e) => handleInputChange(e, section.id)}
                         checked={inputValues[section.id] === option.value}
@@ -92,13 +116,17 @@ const FilterForm = ({ show }: FilterFormProps) => {
                   <div className="flex justify-between">
                     <input
                       type="text"
+                      name={`min-${section.id}`}
                       placeholder="Minimo"
                       className="h-9 w-[48%] place-content-center rounded border-none bg-grey5 text-center"
+                      onChange={(e) => handleInputChange(e, `min-${section.id}`)}
                     />
                     <input
                       type="text"
+                      name={`max-${section.id}`}
                       placeholder="Máximo"
                       className="h-9 w-[48%] place-content-center rounded border-none bg-grey5 text-center"
+                      onChange={(e) => handleInputChange(e, `max-${section.id}`)}
                     />
                   </div>
                 ) : (
@@ -108,7 +136,6 @@ const FilterForm = ({ show }: FilterFormProps) => {
                         id={`filter-scrren-${section.id}-${optionIdx}`}
                         name={`${section.id}[]`}
                         type="checkbox"
-                        defaultChecked={option.checked}
                         value={option.value}
                         onChange={(e) => handleInputChange(e, section.id)}
                         checked={inputValues[section.id] === option.value}
@@ -133,7 +160,12 @@ const FilterForm = ({ show }: FilterFormProps) => {
         </Button>
       </div>
       <div className="hidden lg:block">
-        <Button size="primary" variant="gradient" color="blue" fullWidth={true}>
+        <Button
+          size="primary"
+          variant="gradient"
+          color="blue"
+          fullWidth={true}
+          onClick={() => setInputValues({})}>
           Limpar filtros
         </Button>
       </div>

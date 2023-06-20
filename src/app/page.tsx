@@ -1,21 +1,8 @@
-import Card, { IcarAnnouncement } from "@/Components/Card";
-import CategoryFilters from "@/Components/CategoryFilters";
+import CarsFilterComponent from "@/Components/CarsFilter";
 import { ModalCustom } from "@/Components/Modal";
 import { ModalProvider } from "@/contexts/ModalContext.tsx";
-import { api } from "@/services/api";
-
-const getListCarsAnnouncement = async () => {
-  try {
-    const res = await api.get<IcarAnnouncement[]>("/cars");
-    return res.data;
-  } catch (error) {
-    throw new Error("API sendo iniciada");
-  }
-};
 
 const Home = async () => {
-  const listCarsAnnouncement = await getListCarsAnnouncement();
-
   return (
     <ModalProvider>
       <>
@@ -33,11 +20,7 @@ const Home = async () => {
             </div>
           </section>
           <div className="">
-            <CategoryFilters>
-              {listCarsAnnouncement.map((announcement) => (
-                <Card key={announcement.id} car={announcement} />
-              ))}
-            </CategoryFilters>
+            <CarsFilterComponent />
           </div>
         </main>
         <ModalCustom />

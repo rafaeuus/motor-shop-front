@@ -2,7 +2,7 @@
 
 import { Button } from "@/Components/Button";
 import Card from "@/Components/Card";
-import CategoryFilters from "@/Components/CategoryFilters";
+import CategoryFilters from "@/Components/CarsFilter";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
 import TextArea from "@/Components/TextArea";
