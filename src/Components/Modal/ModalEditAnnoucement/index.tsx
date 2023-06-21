@@ -74,6 +74,7 @@ export const ModalEditAnnoucement = () => {
     const listLinksToUpdate = links.filter((link) => link.idImage);
 
     try {
+      setLoading(true);
       await api.patch(`/cars/${editAnnoucementModal?.id}`, formEditUser);
 
       if (listLinksToCreate) {
@@ -117,6 +118,7 @@ export const ModalEditAnnoucement = () => {
       closeModal();
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -262,10 +264,10 @@ export const ModalEditAnnoucement = () => {
             Cancelar
           </button>
           <button
-            // onClick={() => {
-            //   closeModal();
-            //   openModal("deleteUser", "Excluir usuário");
-            // }}
+            onClick={() => {
+              closeModal();
+              openModal("deleteAnnoucement", "Excluir anúncio");
+            }}
             type="button"
             className="w-auto rounded border-Alert2 bg-Alert2 px-5 py-3 text-base  font-semibold text-Alert1 hover:bg-Alert3">
             Excluir anúncio
