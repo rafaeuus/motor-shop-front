@@ -17,10 +17,10 @@ const AdvertiserMain = ({ user }: AdvertiserMainProps) => {
   const { userAuth } = useContext(AuthContext);
   const { openModal } = useContext(ModalContext);
 
-  const { cars, setCars } = useContext(AnnouncementContext);
+  const { cars, setEditAnnoucementModal } = useContext(AnnouncementContext);
   const { userProfile } = useContext(AuthContext);
 
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-Brand1 from-[357px] via-grey8 via-[357px] to-grey8 to-100% pb-[73px] pt-[40px]">
@@ -69,7 +69,15 @@ const AdvertiserMain = ({ user }: AdvertiserMainProps) => {
                   <Card car={car} />
                   {userAuth && userAuth.id === user.id && (
                     <div className="flex gap-4">
-                      <Button color="black" size="secondary" variant="outlined" type="button">
+                      <Button
+                        color="black"
+                        size="secondary"
+                        variant="outlined"
+                        type="button"
+                        onClick={() => {
+                          openModal("editAnnoucement", "Editar anúncio");
+                          setEditAnnoucementModal(car);
+                        }}>
                         Editar
                       </Button>
                       <div className="max-w-[160px]">

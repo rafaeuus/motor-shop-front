@@ -9,7 +9,7 @@ import { ModalContext } from "@/contexts/ModalContext.tsx";
 import { api } from "@/services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { parseCookies } from "nookies";
-import { useContext, useEffect, useLayoutEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { createCarSchema, ICarsCreate } from "./createCar.schema";
 
@@ -136,7 +136,12 @@ export const ModalCreateCar = () => {
   }, [valuesModel[0]?.year, setValue]);
 
   useEffect(() => {
-    setValue("fipePrice", valuesModel[0]?.value === "" ? "" : Number(valuesModel[0]?.value));
+    setValue(
+      "fipePrice",
+      valuesModel[0]?.value === "" || valuesModel[0]?.value == undefined
+        ? ""
+        : Number(valuesModel[0]?.value)
+    );
     trigger("fipePrice");
   }, [valuesModel[0]?.value, setValue]);
 
@@ -146,7 +151,7 @@ export const ModalCreateCar = () => {
   }, [valuesModel[0]?.fuel, setValue]);
 
   // Adiciona o primeiro input de url de imagem do carro
-  useLayoutEffect(() => {
+  useEffect(() => {
     prepend({
       url: ""
     });

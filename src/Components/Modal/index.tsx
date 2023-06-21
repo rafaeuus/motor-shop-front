@@ -5,9 +5,11 @@ import Image from "next/image";
 import { useContext } from "react";
 import Modal from "react-modal";
 import FilterForm from "../CarsFilter/FilterForm";
+import { ModalConfirmDeleteAnnoucement } from "./ModalConfirmDeleteAnnoucement";
 import { ModalConfirmDeleteUser } from "./ModalConfirmDeleteUser";
 import { ModalCreateCar } from "./ModalCreateCar";
 import { ModalEditAddress } from "./ModalEditAddress";
+import { ModalEditAnnoucement } from "./ModalEditAnnoucement";
 import { ModalEditUser } from "./ModalEditUser";
 import { ModalImageCar } from "./ModalImageCar";
 import { ModalSucessCreateCar } from "./ModalSuccessCreateCar";
@@ -68,6 +70,8 @@ export const ModalCustom = () => {
           {modalType == "sucessRegisterUser" && <ModalSucessRegisterUser />}
           {modalType == "recoverPassword" && <ModalRecoverPassword />}
           {modalType == "deleteUser" && <ModalConfirmDeleteUser />}
+          {modalType == "editAnnoucement" && <ModalEditAnnoucement />}
+          {modalType == "deleteAnnoucement" && <ModalConfirmDeleteAnnoucement />}
         </div>
       </div>
     </Modal>
