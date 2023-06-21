@@ -18,9 +18,17 @@ export const editCarSchema = z.object({
   coverImage: z.string().url("Url inválida").nonempty(),
   links: z.array(
     z.object({
-      url: z.string().url("Url inválida").nonempty()
+      url: z.string().url("Url inválida").nonempty(),
+      idImage: z.string().nullish(),
+      carId: z.string().nullish()
     })
   )
 });
 
 export type ICarsEdit = z.infer<typeof editCarSchema>;
+export interface IimagesCar {
+  id: string;
+  url: string;
+  carId: string;
+  idImage: string;
+}

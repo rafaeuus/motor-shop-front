@@ -1,3 +1,4 @@
+import { IcarAnnouncement } from "@/Components/Card";
 import Input from "@/Components/Input";
 import TextArea from "@/Components/TextArea";
 import { AnnouncementContext } from "@/contexts/AnnouncementContext";
@@ -6,13 +7,14 @@ import { api } from "@/services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext, useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { editCarSchema, ICarsEdit } from "./schema";
+import { editCarSchema, ICarsEdit, IimagesCar } from "./schema";
 
 export const ModalEditAnnoucement = () => {
   const [loading, setLoading] = useState(false);
   const { editAnnoucementModal, setEditAnnoucementModal, setCars } =
     useContext(AnnouncementContext);
   const { closeModal, openModal } = useContext(ModalContext);
+  const [listDeleteImageCar, setListDeleteImageCar] = useState<IimagesCar[]>([]);
 
   const {
     register,
@@ -45,7 +47,9 @@ export const ModalEditAnnoucement = () => {
   // Adiciona um novo input de url de imagem do carro
   const addNewUrlLinks = () => {
     append({
-      url: ""
+      url: "",
+      carId: null,
+      idImage: null
     });
   };
   // Remove um input especifico de imagem do carro, porém obriga que sempre exista ao menos 1 input ativo.
@@ -55,22 +59,62 @@ export const ModalEditAnnoucement = () => {
 
   // Adiciona os inputs de url de imagem do carro já cadastrados
   useEffect(() => {
-    console.log(editAnnoucementModal);
-    editAnnoucementModal?.carImages.map((item) => {
+    editAnnoucementModal?.carImages.map(({ carId, id, url }) => {
       prepend({
-        url: item.url
+        url,
+        carId,
+        idImage: id
       });
     });
   }, []);
 
   const formSubmit = async (data: ICarsEdit) => {
     const { links, ...formEditUser } = data;
+    const listLinksToCreate = links.filter((link) => !link.idImage);
+    const listLinksToUpdate = links.filter((link) => link.idImage);
+
     try {
-      const respondeUpdateAnnoucement = await api.patch(
-        `/cars/${editAnnoucementModal?.id}`,
-        formEditUser
+      await api.patch(`/cars/${editAnnoucementModal?.id}`, formEditUser);
+
+      if (listLinksToCreate) {
+        await Promise.all(
+          listLinksToCreate.map(async (link) => {
+            await api.post(`/cars/${editAnnoucementModal?.id}/image`, { url: link.url });
+          })
+        );
+      }
+
+      if (listLinksToUpdate) {
+        await Promise.all(
+          listLinksToUpdate.map(async (link) => {
+            await api.patch(`/cars/${editAnnoucementModal?.id}/image/${link.idImage}`, {
+              url: link.url
+            });
+          })
+        );
+      }
+
+      if (listDeleteImageCar.length > 0) {
+        await Promise.all(
+          listDeleteImageCar.map(async (link) => {
+            await api.delete(`/cars/${editAnnoucementModal?.id}/image/${link.idImage}`);
+          })
+        );
+      }
+
+      const responseEditAnnoucement = await api.get<IcarAnnouncement>(
+        `/cars/${editAnnoucementModal?.id}`
       );
-      console.log(respondeUpdateAnnoucement);
+      setCars((oldList) => {
+        return oldList.map((car) => {
+          if (car.id === responseEditAnnoucement.data.id) {
+            return responseEditAnnoucement.data;
+          } else {
+            return car;
+          }
+        });
+      });
+      closeModal();
     } catch (error) {
       console.log(error);
     }
@@ -187,7 +231,13 @@ export const ModalEditAnnoucement = () => {
                     <button
                       type="button"
                       className="h-7 w-7 rounded  text-lg font-bold text-red-700"
-                      onClick={() => removeUrlLinks(index)}>
+                      onClick={() => {
+                        removeUrlLinks(index);
+                        const carImagem: IimagesCar = field as IimagesCar;
+                        if (carImagem.carId) {
+                          setListDeleteImageCar((old) => [...old, carImagem]);
+                        }
+                      }}>
                       X
                     </button>
                   </div>
