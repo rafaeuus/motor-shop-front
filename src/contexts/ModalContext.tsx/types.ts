@@ -23,5 +23,5 @@ export type TmodalTypes =
   | "editAddress"
   | "sucessRegisterUser"
   | "recoverPassword"
-  | "deleteUser";
-
+  | "deleteUser"
+  | "editAnnoucement";
