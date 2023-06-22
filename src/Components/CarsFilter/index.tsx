@@ -1,12 +1,11 @@
 "use client";
+import { HomeContext } from "@/contexts/HomeContext";
 import { ModalContext } from "@/contexts/ModalContext.tsx";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Button } from "../Button";
+import Card from "../Card";
 import FilterForm from "./FilterForm";
 import Pagination from "./Pagination";
-import Card, { IcarAnnouncement } from "../Card";
-import { api } from "@/services/api";
-import { useCarsFilter } from "@/hooks/useCarsFilter";
 
 export type TFilterRequest = {
   brand?: string;
@@ -23,20 +22,20 @@ export type TFilterRequest = {
 const CarsFilterComponent = () => {
   const { openModal } = useContext(ModalContext);
   // const { listCarsAnnouncement, setListCarsAnnouncement } = useCarsFilter();
-  const [listCarsAnnouncement, setListCarsAnnouncement] = useState<IcarAnnouncement[]>([]);
+  const { listAnnoucements, setListAnnoucements } = useContext(HomeContext);
 
-  const getListCarsAnnouncement = async () => {
-    try {
-      const res = await api.get<IcarAnnouncement[]>("/cars");
-      return setListCarsAnnouncement(res.data);
-    } catch (error) {
-      throw new Error("API sendo iniciada");
-    }
-  };
+  // const getListCarsAnnouncement = async () => {
+  //   try {
+  //     const res = await api.get<IcarAnnouncement[]>("/cars");
+  //     return setListCarsAnnouncement(res.data);
+  //   } catch (error) {
+  //     throw new Error("API sendo iniciada");
+  //   }
+  // };
 
-  useEffect(() => {
-    getListCarsAnnouncement();
-  }, []);
+  // useEffect(() => {
+  //   getListCarsAnnouncement();
+  // }, []);
 
   return (
     <section className="bg-grey10">
@@ -47,7 +46,7 @@ const CarsFilterComponent = () => {
             <FilterForm />
             <div className=" lg:col-span-3">
               <div className="flex h-max  gap-2 overflow-x-auto  p-4 md:flex-wrap md:justify-around">
-                {listCarsAnnouncement.map((announcement) => (
+                {listAnnoucements.data.map((announcement) => (
                   <Card key={announcement.id} car={announcement} />
                 ))}
               </div>

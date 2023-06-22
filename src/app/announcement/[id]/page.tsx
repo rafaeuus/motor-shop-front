@@ -9,16 +9,16 @@ interface IPageProps {
 }
 
 export interface ICommentProps {
-  content: string,
-  id: string,
-  createdAt: Date,
-  carId: string,
-  userId: string
-  user: {name: string}
+  content: string;
+  id: string;
+  createdAt: Date;
+  carId: string;
+  userId: string;
+  user: { name: string };
 }
 
 export interface ICommentCreateProps {
-  content: string
+  content: string;
 }
 
 const getCarAnnouncement = async (id: string) => {
@@ -32,16 +32,16 @@ const getCarAnnouncement = async (id: string) => {
 
 const getComments = async (carId: string) => {
   try {
-    const res = await api.get<ICommentProps[]>(`/comments/${carId}`)
+    const res = await api.get<ICommentProps[]>(`/comments/${carId}`);
     return res.data;
-  } catch(error) {
+  } catch (error) {
     throw new Error("API sendo iniciada");
   }
-}
+};
 
 const Announcement = async ({ params }: IPageProps) => {
   const carsAnnouncement = await getCarAnnouncement(params.id);
-  const carComments = await getComments(carsAnnouncement.id)
+  const carComments = await getComments(carsAnnouncement.id);
   return (
     <ModalProvider>
       <>

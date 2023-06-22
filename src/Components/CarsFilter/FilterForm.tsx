@@ -1,18 +1,17 @@
 "use client";
-import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
+import { filters, ModelOption, models, Option } from "@/constants/filters";
+import { HomeContext } from "@/contexts/HomeContext";
 import { Disclosure } from "@headlessui/react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
-import { ModelOption, Option, filters, models } from "@/constants/filters";
+import { ChangeEvent, FormEvent, useCallback, useContext, useState } from "react";
 import { Button } from "../Button";
-import { api } from "@/services/api";
-import { useCarsFilter } from "@/hooks/useCarsFilter";
 
 interface FilterFormProps {
   show?: boolean;
 }
 
 const FilterForm = ({ show }: FilterFormProps) => {
-  const { inputValues, setInputValues } = useCarsFilter();
+  const { inputValues, setInputValues, clearFilter } = useContext(HomeContext);
   const [model, setModel] = useState("");
   const filteredModels: ModelOption[] = models.options.filter((e) => e.label === model);
   const modelsList: Option[] = filteredModels.length > 0 ? filteredModels[0].options : [];
@@ -165,7 +164,7 @@ const FilterForm = ({ show }: FilterFormProps) => {
           variant="gradient"
           color="blue"
           fullWidth={true}
-          onClick={() => setInputValues({})}>
+          onClick={clearFilter}>
           Limpar filtros
         </Button>
       </div>
