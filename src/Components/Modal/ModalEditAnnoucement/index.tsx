@@ -11,15 +11,16 @@ import { editCarSchema, ICarsEdit, IimagesCar } from "./schema";
 
 export const ModalEditAnnoucement = () => {
   const [loading, setLoading] = useState(false);
-  const { editAnnoucementModal, setEditAnnoucementModal, setCars } =
-    useContext(AnnouncementContext);
+  const { editAnnoucementModal, setCars } = useContext(AnnouncementContext);
   const { closeModal, openModal } = useContext(ModalContext);
   const [listDeleteImageCar, setListDeleteImageCar] = useState<IimagesCar[]>([]);
+  const [statusIsPublished, setStatusIsPublished] = useState(editAnnoucementModal?.isPublished);
 
   const {
     register,
     handleSubmit,
     control,
+    setValue,
     formState: { errors }
   } = useForm<ICarsEdit>({
     criteriaMode: "all",
@@ -35,7 +36,8 @@ export const ModalEditAnnoucement = () => {
       fipePrice: editAnnoucementModal?.fipePrice,
       price: editAnnoucementModal?.price,
       description: editAnnoucementModal?.description,
-      coverImage: editAnnoucementModal?.coverImage
+      coverImage: editAnnoucementModal?.coverImage,
+      isPublished: editAnnoucementModal?.isPublished.toString()
     }
   });
 
@@ -57,6 +59,11 @@ export const ModalEditAnnoucement = () => {
     if (fields.length > 1) remove(index);
   };
 
+  const handleRadioChange = (value: string) => {
+    setStatusIsPublished(value === "true");
+    setValue("isPublished", value); // Atualiza o valor de isPublished no formulário
+  };
+
   // Adiciona os inputs de url de imagem do carro já cadastrados
   useEffect(() => {
     editAnnoucementModal?.carImages.map(({ carId, id, url }) => {
@@ -69,13 +76,14 @@ export const ModalEditAnnoucement = () => {
   }, []);
 
   const formSubmit = async (data: ICarsEdit) => {
-    const { links, ...formEditUser } = data;
+    const { links, isPublished: isPublishedString, ...formEditUser } = data;
+    const isPublished = isPublishedString == "true"; // transforma o valor do input radio em boolean
     const listLinksToCreate = links.filter((link) => !link.idImage);
     const listLinksToUpdate = links.filter((link) => link.idImage);
 
     try {
       setLoading(true);
-      await api.patch(`/cars/${editAnnoucementModal?.id}`, formEditUser);
+      await api.patch(`/cars/${editAnnoucementModal?.id}`, { ...formEditUser, isPublished });
 
       if (listLinksToCreate) {
         await Promise.all(
@@ -196,6 +204,44 @@ export const ModalEditAnnoucement = () => {
               register={register("price")}
               error={errors.price?.message}
             />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <h5 className="prose-body-2-500">Publicado</h5>
+          <div className="flex w-full flex-col items-center justify-around gap-4 xs:flex-row">
+            <label
+              className={`inline-flex h-12 w-[152px] items-center justify-center rounded-md border-[2px] px-4 py-2 hover:cursor-pointer hover:border-Brand1 hover:bg-Brand1 hover:text-grey10 ${
+                statusIsPublished
+                  ? "border-Brand1 bg-Brand1 text-grey10"
+                  : "border-grey5 bg-grey10 text-grey0"
+              }`}>
+              <input
+                type="radio"
+                value="true"
+                id="isPublished-radio-true"
+                {...register("isPublished")}
+                onChange={(e) => handleRadioChange(e.target.value)}
+                className="sr-only"
+              />
+              <span className="select-none">Sim</span>
+            </label>
+            <label
+              className={`inline-flex h-12 w-[152px] items-center justify-center rounded-md border-[2px] px-4 py-2 hover:cursor-pointer hover:border-Brand1 hover:bg-Brand1 hover:text-grey10 ${
+                !statusIsPublished
+                  ? "border-Brand1 bg-Brand1 text-grey10"
+                  : "border-grey5 bg-grey10 text-grey0"
+              }`}>
+              <input
+                type="radio"
+                value="false"
+                id="isPublished-radio-false"
+                {...register("isPublished")}
+                onChange={(e) => handleRadioChange(e.target.value)}
+                className="sr-only"
+              />
+              <span className="select-none">Não</span>
+            </label>
           </div>
         </div>
         <div className="flex flex-col gap-2">
