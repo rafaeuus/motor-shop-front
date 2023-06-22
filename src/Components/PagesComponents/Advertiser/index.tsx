@@ -64,37 +64,43 @@ const AdvertiserMain = ({ user }: AdvertiserMainProps) => {
         <div className="w-full">
           {cars.length > 0 ? (
             <ul className="flex gap-x-12 gap-y-20 overflow-x-scroll md:flex-wrap md:justify-around md:overflow-clip lg:grid lg:grid-cols-3 xl:grid-cols-4">
-              {cars.map((car) => (
-                <li key={car.id} className="gap- flex flex-col">
-                  <Card car={car} />
-                  {userAuth && userAuth.id === user.id && (
-                    <div className="flex gap-4">
-                      <Button
-                        color="black"
-                        size="secondary"
-                        variant="outlined"
-                        type="button"
-                        onClick={() => {
-                          openModal("editAnnoucement", "Editar anúncio");
-                          setEditAnnoucementModal(car);
-                        }}>
-                        Editar
-                      </Button>
-                      <div className="max-w-[160px]">
+              {userAuth && userAuth.id === user.id
+                ? cars.map((car) => (
+                    <li key={car.id} className="gap- flex flex-col">
+                      <Card car={car} />
+                      <div className="flex gap-4">
                         <Button
-                          onClick={() => router.push(`/announcement/${car.id}`)}
                           color="black"
                           size="secondary"
                           variant="outlined"
                           type="button"
-                          fullWidth>
-                          Ver detalhes
+                          onClick={() => {
+                            openModal("editAnnoucement", "Editar anúncio");
+                            setEditAnnoucementModal(car);
+                          }}>
+                          Editar
                         </Button>
+                        <div className="max-w-[160px]">
+                          <Button
+                            onClick={() => router.push(`/announcement/${car.id}`)}
+                            color="black"
+                            size="secondary"
+                            variant="outlined"
+                            type="button"
+                            fullWidth>
+                            Ver detalhes
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </li>
-              ))}
+                    </li>
+                  ))
+                : cars
+                    .filter((item) => item.isPublished == true)
+                    .map((car) => (
+                      <li key={car.id} className="gap- flex flex-col">
+                        <Card car={car} />
+                      </li>
+                    ))}
             </ul>
           ) : (
             <h1>Anunciante sem anúncios.</h1>

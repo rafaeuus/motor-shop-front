@@ -15,6 +15,9 @@ export const editCarSchema = z.object({
   fipePrice: z.number().nonnegative().or(z.string()),
   price: z.coerce.number().min(1, "Mímino R$ 1,00"),
   description: z.string().min(50, "Precisa ter no mínimo 50 caracteres").nonempty(),
+  isPublished: z
+    .string()
+    .nonempty("É necessário selecionar o tipo de conta: anunciante ou comprador"),
   coverImage: z.string().url("Url inválida").nonempty(),
   links: z.array(
     z.object({
