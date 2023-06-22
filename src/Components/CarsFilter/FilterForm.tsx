@@ -22,29 +22,18 @@ const FilterForm = ({ show }: FilterFormProps) => {
   const handleInputChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>, sectionId: string) => {
       const newInputValues = { ...inputValues };
+
       newInputValues[sectionId] = e.target.value;
+
+      if (sectionId === "brand") {
+        delete newInputValues["model"];
+      }
 
       setInputValues(newInputValues);
     },
     [inputValues]
   );
-
-  // useEffect(() => {
-  //   submit();
-  // }, [inputValues]);
-
-  // const submit = async () => {
-  //   const queryParams = new URLSearchParams({ ...inputValues });
-  //   try {
-  //     const response = await api(`${process.env.NEXT_PUBLIC_BASE_URL_API}/filters?${queryParams}`);
-  //     const { data } = response;
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  //   console.log(queryParams);
-  // };
-
+  console.log(inputValues);
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log(inputValues);
@@ -118,14 +107,14 @@ const FilterForm = ({ show }: FilterFormProps) => {
                       name={`min-${section.id}`}
                       placeholder="Minimo"
                       className="h-9 w-[48%] place-content-center rounded border-none bg-grey5 text-center"
-                      onChange={(e) => handleInputChange(e, `min-${section.id}`)}
+                      onChange={(e) => handleInputChange(e, `min${section.id}`)}
                     />
                     <input
                       type="text"
                       name={`max-${section.id}`}
                       placeholder="Máximo"
                       className="h-9 w-[48%] place-content-center rounded border-none bg-grey5 text-center"
-                      onChange={(e) => handleInputChange(e, `max-${section.id}`)}
+                      onChange={(e) => handleInputChange(e, `max${section.id}`)}
                     />
                   </div>
                 ) : (

@@ -12,6 +12,7 @@ export const HomeProvider = ({ children, listAnnoucementsServer }: IhomeContextP
   const [inputValues, setInputValues] = useState<{ [key: string]: string }>({} as TFilterRequest);
 
   const retrieveCars = async () => {
+    console.log(inputValues);
     const queryParams = new URLSearchParams({ ...inputValues });
     try {
       console.log(queryParams);
