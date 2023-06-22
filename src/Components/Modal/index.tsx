@@ -14,7 +14,7 @@ import { ModalEditUser } from "./ModalEditUser";
 import { ModalImageCar } from "./ModalImageCar";
 import { ModalSucessCreateCar } from "./ModalSuccessCreateCar";
 import { ModalSucessRegisterUser } from "./ModalSucessRegisterUser";
-import { ModalRecoverPassword } from "./MoralRecoverPassword";
+import { ModalRecoverPassword } from "./ModalRecoverPassword";
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)"

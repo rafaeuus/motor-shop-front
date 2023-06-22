@@ -18,9 +18,11 @@ import { toast } from "react-hot-toast";
 import { ModalContext } from "@/contexts/ModalContext.tsx";
 import { IUpdatePasswordForm, updatePasswordSchema } from "./updatePasswordSchema";
 
-const RecoverPage = () => {
-  const { setUserAuth, setUserProfile } = useContext(AuthContext);
-  const { openModal } = useContext(ModalContext);
+interface IResetPageProps {
+  params: { token: string };
+}
+
+const RecoverPage = ({ params }: IResetPageProps) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -34,12 +36,24 @@ const RecoverPage = () => {
   });
 
   const submitUpdatePassword: SubmitHandler<IUpdatePasswordForm> = async (data): Promise<void> => {
-    const toaster = toast.loading("Realizando login, aguarde!");
     setLoading(true);
-    setTimeout(() => {
+    const toaster = toast.loading("Atualizando senha, aguarde!");
+    const { password } = data;
+    const { token } = params;
+
+    try {
+      await api.patch(`/user/resetPassword/${token}`, { password });
       toast.dismiss(toaster);
-      setLoading(false);
-    }, 2000);
+      toast.success("Senha atualizada com sucesso!");
+      router.push("/login");
+    } catch (error: any) {
+      console.log(error);
+      toast.dismiss(toaster);
+      toast.error(error.message, {
+        duration: 3000
+      });
+    }
+    setLoading(false);
   };
 
   return (
