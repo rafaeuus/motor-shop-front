@@ -5,7 +5,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { IRecoverPassword, recoverPasswordSchema } from "./recoverPassword.schema";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
+import { api } from "@/services/api";
+import { toast } from "react-hot-toast";
 import { ModalContext } from "@/contexts/ModalContext.tsx";
+import { Spinner } from "@material-tailwind/react";
 
 export const ModalRecoverPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -17,15 +20,23 @@ export const ModalRecoverPassword = () => {
     formState: { errors }
   } = useForm<IRecoverPassword>({
     criteriaMode: "all",
-    mode: "all",
+    mode: "onSubmit",
     resolver: zodResolver(recoverPasswordSchema)
   });
 
-  const formSubmit = () => {
+  const formSubmit = async (data: IRecoverPassword) => {
     setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
-
-    console.log("oi");
+    try {
+      await api.post("/user/resetPassword", data);
+      toast.success("Email de recuperação de senha enviado!", { duration: 3000 });
+      closeModal();
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.response.data.message, {
+        duration: 3000
+      });
+    }
+    setLoading(false);
   };
 
   return (
@@ -48,9 +59,9 @@ export const ModalRecoverPassword = () => {
         <div className="mt-4 flex flex-col gap-4">
           <button
             type="submit"
-            className="w-auto rounded border-Brand1 bg-Brand1 px-5 py-3 text-base  font-semibold text-grey10 hover:bg-Brand2"
+            className="flex w-auto justify-center rounded border-Brand1 bg-Brand1 px-5 py-3 text-base  font-semibold text-grey10 hover:bg-Brand2"
             disabled={loading}>
-            {loading ? "Carregando..." : " Recuperar Senha"}
+            {loading ? <Spinner color="blue-gray" /> : "Entrar"}
           </button>
         </div>
       </form>
