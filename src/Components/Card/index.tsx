@@ -1,6 +1,6 @@
 "use client";
 import { AuthContext } from "@/contexts/AuthContext";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
 
 export interface IcarAnnouncement {
@@ -38,6 +38,7 @@ const Card = ({ car }: CardProps) => {
   const { userAuth } = useContext(AuthContext);
 
   const router = useRouter();
+  const pathName = usePathname();
 
   if (car.coverImage === "") {
     car.coverImage = "/assets/carExample.png";
@@ -61,7 +62,7 @@ const Card = ({ car }: CardProps) => {
             height={132}
           />
         </picture>
-        {isAdvertiserOwner && (
+        {isAdvertiserOwner && pathName !== "/" && (
           <span
             className={`prose-body-2-600 absolute left-4 top-[11px] bg-Brand1 px-2 text-grey10 ${
               car.isPublished ? "bg-Bran1" : "bg-grey4"

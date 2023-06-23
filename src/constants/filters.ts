@@ -26,25 +26,17 @@ export const filters: Filter[] = [
     id: "brand",
     name: "Marca",
     options: [
-      { value: "Mercedes", label: "Mercedes", checked: false },
-      { value: "BMW", label: "BMW", checked: false },
-      { value: "Audi", label: "Audi", checked: false },
-      { value: "Volvo", label: "Volvo", checked: false },
+      { value: "Chevrolet", label: "Chevrolet", checked: false },
+      { value: "Citroën", label: "Citroën", checked: false },
       { value: "Fiat", label: "Fiat", checked: false },
       { value: "Ford", label: "Ford", checked: false },
-      { value: "Renault", label: "Renault", checked: false },
-      { value: "Chevrolet", label: "Chevrolet", checked: false },
-      { value: "Peugeot", label: "Peugeot", checked: false },
       { value: "Honda", label: "Honda", checked: false },
       { value: "Hyundai", label: "Hyundai", checked: false },
-      { value: "Kia", label: "Kia", checked: false },
       { value: "Nissan", label: "Nissan", checked: false },
+      { value: "Peugeot", label: "Peugeot", checked: false },
+      { value: "Renault", label: "Renault", checked: false },
       { value: "Toyota", label: "Toyota", checked: false },
-      { value: "Volkswagen", label: "Volkswagen", checked: false },
-      { value: "Mazda", label: "Mazda", checked: false },
-      { value: "Mitsubishi", label: "Mitsubishi", checked: false },
-      { value: "Suzuki", label: "Suzuki", checked: false },
-      { value: "Ferrari", label: "Ferrari", checked: false }
+      { value: "Volkswagen", label: "Volkswagen", checked: false }
     ]
   },
   {
@@ -75,15 +67,7 @@ export const filters: Filter[] = [
       { value: "2021", label: "2021", checked: false },
       { value: "2020", label: "2020", checked: false },
       { value: "2019", label: "2019", checked: false },
-      { value: "2018", label: "2018", checked: false },
-      { value: "2017", label: "2017", checked: false },
-      { value: "2016", label: "2016", checked: false },
-      { value: "2015", label: "2015", checked: false },
-      { value: "2014", label: "2014", checked: false },
-      { value: "2013", label: "2013", checked: false },
-      { value: "2012", label: "2012", checked: false },
-      { value: "2011", label: "2011", checked: false },
-      { value: "2010", label: "2010", checked: false }
+      { value: "2018", label: "2018", checked: false }
     ]
   },
   {
@@ -125,77 +109,46 @@ export const models: CarModels = {
   name: "Modelo",
   options: [
     {
-      label: "Mercedes",
-      options: [
-        { value: "Clase C", label: "Clase C", checked: false },
-        { value: "Clase E", label: "Clase E", checked: false },
-        { value: "GLC", label: "GLC", checked: false },
-        { value: "Clase A", label: "Clase A", checked: false },
-        { value: "GLA", label: "GLA", checked: false },
-        { value: "GLB", label: "GLB", checked: false }
-      ]
-    },
-    {
-      label: "BMW",
-      options: [
-        { value: "Serie 3", label: "Serie 3", checked: false },
-        { value: "Serie 5", label: "Serie 5", checked: false },
-        { value: "X3", label: "X3", checked: false },
-        { value: "Serie 1", label: "Serie 1", checked: false },
-        { value: "X5", label: "X5", checked: false },
-        { value: "X1", label: "X1", checked: false }
-      ]
-    },
-    {
-      label: "Audi",
-      options: [
-        { value: "A4", label: "A4", checked: false },
-        { value: "A3", label: "A3", checked: false },
-        { value: "Q5", label: "Q5", checked: false },
-        { value: "A1", label: "A1", checked: false },
-        { value: "Q3", label: "Q3", checked: false },
-        { value: "A5", label: "A5", checked: false }
-      ]
-    },
-    {
-      label: "Volvo",
-      options: [
-        { value: "XC90", label: "XC90", checked: false },
-        { value: "XC60", label: "XC60", checked: false },
-        { value: "S60", label: "S60", checked: false },
-        { value: "V60", label: "V60", checked: false },
-        { value: "XC40", label: "XC40", checked: false },
-        { value: "S90", label: "S90", checked: false }
-      ]
-    },
-    {
       label: "Fiat",
       options: [
-        { value: "Uno", label: "Uno", checked: false },
-        { value: "Mobi", label: "Mobi", checked: false },
-        { value: "Argo", label: "Argo", checked: false },
-        { value: "Toro", label: "Toro", checked: false },
+        { value: "500e", label: "500e", checked: false },
         { value: "Cronos", label: "Cronos", checked: false },
-        { value: "Palio", label: "Palio", checked: false }
+        { value: "Argo", label: "Argo", checked: false },
+        { value: "Doblo", label: "Doblo", checked: false },
+        { value: "Fiorino", label: "Fiorino", checked: false },
+        { value: "Grand Siena", label: "Grand Siena", checked: false },
+        { value: "Palio", label: "Palio", checked: false },
+        { value: "Strada", label: "Strada", checked: false },
+        { value: "Mobi", label: "Mobi", checked: false },
+        { value: "Pulse", label: "Pulse", checked: false },
+        { value: "Toro", label: "Toro", checked: false },
+        { value: "Uno", label: "Uno", checked: false }
       ]
     },
     {
       label: "Ford",
       options: [
-        { value: "Mustang", label: "Mustang", checked: false },
-        { value: "Focus", label: "Focus", checked: false },
+        { value: "Bronco", label: "Bronco", checked: false },
         { value: "EcoSport", label: "EcoSport", checked: false },
-        { value: "Ranger", label: "Ranger", checked: false },
+        { value: "Edge", label: "Edge", checked: false },
+        { value: "Fiesta", label: "Fiesta", checked: false },
+        { value: "Focus", label: "Focus", checked: false },
         { value: "Fusion", label: "Fusion", checked: false },
-        { value: "Ka", label: "Ka", checked: false }
+        { value: "Ka", label: "Ka", checked: false },
+        { value: "Mustang", label: "Mustang", checked: false },
+        { value: "Territory", label: "Territory", checked: false },
+        { value: "Ranger", label: "Ranger", checked: false },
+        { value: "Maverick", label: "Maverick", checked: false }
       ]
     },
     {
       label: "Renault",
       options: [
-        { value: "Clio", label: "Clio", checked: false },
+        { value: "Zoe", label: "Zoe", checked: false },
+        { value: "Stepway", label: "Stepway", checked: false },
         { value: "Sandero", label: "Sandero", checked: false },
         { value: "Kwid", label: "Kwid", checked: false },
+        { value: "Oroch", label: "Oroch", checked: false },
         { value: "Duster", label: "Duster", checked: false },
         { value: "Logan", label: "Logan", checked: false },
         { value: "Captur", label: "Captur", checked: false }
@@ -204,12 +157,10 @@ export const models: CarModels = {
     {
       label: "Chevrolet",
       options: [
-        { value: "Onix", label: "Onix", checked: false },
-        { value: "Prisma", label: "Prisma", checked: false },
-        { value: "Tracker", label: "Tracker", checked: false },
-        { value: "Cruze", label: "Cruze", checked: false },
-        { value: "S10", label: "S10", checked: false },
-        { value: "Spin", label: "Spin", checked: false }
+        { value: "Bolt", label: "Bolt", checked: false },
+        { value: "Camaro", label: "Camaro", checked: false },
+        { value: "Cobalt", label: "Cobalt", checked: false },
+        { value: "Cruze", label: "Cruze", checked: false }
       ]
     },
     {
@@ -220,6 +171,7 @@ export const models: CarModels = {
         { value: "308", label: "308", checked: false },
         { value: "3008", label: "3008", checked: false },
         { value: "408", label: "408", checked: false },
+        { value: "5008", label: "5008", checked: false },
         { value: "Partner", label: "Partner", checked: false }
       ]
     },
@@ -230,6 +182,7 @@ export const models: CarModels = {
         { value: "HR-V", label: "HR-V", checked: false },
         { value: "Fit", label: "Fit", checked: false },
         { value: "CR-V", label: "CR-V", checked: false },
+        { value: "WR-V", label: "WR-V", checked: false },
         { value: "City", label: "City", checked: false },
         { value: "Accord", label: "Accord", checked: false }
       ]
@@ -241,19 +194,8 @@ export const models: CarModels = {
         { value: "Creta", label: "Creta", checked: false },
         { value: "Tucson", label: "Tucson", checked: false },
         { value: "Santa Fe", label: "Santa Fe", checked: false },
-        { value: "i30", label: "i30", checked: false },
-        { value: "Veloster", label: "Veloster", checked: false }
-      ]
-    },
-    {
-      label: "Kia",
-      options: [
-        { value: "Sportage", label: "Sportage", checked: false },
-        { value: "Cerato", label: "Cerato", checked: false },
-        { value: "Soul", label: "Soul", checked: false },
-        { value: "Picanto", label: "Picanto", checked: false },
-        { value: "Sorento", label: "Sorento", checked: false },
-        { value: "Stinger", label: "Stinger", checked: false }
+        { value: "Ix35", label: "Ix35", checked: false },
+        { value: "Azera", label: "Azera", checked: false }
       ]
     },
     {
@@ -263,61 +205,49 @@ export const models: CarModels = {
         { value: "Versa", label: "Versa", checked: false },
         { value: "Sentra", label: "Sentra", checked: false },
         { value: "Kicks", label: "Kicks", checked: false },
-        { value: "X-Trail", label: "X-Trail", checked: false },
-        { value: "Frontier", label: "Frontier", checked: false }
+        { value: "Leaf", label: "Leaf", checked: false },
+        { value: "Gt-r", label: "Gt-r", checked: false }
       ]
     },
     {
       label: "Toyota",
       options: [
+        { value: "Camry", label: "Camry", checked: false },
         { value: "Corolla", label: "Corolla", checked: false },
         { value: "Etios", label: "Etios", checked: false },
         { value: "Hilux", label: "Hilux", checked: false },
         { value: "Rav4", label: "Rav4", checked: false },
         { value: "Yaris", label: "Yaris", checked: false },
-        { value: "SW4", label: "SW4", checked: false }
+        { value: "Prius", label: "Prius", checked: false }
       ]
     },
     {
       label: "Volkswagen",
       options: [
+        { value: "Fox", label: "Fox", checked: false },
         { value: "Gol", label: "Gol", checked: false },
-        { value: "Voyage", label: "Voyage", checked: false },
+        { value: "Golf", label: "Golf", checked: false },
+        { value: "Jetta", label: "Jetta", checked: false },
+        { value: "Nivus", label: "Nivus", checked: false },
+        { value: "Passat", label: "Passat", checked: false },
         { value: "Polo", label: "Polo", checked: false },
+        { value: "Saveiro", label: "Saveiro", checked: false },
+        { value: "Taos", label: "Taos", checked: false },
+        { value: "Voyage", label: "Voyage", checked: false },
         { value: "T-Cross", label: "T-Cross", checked: false },
-        { value: "Amarok", label: "Amarok", checked: false },
-        { value: "Golf", label: "Golf", checked: false }
+        { value: "Tiguan", label: "Tiguan", checked: false },
+        { value: "Up", label: "Up", checked: false },
+        { value: "Virtus", label: "Virtus", checked: false },
+        { value: "Voyage", label: "Voyage", checked: false }
       ]
     },
     {
-      label: "Mazda",
+      label: "Citroën",
       options: [
-        { value: "Mazda3", label: "Mazda3", checked: false },
-        { value: "CX-5", label: "CX-5", checked: false },
-        { value: "Mazda6", label: "Mazda6", checked: false },
-        { value: "MX-5", label: "MX-5", checked: false },
-        { value: "CX-3", label: "CX-3", checked: false },
-        { value: "CX-9", label: "CX-9", checked: false }
-      ]
-    },
-    {
-      label: "Mitsubishi",
-      options: [
-        { value: "L200", label: "L200", checked: false },
-        { value: "Outlander", label: "Outlander", checked: false },
-        { value: "ASX", label: "ASX", checked: false },
-        { value: "Eclipse Cross", label: "Eclipse Cross", checked: false },
-        { value: "Pajero Sport", label: "Pajero Sport", checked: false },
-        { value: "Mirage", label: "Mirage", checked: false }
-      ]
-    },
-    {
-      label: "Suzuki",
-      options: [
-        { value: "Swift", label: "Swift", checked: false },
-        { value: "Vitara", label: "Vitara", checked: false },
-        { value: "Jimny", label: "Jimny", checked: false },
-        { value: "S-Cross", label: "S-Cross", checked: false },
+        { value: "Aircross", label: "Aircross", checked: false },
+        { value: "Berlingo", label: "Berlingo", checked: false },
+        { value: "C3", label: "C3", checked: false },
+        { value: "C4", label: "C4", checked: false },
         { value: "Celerio", label: "Celerio", checked: false },
         { value: "Baleno", label: "Baleno", checked: false }
       ]

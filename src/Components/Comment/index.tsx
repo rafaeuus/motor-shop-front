@@ -7,7 +7,7 @@ interface CommentProps {
 const Comment = ({ comment }: CommentProps) => {
   const calcDaysAgo = () => {
     const currentDate = new Date();
-    const commentDate = new Date(comment.createdAt)
+    const commentDate = new Date(comment.createdAt);
     const timeDiff = currentDate.getTime() - commentDate.getTime();
 
     return Math.floor(timeDiff / (1000 * 3600 * 24));

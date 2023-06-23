@@ -21,21 +21,8 @@ export type TFilterRequest = {
 
 const CarsFilterComponent = () => {
   const { openModal } = useContext(ModalContext);
-  // const { listCarsAnnouncement, setListCarsAnnouncement } = useCarsFilter();
+
   const { listAnnoucements, setListAnnoucements } = useContext(HomeContext);
-
-  // const getListCarsAnnouncement = async () => {
-  //   try {
-  //     const res = await api.get<IcarAnnouncement[]>("/cars");
-  //     return setListCarsAnnouncement(res.data);
-  //   } catch (error) {
-  //     throw new Error("API sendo iniciada");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getListCarsAnnouncement();
-  // }, []);
 
   return (
     <section className="bg-grey10">

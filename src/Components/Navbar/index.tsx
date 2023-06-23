@@ -13,7 +13,7 @@ export const Navbar = () => {
   const [menuBurgerIsOpen, setMenuBurgerIsOpen] = useState(false);
   const [menuAuthIsOpen, setMenuAuthIsOpen] = useState(false);
 
-  const { userAuth } = useContext(AuthContext);
+  const { userAuth, userProfile } = useContext(AuthContext);
   const isAdvertiser = userAuth ? userAuth.isAdvertiser : false;
 
   const closeMenuBurguer = () => {
@@ -83,7 +83,7 @@ export const Navbar = () => {
               isAdvertiser={isAdvertiser}
               menuAuthIsOpen={menuAuthIsOpen}
               toogleMenuAuth={toogleMenuAuth}
-              name={userAuth.name}
+              name={userProfile!.name}
               closeMenuAuth={closeMenuAuth}
             />
           ) : (
@@ -100,7 +100,7 @@ export const Navbar = () => {
                   isAdvertiser={isAdvertiser}
                   menuAuthIsOpen={menuAuthIsOpen}
                   toogleMenuAuth={toogleMenuAuth}
-                  name={userAuth.name}
+                  name={userProfile!.name}
                   closeMenuAuth={closeMenuAuth}
                 />
               </nav>

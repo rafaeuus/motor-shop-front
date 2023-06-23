@@ -8,7 +8,6 @@ import { api } from "@/services/api";
 const getLisAnnouncements = async () => {
   try {
     const { data } = await api.get<IListAnnoucementsFilter>(`/filters`);
-    console.log(data);
     return data;
   } catch (error) {
     throw new Error("API sendo iniciada");

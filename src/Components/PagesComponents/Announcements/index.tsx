@@ -1,19 +1,18 @@
 "use client";
 
+import { ICommentCreateProps, ICommentProps } from "@/app/announcement/[id]/page";
 import { Button } from "@/Components/Button";
 import { IcarAnnouncement } from "@/Components/Card";
 import Comment from "@/Components/Comment";
 import AnnouncerCard from "@/Components/PagesComponents/Announcements/AnnouncerCard";
 import TextArea from "@/Components/TextArea";
-import { ICommentCreateProps, ICommentProps } from "@/app/announcement/[id]/page";
+import { AuthContext } from "@/contexts/AuthContext";
 import { ModalContext } from "@/contexts/ModalContext.tsx";
 import { api } from "@/services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { parseCookies } from "nookies";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { commentSchema } from "./schema";
-import { AuthContext } from "@/contexts/AuthContext";
 
 interface IannouncementsMainProps {
   carsAnnouncement: IcarAnnouncement;
@@ -22,27 +21,34 @@ interface IannouncementsMainProps {
 
 export const AnnouncementsMain = ({ carsAnnouncement, carComments }: IannouncementsMainProps) => {
   const { openModal, setModalImageCarUrl } = useContext(ModalContext);
-  const {userAuth, userProfile} = useContext(AuthContext)
+  const { userAuth, userProfile } = useContext(AuthContext);
 
-  const [comments, setComments] = useState(carComments)
+  const [comments, setComments] = useState(carComments);
 
   const openModalImageCar = (url: string) => {
     openModal("imageCar", "Imagem do veículo");
     setModalImageCarUrl(url);
   };
 
-  const {register, handleSubmit, formState: {errors}, setValue} = useForm<ICommentCreateProps>({
-    resolver: zodResolver(commentSchema),
-  })
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    reset
+  } = useForm<ICommentCreateProps>({
+    resolver: zodResolver(commentSchema)
+  });
 
   const createComment = async (data: ICommentCreateProps) => {
     try {
-      const res = await api.post<ICommentProps>(`/comments/${carsAnnouncement.id}`, data)
-      setComments(oldList => [...oldList, res.data]);
-    } catch(error){
-      console.log(error)
+      const res = await api.post<ICommentProps>(`/comments/${carsAnnouncement.id}`, data);
+      reset();
+      setComments((oldList) => [...oldList, res.data]);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-Brand1 from-30% via-grey8 via-30% to-grey8 to-100% pb-[73px] pt-[40px]">
@@ -125,21 +131,19 @@ export const AnnouncementsMain = ({ carsAnnouncement, carComments }: Iannounceme
             <span className="prose-heading-6-600">Comentários</span>
             <ul className="flex flex-col gap-11">
               {comments.map((comment) => {
-                return <Comment key={comment.id}
-                  comment={comment}
-                />
+                return <Comment key={comment.id} comment={comment} />;
               })}
             </ul>
           </div>
           <div className="flex flex-col gap-4 rounded bg-grey10 px-5 py-9">
-            {userAuth &&
-            <div className="flex items-center gap-2">
-              <span className="prose-body-2-600 flex h-8 w-8 items-center justify-center rounded-full bg-Brand2 text-grey10">
-                {userProfile?.name[0].toUpperCase()}
-              </span>
-              <span className="prose-body-2-600 text-grey2">{userProfile?.name}</span>
-            </div>
-            }
+            {userAuth && (
+              <div className="flex items-center gap-2">
+                <span className="prose-body-2-600 flex h-8 w-8 items-center justify-center rounded-full bg-Brand2 text-grey10">
+                  {userProfile?.name[0].toUpperCase()}
+                </span>
+                <span className="prose-body-2-600 text-grey2">{userProfile?.name}</span>
+              </div>
+            )}
             <form className="relative" onSubmit={handleSubmit(createComment)}>
               <TextArea
                 disabled={!userAuth && true}
@@ -149,24 +153,39 @@ export const AnnouncementsMain = ({ carsAnnouncement, carComments }: Iannounceme
                 placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
               />
               <div className="absolute bottom-3 right-3">
-                <Button variant={"gradient"} color={userAuth ? "blue" : "grey"} size={"secondary"} fullWidth={true} type="submit" disabled={!userAuth && true}>
+                <Button
+                  variant={"gradient"}
+                  color={userAuth ? "blue" : "grey"}
+                  size={"secondary"}
+                  fullWidth={true}
+                  type="submit"
+                  disabled={!userAuth && true}>
                   Comentar
                 </Button>
               </div>
             </form>
             <ul className="flex flex-wrap gap-2">
               <li>
-                <button onClick={() => setValue("content", "Gostei muito!")} className="prose-body-2-600 rounded-full bg-grey7 px-3 py-1 text-xs text-grey3 transition hover:bg-grey6" disabled={!userAuth && true}>
+                <button
+                  onClick={() => setValue("content", "Gostei muito!")}
+                  className="prose-body-2-600 rounded-full bg-grey7 px-3 py-1 text-xs text-grey3 transition hover:bg-grey6"
+                  disabled={!userAuth && true}>
                   Gostei muito!
                 </button>
               </li>
               <li>
-                <button onClick={() => setValue("content", "Incrível!")} className="prose-body-2-600 rounded-full bg-grey7 px-3 py-1 text-xs text-grey3 transition hover:bg-grey6" disabled={!userAuth && true}>
+                <button
+                  onClick={() => setValue("content", "Incrível!")}
+                  className="prose-body-2-600 rounded-full bg-grey7 px-3 py-1 text-xs text-grey3 transition hover:bg-grey6"
+                  disabled={!userAuth && true}>
                   Incrível!
                 </button>
               </li>
               <li>
-                <button onClick={() => setValue("content", "Recomendarei para meus amigos!")} className="prose-body-2-600 rounded-full bg-grey7 px-3 py-1 text-xs text-grey3 transition hover:bg-grey6" disabled={!userAuth && true}>
+                <button
+                  onClick={() => setValue("content", "Recomendarei para meus amigos!")}
+                  className="prose-body-2-600 rounded-full bg-grey7 px-3 py-1 text-xs text-grey3 transition hover:bg-grey6"
+                  disabled={!userAuth && true}>
                   Recomendarei para meus amigos!
                 </button>
               </li>

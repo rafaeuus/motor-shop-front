@@ -12,13 +12,11 @@ export const HomeProvider = ({ children, listAnnoucementsServer }: IhomeContextP
   const [inputValues, setInputValues] = useState<{ [key: string]: string }>({} as TFilterRequest);
 
   const retrieveCars = async () => {
-    console.log(inputValues);
     const queryParams = new URLSearchParams({ ...inputValues });
     try {
-      console.log(queryParams);
       const response = await api<IListAnnoucementsFilter>(`/filters?${queryParams}`);
       const { data } = response;
-      console.log(data);
+
       setListAnnoucements(data);
     } catch (error) {
       console.log(error);
@@ -29,7 +27,7 @@ export const HomeProvider = ({ children, listAnnoucementsServer }: IhomeContextP
     try {
       const response = await api<IListAnnoucementsFilter>(`/filters`);
       const { data } = response;
-      console.log(data);
+
       setListAnnoucements(data);
     } catch (error) {
       console.log(error);
@@ -38,7 +36,6 @@ export const HomeProvider = ({ children, listAnnoucementsServer }: IhomeContextP
 
   const clearFilter = () => {
     setInputValues({});
-    console.log("neto");
     requestClearFilter();
   };
 

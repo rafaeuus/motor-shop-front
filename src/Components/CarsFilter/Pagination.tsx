@@ -7,7 +7,6 @@ const Pagination = () => {
   const { listAnnoucements, setListAnnoucements } = useContext(HomeContext);
 
   const { pages, prevPage, nextPage } = listAnnoucements;
-  console.log(listAnnoucements);
 
   let pageNumber = 1;
 
@@ -25,7 +24,6 @@ const Pagination = () => {
 
     try {
       const { data } = await api.get<IListAnnoucementsFilter>(`/filters?${params.toString()}`);
-      console.log(data);
       setListAnnoucements(data);
     } catch (error) {
       throw new Error("Deu erro!");
@@ -37,7 +35,6 @@ const Pagination = () => {
     const params = new URLSearchParams(nextPage.split("?")[1]);
     try {
       const { data } = await api.get<IListAnnoucementsFilter>(`/filters?${params.toString()}`);
-      console.log(data);
       setListAnnoucements(data);
     } catch (error) {
       throw new Error("Deu erro!");

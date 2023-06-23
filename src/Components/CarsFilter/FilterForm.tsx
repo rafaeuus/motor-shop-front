@@ -16,9 +16,6 @@ const FilterForm = ({ show }: FilterFormProps) => {
   const filteredModels: ModelOption[] = models.options.filter((e) => e.label === model);
   const modelsList: Option[] = filteredModels.length > 0 ? filteredModels[0].options : [];
 
-  // Logica temporaria, só pra mostra
-  // const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
-
   const handleInputChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>, sectionId: string) => {
       const newInputValues = { ...inputValues };
@@ -33,10 +30,10 @@ const FilterForm = ({ show }: FilterFormProps) => {
     },
     [inputValues]
   );
-  console.log(inputValues);
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(inputValues);
+
     //  lógica do envío do formulario
   };
 
