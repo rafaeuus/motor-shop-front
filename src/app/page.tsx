@@ -1,20 +1,48 @@
-"use client";
-import Link from "next/link";
-import { toast } from "react-hot-toast";
+import CarsFilterComponent from "@/Components/CarsFilter";
+import { ModalCustom } from "@/Components/Modal";
+import { HomeProvider } from "@/contexts/HomeContext";
+import { IListAnnoucementsFilter } from "@/contexts/HomeContext/types";
+import { ModalProvider } from "@/contexts/ModalContext.tsx";
+import { api } from "@/services/api";
 
-export default function Home() {
-  const handleToast = () => {
-    toast.success("Hello World");
-  };
+const getLisAnnouncements = async () => {
+  try {
+    const { data } = await api.get<IListAnnoucementsFilter>(`/filters`);
+    return data;
+  } catch (error) {
+    throw new Error("API sendo iniciada");
+  }
+};
+
+const Home = async () => {
+  const listAnnoucements = await getLisAnnouncements();
 
   return (
-    <main className="">
-      <h1>Hello World</h1>
-      <button className="mt-2 rounded-md bg-blue-500 px-6 py-4 text-white" onClick={handleToast}>
-        Toast
-      </button>
-      <p className="">Read More about hot-toast:</p>
-      <Link href={"https://react-hot-toast.com/"}>https://react-hot-toast.com/</Link>
-    </main>
+    <HomeProvider listAnnoucementsServer={listAnnoucements}>
+      <ModalProvider>
+        <>
+          <main className="mx-auto max-w-[1600px]">
+            <section className="flex max-h-[537px] min-h-[537px] w-full items-center justify-center bg-[url('/car.png')] bg-center bg-no-repeat">
+              <div className="flex max-h-[537px] min-h-[537px] w-full items-center justify-center bg-gradient-to-b from-[rgba(0,0,0,0.19940476190476186)] to-grey0">
+                <div className="px-8 text-center">
+                  <h1 className="prose-heading-3-500 mb-6 text-grey10 md:prose-heading-1-700">
+                    Motors Shop
+                  </h1>
+                  <h2 className="prose-heading-5-500 text-grey10 md:prose-heading-2-600">
+                    A melhor plataforma de anúncios de carros do país
+                  </h2>
+                </div>
+              </div>
+            </section>
+            <div className="">
+              <CarsFilterComponent />
+            </div>
+          </main>
+          <ModalCustom />
+        </>
+      </ModalProvider>
+    </HomeProvider>
   );
-}
+};
+
+export default Home;

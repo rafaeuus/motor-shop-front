@@ -10,6 +10,9 @@ export default withMT({
   ],
   darkMode: "class",
   theme: {
+    minHeight: {
+      "3/4": "78vh"
+    },
     container: {
       center: true,
       padding: "1rem"
@@ -37,7 +40,9 @@ export default withMT({
       xl: "1200px",
       // => @media (min-width: 1200px) { ... }
 
-      "2xl": "1400px"
+      "2xl": "1400px",
+      // => @media (min-width: 1400px) { ... }
+      "3xl": "1600px"
       // => @media (min-width: 1400px) { ... }
     },
     extend: {
@@ -45,13 +50,16 @@ export default withMT({
         sans: "var(--font-inter)",
         lexend: "var(--font-bai-lexend)"
       },
+      gridAutoRows: {
+        "3fr": "minmax(320, 3fr)"
+      },
       colors: {
         Alert1: "#cd2b31",
         Alert2: "#fdd8d8",
         Alert3: "#ffe5e5",
-        Sucess1: "#18794e",
-        Sucess2: "#ccebd7",
-        Sucess3: "#ddf3e4",
+        Success1: "#18794e",
+        Success2: "#ccebd7",
+        Success3: "#ddf3e4",
         Pink1: "#e34d8c",
         Pink2: "#c04277",
         Pink3: "#7d2a4d",
@@ -76,20 +84,165 @@ export default withMT({
         grey8: "#f1f3f5",
         grey9: "#f8f9fa",
         grey10: "#fdfdfd"
+      },
+      backgroundImage: {
+        car: "url('/public/motors-shop-white.svg')"
+      },
+      typography: {
+        "heading-1-700": {
+          css: {
+            fontSize: "2.75rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "700",
+            fontStyle: "normal",
+            lineHeight: "56px"
+          }
+        },
+        "heading-2-600": {
+          css: {
+            fontSize: "2.25rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "600",
+            fontStyle: "normal",
+            lineHeight: "45px"
+          }
+        },
+        "heading-3-600": {
+          css: {
+            fontSize: "2rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "600",
+            fontStyle: "normal",
+            lineHeight: "40px"
+          }
+        },
+        "heading-3-500": {
+          css: {
+            fontSize: "2rem",
+            fontFamily: "var(--font-inter)",
+            fontWeight: "500",
+            fontStyle: "normal",
+            lineHeight: "40px"
+          }
+        },
+        "heading-4-600": {
+          css: {
+            fontSize: "1.75rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "600",
+            fontStyle: "normal",
+            lineHeight: "35px"
+          }
+        },
+        "heading-4-500": {
+          css: {
+            fontSize: "1.75rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "500",
+            fontStyle: "normal",
+            lineHeight: "35px"
+          }
+        },
+        "heading-5-600": {
+          css: {
+            fontSize: "1.5rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "600",
+            fontStyle: "normal",
+            lineHeight: "30px"
+          }
+        },
+        "heading-5-500": {
+          css: {
+            fontSize: "1.5rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "500",
+            fontStyle: "normal",
+            lineHeight: "30px"
+          }
+        },
+        "heading-6-600": {
+          css: {
+            fontSize: "1.25rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "600",
+            fontStyle: "normal",
+            lineHeight: "25px"
+          }
+        },
+        "heading-6-500": {
+          css: {
+            fontSize: "1.25rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "500",
+            fontStyle: "normal",
+            lineHeight: "25px"
+          }
+        },
+        "heading-7-600": {
+          css: {
+            fontSize: "1rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "600",
+            fontStyle: "normal",
+            lineHeight: "20px"
+          }
+        },
+        "heading-7-500": {
+          css: {
+            fontSize: "1rem",
+            fontFamily: "var(--font-lexend)",
+            fontWeight: "500",
+            fontStyle: "normal",
+            lineHeight: "20px"
+          }
+        },
+        "body-1-400": {
+          css: {
+            fontSize: "1rem",
+            fontFamily: "var(--font-inter)",
+            fontWeight: "400",
+            lineHeight: "1.625"
+          }
+        },
+        "body-1-600": {
+          css: {
+            fontSize: "1rem",
+            fontFamily: "var(--font-inter)",
+            fontWeight: "600",
+            lineHeight: "1.625"
+          }
+        },
+        "body-2-400": {
+          css: {
+            fontSize: "0.875rem",
+            fontFamily: "var(--font-inter)",
+            fontWeight: "400",
+            lineHeight: "1.625"
+          }
+        },
+        "body-2-500": {
+          css: {
+            fontSize: "0.875rem",
+            fontFamily: "var(--font-inter)",
+            fontWeight: "500",
+            lineHeight: "1.625"
+          }
+        },
+        "body-2-600": {
+          css: {
+            fontSize: "0.875rem",
+            fontFamily: "var(--font-inter)",
+            fontWeight: "500",
+            lineHeight: "1.625"
+          }
+        }
       }
     }
   },
-  plugins: []
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/line-clamp")
+  ]
 });
-
-// Apenas falta configurar weights das fonts //
-// fontSizes: {
-//   h1: "2.75rem",
-//   h2: "2.25rem",
-//   h3: "2rem",
-//   h4: "1.75rem",
-//   h5: "1.5rem",
-//   t1: "1.25rem",
-//   t2: "1rem",
-//   t3: "0.875rem"
-// }

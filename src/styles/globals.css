@@ -10,6 +10,13 @@
     font-family: var(--font-inter);
   }
 
+  p,
+  small,
+  input,
+  button {
+    font-family: var(--font-inter);
+  }
+
   h1,
   h2,
   h3,
@@ -20,7 +27,7 @@
   }
 }
 
- {
+* {
   margin: 0;
   padding: 0;
   outline: 0;
@@ -53,12 +60,20 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  position: relative;
+  padding-bottom: 18rem;
+}
+
+@media (min-width: 576px) {
+  body {
+    padding-bottom: 8rem;
+  }
 }
 
 body,
 html {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 button {
