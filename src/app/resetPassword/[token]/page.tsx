@@ -2,20 +2,13 @@
 
 import { Button } from "@/Components/Button";
 import Input from "@/Components/Input";
-import { AuthContext } from "@/contexts/AuthContext";
-import { IdecodedToken, IloginUser, TinfosToken, UserProfile } from "@/contexts/AuthContext/types";
 import { api } from "@/services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Spinner } from "@material-tailwind/react";
-// eslint-disable-next-line camelcase
-import jwt_decode from "jwt-decode";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { setCookie } from "nookies";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { ModalContext } from "@/contexts/ModalContext.tsx";
 import { IUpdatePasswordForm, updatePasswordSchema } from "./updatePasswordSchema";
 
 interface IResetPageProps {

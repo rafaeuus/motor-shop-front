@@ -1,14 +1,14 @@
 "use client";
 import Input from "@/Components/Input";
+import { AuthContext } from "@/contexts/AuthContext";
 import { ModalContext } from "@/contexts/ModalContext.tsx";
+import { useMasks } from "@/hooks/useMasks";
 import { api } from "@/services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { parseCookies } from "nookies";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { IEditAddress, editAddressSchema } from "./editAddress.schema";
-import { useMasks } from "@/hooks/useMasks";
-import { AuthContext } from "@/contexts/AuthContext";
+import { editAddressSchema, IEditAddress } from "./editAddress.schema";
 
 type TAddressProps = {
   bairro: string;
@@ -16,38 +16,44 @@ type TAddressProps = {
   uf: string;
   logradouro: string;
   localidade: string;
-  cep: string;  
+  cep: string;
 };
 
 export const ModalEditAddress = () => {
+  const { closeModal } = useContext(ModalContext);
+  const { userProfile, setUserProfile } = useContext(AuthContext);
+  const { zipCodeMask } = useMasks();
 
-  const {closeModal} = useContext(ModalContext)
-  const {userProfile, setUserProfile} = useContext(AuthContext)
-  const {zipCodeMask} = useMasks();
+  const [cepInfo, setCepInfo] = useState({} as TAddressProps);
 
-  const [cepInfo, setCepInfo] = useState({} as TAddressProps)
-
-  const {register, handleSubmit, reset, setValue, formState: {errors}, clearErrors} = useForm<IEditAddress>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+    clearErrors
+  } = useForm<IEditAddress>({
     resolver: zodResolver(editAddressSchema),
     mode: "onChange"
-  })
+  });
 
   const editAddress = async (data: IEditAddress) => {
-    data.zipCode = data.zipCode?.replace(/\D/g, "")
+    data.zipCode = data.zipCode?.replace(/\D/g, "");
     try {
       const cookies = parseCookies();
       const token = cookies["@motors-shop:token"];
-      api.defaults.headers.common.authorization = `Bearer ${token}`; 
-      const response = await api.patch("/user", {...data})
-      setUserProfile(response.data)
-      closeModal()
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      const response = await api.patch("/user", { ...data });
+      setUserProfile(response.data);
+      closeModal();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    if(userProfile?.address){
+    if (userProfile?.address) {
       reset({
         zipCode: zipCodeMask(userProfile?.address.zipCode),
         city: userProfile?.address.city,
@@ -55,9 +61,9 @@ export const ModalEditAddress = () => {
         state: userProfile?.address.state,
         number: userProfile?.address.number,
         complement: userProfile?.address.complement
-      })
+      });
     }
-  }, [userProfile?.address])
+  }, [userProfile?.address]);
 
   const handleZipCode: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
     const input = event.target as HTMLInputElement;
@@ -65,51 +71,52 @@ export const ModalEditAddress = () => {
   };
 
   const checkCEP = (value: string) => {
-    const cep = value.replace(/\D/g, "")
-    if(cep.length === 8){
+    const cep = value.replace(/\D/g, "");
+    if (cep.length === 8) {
       fetch(`https://viacep.com.br/ws/${cep}/json/`)
-      .then(res => res.json()).then(data => {
-        if (!data.erro) {
-          setCepInfo(data)
-          clearErrors("state")
-          clearErrors("city")
-          clearErrors("street")
-        }
-      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.erro) {
+            setCepInfo(data);
+            clearErrors("state");
+            clearErrors("city");
+            clearErrors("street");
+          }
+        });
     }
-  }
+  };
 
   const handleKeyUp = (event: any) => {
-    if(event){
-      setValue("number", "")
-      setValue("complement", "")
-      setValue("state", "")
-      setValue("city", "")
-      setValue("street", "")
+    if (event) {
+      setValue("number", "");
+      setValue("complement", "");
+      setValue("state", "");
+      setValue("city", "");
+      setValue("street", "");
     }
-    checkCEP(event.target.value)
-    handleZipCode(event)
-  }
+    checkCEP(event.target.value);
+    handleZipCode(event);
+  };
 
   useEffect(() => {
-    setValue("state", cepInfo.uf)
-    setValue("city", cepInfo.localidade)
-    setValue("street", cepInfo.logradouro)
-  }, [cepInfo])
+    setValue("state", cepInfo.uf);
+    setValue("city", cepInfo.localidade);
+    setValue("street", cepInfo.logradouro);
+  }, [cepInfo]);
 
   return (
     <div className="h-fit max-h-[80vh] w-full overflow-auto">
       <h2 className="prose-body-2-500 mb-5">Informações de endereço</h2>
       <form onSubmit={handleSubmit(editAddress)} className="mb-5 flex flex-col gap-2">
-          <Input
-            label="CEP"
-            type="text"
-            placeholder="00000.000"
-            maxLength={9}
-            onKeyUp={handleKeyUp}
-            register={register("zipCode")}
-            error={errors.zipCode?.message}
-          />  
+        <Input
+          label="CEP"
+          type="text"
+          placeholder="00000.000"
+          maxLength={9}
+          onKeyUp={handleKeyUp}
+          register={register("zipCode")}
+          error={errors.zipCode?.message}
+        />
         <div className="flex gap-3">
           <Input
             label="Estado"
@@ -153,19 +160,27 @@ export const ModalEditAddress = () => {
           />
         </div>
         <div className="mt-9 flex justify-end gap-3">
-          <button 
-              className="w-auto rounded border-grey6 bg-grey6 px-5 py-3 text-base font-semibold text-grey2"
-              type="button" onClick={() => reset({
-              zipCode: zipCodeMask(userProfile?.address.zipCode!),
-              city: userProfile?.address.city,
-              street: userProfile?.address.street,
-              state: userProfile?.address.state,
-              number: userProfile?.address.number,
-              complement: userProfile?.address.complement})}>Cancelar
-            </button>
-          <button 
-          className="w-auto rounded border-Brand3 bg-Brand3 px-5 py-3 text-base font-semibold text-Brand4"
-          type="submit">Salvar Alterações</button>
+          <button
+            className="w-auto rounded border-grey6 bg-grey6 px-5 py-3 text-base font-semibold text-grey2"
+            type="button"
+            onClick={() =>
+              reset({
+                // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+                zipCode: zipCodeMask(userProfile?.address.zipCode!),
+                city: userProfile?.address.city,
+                street: userProfile?.address.street,
+                state: userProfile?.address.state,
+                number: userProfile?.address.number,
+                complement: userProfile?.address.complement
+              })
+            }>
+            Cancelar
+          </button>
+          <button
+            className="w-auto rounded border-Brand3 bg-Brand3 px-5 py-3 text-base font-semibold text-Brand4"
+            type="submit">
+            Salvar Alterações
+          </button>
         </div>
       </form>
     </div>

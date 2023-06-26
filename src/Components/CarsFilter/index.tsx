@@ -22,7 +22,7 @@ export type TFilterRequest = {
 const CarsFilterComponent = () => {
   const { openModal } = useContext(ModalContext);
 
-  const { listAnnoucements, setListAnnoucements } = useContext(HomeContext);
+  const { listAnnoucements } = useContext(HomeContext);
 
   return (
     <section className="bg-grey10">
